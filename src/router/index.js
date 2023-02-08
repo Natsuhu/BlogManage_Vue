@@ -1,0 +1,266 @@
+import Vue from 'vue'
+import Router from 'vue-router'
+
+Vue.use(Router)
+
+/* Layout */
+import Layout from '@/layout'
+
+/**
+ * Note: sub-menu only appear when route children.length >= 1
+ * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
+ *
+ * hidden: true                   if set true, item will not show in the sidebar(default is false)
+ * alwaysShow: true               if set true, will always show the root menu
+ *                                if not set alwaysShow, when item has more than one children route,
+ *                                it will becomes nested mode, otherwise not show the root menu
+ * redirect: noRedirect           if set noRedirect will no redirect in the breadcrumb
+ * name:'router-name'             the name is used by <keep-alive> (must set!!!)
+ * meta : {
+    roles: ['admin','editor']    control the page roles (you can set multiple roles)
+    title: 'title'               the name show in sidebar and breadcrumb (recommend set)
+    icon: 'svg-name'/'el-icon-x' the icon show in the sidebar
+    breadcrumb: false            if set false, the item will hidden in breadcrumb(default is true)
+    activeMenu: '/example/list'  if set path, the sidebar will highlight the path you set
+  }
+ */
+
+/**
+ * constantRoutes
+ * a base page that does not have permission requirements
+ * all roles can be accessed
+ */
+export const constantRoutes = [
+  {
+    path: '/login',
+    component: () => import('@/views/login/index'),
+    hidden: true
+  },
+
+  {
+    path: '/404',
+    component: () => import('@/views/404'),
+    hidden: true
+  },
+
+  {
+    path: '/',
+    component: Layout,
+    redirect: '/dashboard',
+    children: [{
+      path: 'dashboard',
+      name: 'Dashboard',
+      component: () => import('@/views/dashboard/index'),
+      meta: { title: '主页', icon: 'dashboard' }
+    }]
+  },
+
+  {
+    path: '/blog',
+    name: 'Blog',
+    redirect: '/blog/write',
+    component: Layout,
+    meta: { title: '博客管理', icon: 'el-icon-menu' },
+    children: [
+      {
+        path: 'write',
+        name: 'WriteBlog',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '写文章', icon: 'el-icon-edit' }
+      },
+      {
+        path: 'moment/write',
+        name: 'WriteMoment',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '写动态', icon: 'el-icon-edit' }
+      },
+      {
+        path: 'edit/:id',
+        name: 'EditBlog',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '编辑文章', icon: 'el-icon-edit' },
+        hidden: true
+      },
+      {
+        path: 'moment/edit/:id',
+        name: 'EditMoment',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '编辑动态', icon: 'el-icon-edit' },
+        hidden: true
+      },
+      {
+        path: 'list',
+        name: 'BlogList',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '文章管理', icon: 'el-icon-s-order' }
+      },
+      {
+        path: 'moment/list',
+        name: 'MomentList',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '动态管理', icon: 'el-icon-chat-dot-round' }
+      },
+      {
+        path: 'category/list',
+        name: 'CategoryList',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '分类管理', icon: 'el-icon-s-grid' }
+      },
+      {
+        path: 'tag/list',
+        name: 'TagList',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '标签管理', icon: 'el-icon-paperclip' }
+      },
+      {
+        path: 'comment/list',
+        name: 'CommentList',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '评论管理', icon: 'el-icon-s-comment' }
+      }
+    ]
+  },
+  {
+    path: '/page',
+    name: 'Page',
+    redirect: '/page/site',
+    component: Layout,
+    meta: { title: '页面管理', icon: 'el-icon-document-copy' },
+    children: [
+      {
+        path: 'site',
+        name: 'SiteSetting',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '站点设置', icon: 'el-icon-setting' }
+      },
+      {
+        path: 'friend',
+        name: 'FriendList',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '友链管理', icon: 'el-icon-link' }
+      },
+      {
+        path: 'about',
+        name: 'About',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '关于我', icon: 'el-icon-tickets' }
+      }
+    ]
+  },
+  {
+    path: '/pictureHosting',
+    name: 'PictureHosting',
+    redirect: '/pictureHosting/setting',
+    component: Layout,
+    meta: { title: '图床管理', icon: 'el-icon-picture' },
+    children: [
+      {
+        path: 'setting',
+        name: 'Setting',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '配置', icon: 'el-icon-setting' }
+      },
+      {
+        path: 'github',
+        name: 'GithubManage',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: 'GitHub', icon: 'el-icon-folder-opened' }
+      },
+      {
+        path: 'upyun',
+        name: 'UpyunManage',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '又拍云', icon: 'el-icon-folder-opened' }
+      }
+    ]
+  },
+  {
+    path: '/system',
+    name: 'System',
+    redirect: '/system/job',
+    component: Layout,
+    meta: { title: '系统管理', icon: 'el-icon-s-tools' },
+    children: [
+      {
+        path: 'job',
+        name: 'JobList',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '定时任务', icon: 'el-icon-alarm-clock' }
+      }
+    ]
+  },
+  {
+    path: '/log',
+    name: 'Log',
+    redirect: '/log/job',
+    component: Layout,
+    meta: { title: '日志管理', icon: 'el-icon-document' },
+    children: [
+      {
+        path: 'job',
+        name: 'JobLog',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '任务日志', icon: 'el-icon-alarm-clock' }
+      },
+      {
+        path: 'login',
+        name: 'LoginLog',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '登录日志', icon: 'el-icon-finished' }
+      },
+      {
+        path: 'operation',
+        name: 'OperationLog',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '操作日志', icon: 'el-icon-document-checked' }
+      },
+      {
+        path: 'exception',
+        name: 'ExceptionLog',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '异常日志', icon: 'el-icon-document-delete' }
+      },
+      {
+        path: 'visit',
+        name: 'VisitLog',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '访问日志', icon: 'el-icon-data-line' }
+      }
+    ]
+  },
+
+  {
+    path: '/statistics',
+    name: 'Statistics',
+    redirect: '/statistics/visitor',
+    component: Layout,
+    meta: { title: '数据统计', icon: 'el-icon-s-data' },
+    children: [
+      {
+        path: 'visitor',
+        name: 'Visitor',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '访客统计', icon: 'el-icon-s-marketing' }
+      }
+    ]
+  },
+
+  // 404 page must be placed at the end !!!
+  { path: '*', redirect: '/404', hidden: true }
+]
+
+const createRouter = () => new Router({
+  // mode: 'history', // require service support
+  scrollBehavior: () => ({ y: 0 }),
+  routes: constantRoutes
+})
+
+const router = createRouter()
+
+// Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
+export function resetRouter() {
+  const newRouter = createRouter()
+  router.matcher = newRouter.matcher // reset router
+}
+
+export default router
