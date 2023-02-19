@@ -9,7 +9,7 @@ import 'normalize.css/normalize.css'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 //global css
-import '@/styles/index.scss' 
+import '@/assets/styles/index.scss' 
 //icon
 import '@/icons' 
 
