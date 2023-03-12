@@ -1,6 +1,5 @@
 <template>
 	<el-form :model="form" :rules="formRules" ref="formRef" label-position="top">
-		
 		<el-row :gutter="20">
 			
 			<!-- 文章标题 -->
@@ -184,6 +183,10 @@
 					}
 				})
 			}
+		},
+		
+		components: {
+			Breadcrumb
 		}
 		
 	}

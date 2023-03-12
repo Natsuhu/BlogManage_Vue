@@ -3,7 +3,7 @@ import App from './App'
 import store from './store'
 import router from './router'
 
-//A modern alternative to CSS resets
+//a modern alternative to CSS resets
 import 'normalize.css/normalize.css' 
 //element-ui
 import ElementUI from 'element-ui'
@@ -12,6 +12,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/styles/index.scss' 
 //icon
 import '@/icons' 
+//base css
+import './assets/styles/base.css'
 
 //mavonEditor
 import mavonEditor from 'mavon-editor'

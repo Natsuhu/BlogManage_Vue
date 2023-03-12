@@ -4,18 +4,6 @@ body,
 	height: 100%;
     margin: 0;
     padding: 0;
-    background-color: #efefef;
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: left top;
-    background-repeat: no-repeat;
-}
-
-/*改变选择文本后的颜色*/
-::selection {
-    color: #ffffff !important;
-    background-color: #383838 !important;
-    text-shadow: none !important;
 }
 
 /*滚动条整体*/

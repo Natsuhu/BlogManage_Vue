@@ -9,3 +9,13 @@ export function saveArticle(form) {
 		}
 	})
 }
+
+export function getArticleTable(queryParam) {
+	return request({
+		method: 'post',
+		url: '/admin/article/getArticleTable',
+		data: {
+			...queryParam
+		}
+	})
+}

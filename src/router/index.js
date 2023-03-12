@@ -65,9 +65,9 @@ export const constantRoutes = [
         hidden: true
       },
       {
-        path: 'list',
-        name: 'BlogList',
-        component: () => import('@/views/dashboard/index'),
+        path: 'manage',
+        name: 'BlogTable',
+        component: () => import('@/views/blog/ArticleTable'),
         meta: { title: '文章管理', icon: 'el-icon-s-order' }
       },
       {
