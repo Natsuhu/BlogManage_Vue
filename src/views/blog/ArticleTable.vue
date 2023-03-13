@@ -14,7 +14,7 @@
 			<el-table-column label="分类" prop="categoryName" width="150" align="center"/>
 			<el-table-column label="浏览数" prop="views" width="100" align="center"/>
 			<el-table-column label="字数" prop="words" width="100" align="center"/>
-			<el-table-column label="编辑属性" width="100" align="center">
+			<el-table-column label="编辑属性" width="150" align="center">
 				<el-link icon="el-icon-edit" :underline="false">
 					可见
 				</el-link>
@@ -28,7 +28,7 @@
 		
 		<!--分页-->
 		<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="queryParam.pageNo"
-					   :page-sizes="[10, 20, 30, 50]" :page-size="queryParam.pageSize" :page-count="totalPage" :total="total"
+					   :page-sizes="[10, 15, 20, 30, 50]" :page-size="queryParam.pageSize" :page-count="totalPage" :total="total"
 					   layout="total, sizes, prev, pager, next, jumper" background style="float: right;">
 		</el-pagination>
 	</div>
