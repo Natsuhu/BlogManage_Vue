@@ -19,3 +19,13 @@ export function getArticleTable(queryParam) {
 		}
 	})
 }
+
+export function updateArticle(updateParam) {
+	return request({
+		method: 'post',
+		url: '/admin/article/update',
+		data: {
+			...updateParam
+		}
+	})
+}

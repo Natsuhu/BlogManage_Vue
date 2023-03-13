@@ -14,11 +14,42 @@
 			<el-table-column label="分类" prop="categoryName" width="150" align="center"/>
 			<el-table-column label="浏览数" prop="views" width="100" align="center"/>
 			<el-table-column label="字数" prop="words" width="100" align="center"/>
+
+			<!-- 编辑属性弹出框 -->
 			<el-table-column label="编辑属性" width="150" align="center">
-				<el-link icon="el-icon-edit" :underline="false">
-					可见
-				</el-link>
+				<template slot-scope="scope">
+					<el-popover placement="bottom" width="220" :ref="`popover-${scope.$index}`">
+						<el-row :gutter="20" class="base_margin_b">
+							<el-col :span="12">
+								<span class="base_margin_r">公开</span>
+								<el-switch v-model="scope.row.isPublished" @click="updateArticleData(scope.row)"/>
+							</el-col>
+							<el-col :span="12">
+								<span class="base_margin_r">置顶</span>
+								<el-switch v-model="scope.row.isTop"/>
+							</el-col>
+						</el-row>
+						<el-row :gutter="20" class="base_margin_b">
+							<el-col :span="12">
+								<span class="base_margin_r">评论</span>
+								<el-switch v-model="scope.row.isCommentEnabled"/>
+							</el-col>
+							<el-col :span="12">
+								<span class="base_margin_r">推荐</span>
+								<el-switch v-model="scope.row.isRecommend"/>
+							</el-col>
+						</el-row>
+						<el-row>
+							<el-col :span="12">
+								<span class="base_margin_r">赞赏</span>
+								<el-switch v-model="scope.row.isAppreciation"/>
+							</el-col>
+						</el-row>
+						<el-link slot="reference" icon="el-icon-edit" :underline="false">{{ scope.row.isPublished ? "公开" : "私人" }}</el-link>
+					</el-popover>
+				</template>
 			</el-table-column>
+			
 			<el-table-column label="创建时间" prop="createTime" width="170" align="center"/>
 			<el-table-column label="更新时间" prop="updateTime" width="170" align="center"/>
 			<el-table-column label="操作" width="150" align="center"> 
@@ -38,7 +69,7 @@
 
 <script>
 	import Breadcrumb from "@/components/Breadcrumb";
-	import { getArticleTable } from "@/api/Article"
+	import { getArticleTable , updateArticle } from "@/api/Article"
 	
 	export default {
 		name: "ArticleTable",
@@ -69,6 +100,7 @@
 		},
 		
 		methods: {
+			//获取文章表格
 			getTableData() {
 				getArticleTable(this.queryParam).then(res => {
 					if(res.success){
@@ -77,6 +109,23 @@
 						this.total = res.total;
 					}else {
 						this.$message.error(res.msg);
+					}
+				})
+			},
+			//更新文章
+			updateArticleData(updateParam) {
+				updateArticle(updateParam).then(res => {
+					if (res.success) {
+						Notification({
+							title: '保存成功',
+							type: 'success'
+						})
+					} else {
+						Notification({
+							title: '保存失败',
+							message: res.msg,
+							type: 'error'
+						})
 					}
 				})
 			},
