@@ -58,7 +58,7 @@
 						<el-checkbox border v-model="form.isCommentEnabled" true-label="true" false-label="false">评论</el-checkbox>
 						<el-checkbox border v-model="form.isTop" true-label="true" false-label="false">置顶</el-checkbox>
 						<el-checkbox border v-model="form.isRecommend" true-label="true" false-label="false">推荐</el-checkbox>
-						<el-checkbox border v-model="form.isAppreciation"true-label="true" false-label="false">赞赏</el-checkbox>
+						<el-checkbox border v-model="form.isAppreciation" true-label="true" false-label="false">赞赏</el-checkbox>
 					</div>
 				</el-form-item>
 			</el-col>
