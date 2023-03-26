@@ -13,6 +13,7 @@
     "core-js": "3.6.5",
     "echarts": "4.9.0",
     "element-ui": "2.13.2",
+    "js-cookie": "^3.0.1",
     "lodash": "4.17.19",
     "mavon-editor": "2.9.1",
     "moment": "2.27.0",

@@ -11,15 +11,14 @@
         <div class="right-menu">
             <el-dropdown class="avatar-container" trigger="click">
                 <div class="avatar-wrapper">
-                    <!-- <img :src="avatar + '?imageView2/1/w/80/h/80'" class="user-avatar"/> -->
-                    <i class="el-icon-caret-bottom" />
+                    <img :src="avatar" class="user-avatar"/>
                 </div>
                 <el-dropdown-menu slot="dropdown" class="user-dropdown">
                     <router-link to="/">
-                        <el-dropdown-item> Home </el-dropdown-item>
+                        <el-dropdown-item> 主页 </el-dropdown-item>
                     </router-link>
                     <el-dropdown-item divided @click.native="logout">
-                        <span style="display: block">Log Out</span>
+                        <span style="display: block"> 注销 </span>
                     </el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
@@ -96,7 +95,7 @@ export default {
 
             &.hover-effect {
                 cursor: pointer;
-                transition: background 0.3s;
+                transition: background 0.3;
 
                 &:hover {
                     background: rgba(0, 0, 0, 0.025);

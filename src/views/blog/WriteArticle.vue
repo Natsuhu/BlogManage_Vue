@@ -202,4 +202,9 @@
 		margin-left: 0px !important;
 		margin-right: 0px !important;
 	}
+
+	/* 设置markdown编辑区域的图层，避免其覆盖header */
+	.v-note-wrapper {
+		z-index: 9 !important;
+	}
 </style>

@@ -1,9 +1,23 @@
 <template>
 	<div>
 		<!-- 筛选面板 -->
-		<el-row class="base_margin_b">
-			<el-col :span="8">
-				<el-button>筛选预留</el-button>
+		<el-row :gutter="24" class="base_margin_tb">
+			<!-- 搜索标题 -->
+			<el-col :span="3">
+				<el-input v-model="queryParam.keyword" @input="getTableData()" clearable placeholder="搜索标题" style="width: 100%;" prefix-icon="el-icon-search"/>
+			</el-col>
+			
+			<!-- 选择分类 -->
+			<el-col :span="3">
+				<el-select v-model="queryParam.categoryId" @input="getTableData()" clearable placeholder="筛选分类" style="width: 100%;">
+					<el-option v-for="item in categories" :key="item.index" :label="item.name" :value="item.id" />
+				</el-select>
+			</el-col>
+			
+			<!-- 时间范围 -->
+			<el-col :span="16">
+				<el-date-picker type="daterange" v-model="queryParam.time" @input="getTableData()" range-separator="至" start-placeholder="开始时间"
+								value-format="yyyy-MM-dd" clearable end-placeholder="结束时间" placeholder="选择时间范围" />
 			</el-col>
 		</el-row>
 		
@@ -75,6 +89,7 @@
 <script>
 	import Breadcrumb from "@/components/Breadcrumb";
 	import { Notification } from "element-ui";
+	import { getCategories } from '@/api/Category';
 	import { getArticleTable , updateArticle } from "@/api/Article";
 	
 	export default {
@@ -82,6 +97,7 @@
 		
 		data() {
 			return {
+				categories: [],
 				articleTable: [],
 				totalPage: 0,
 				total: 0,
@@ -92,27 +108,48 @@
 					isRecommend: null,
 					isAppreciation: null,
 					isCommentEnabled: null,
-					startTime: null,
-					endTime: null,
+					time: null,
 					keyword: null,
 					pageNo: 1,
-					pageSize: 10,
+					pageSize: 10
 				}
 			}
 		},
 		
 		created() {
+			this.getCategories()
 			this.getTableData()
 		},
 		
 		methods: {
 			//获取文章表格
 			getTableData() {
+				//处理时间筛选，将对象转为数组
+				let time = null;
+				time = this.queryParam.time;
+				if (time != null) {
+					let arr = time.toString().split(",");
+					this.queryParam.startTime = arr[0];
+					this.queryParam.endTime = arr[1];
+				} else {
+					this.queryParam.startTime = null;
+					this.queryParam.endTime = null;
+				}	
 				getArticleTable(this.queryParam).then(res => {
 					if(res.success){
 						this.articleTable = res.data;
 						this.totalPage = res.totalPage;
 						this.total = res.total;
+					}else {
+						this.$message.error(res.msg);
+					}
+				})
+			},
+			//获取分类，用于筛选
+			getCategories() {
+				getCategories().then(res => {
+					if(res.success){
+						this.categories = res.data;
 					}else {
 						this.$message.error(res.msg);
 					}
