@@ -38,27 +38,27 @@
 						<el-row :gutter="20" class="base_margin_b">
 							<el-col :span="12">
 								<span class="base_margin_r">公开</span>
-								<el-switch v-model="scope.row.isPublished" @change="updateArticleData(scope.row)"/>
+								<el-switch v-model="scope.row.isPublished" @change="updateArticleAtt(scope.row)"/>
 							</el-col>
 							<el-col :span="12">
 								<span class="base_margin_r">置顶</span>
-								<el-switch v-model="scope.row.isTop" @change="updateArticleData(scope.row)"/>
+								<el-switch v-model="scope.row.isTop" @change="updateArticleAtt(scope.row)"/>
 							</el-col>
 						</el-row>
 						<el-row :gutter="20" class="base_margin_b">
 							<el-col :span="12">
 								<span class="base_margin_r">评论</span>
-								<el-switch v-model="scope.row.isCommentEnabled" @change="updateArticleData(scope.row)"/>
+								<el-switch v-model="scope.row.isCommentEnabled" @change="updateArticleAtt(scope.row)"/>
 							</el-col>
 							<el-col :span="12">
 								<span class="base_margin_r">推荐</span>
-								<el-switch v-model="scope.row.isRecommend" @change="updateArticleData(scope.row)"/>
+								<el-switch v-model="scope.row.isRecommend" @change="updateArticleAtt(scope.row)"/>
 							</el-col>
 						</el-row>
 						<el-row>
 							<el-col :span="12">
 								<span class="base_margin_r">赞赏</span>
-								<el-switch v-model="scope.row.isAppreciation" @change="updateArticleData(scope.row)"/>
+								<el-switch v-model="scope.row.isAppreciation" @change="updateArticleAtt(scope.row)"/>
 							</el-col>
 						</el-row>
 						<el-link slot="reference" icon="el-icon-edit" :underline="false">{{ scope.row.isPublished ? "公开" : "私人" }}</el-link>
@@ -71,8 +71,10 @@
 			<el-table-column label="更新时间" prop="updateTime" width="170" align="center"/>
 
 			<!-- 操作按钮 -->
-			<el-table-column label="操作" width="150" align="center"> 
-				<el-button type="primary" icon="el-icon-edit" size="mini" >编辑</el-button>
+			<el-table-column label="操作" width="150" align="center">
+				<template slot-scope="scope">
+					<el-button type="primary" icon="el-icon-edit" size="mini" @click="editArticle(scope.row.id)">编辑</el-button>
+				</template>
 			</el-table-column>
 		</el-table>
 		
@@ -156,7 +158,7 @@
 				})
 			},
 			//直接在表格内更新文章属性
-			updateArticleData(updateParam) {
+			updateArticleAtt(updateParam) {
 				let attrList = {};
 				attrList.id = updateParam.id;
 				attrList.isPublished = updateParam.isPublished;
@@ -177,6 +179,15 @@
 							message: res.msg,
 							type: 'error'
 						})
+					}
+				})
+			},
+			//编辑按钮跳转，编辑文章
+			editArticle(id) {
+				this.$router.push({
+					name: 'WriteBlog',
+					params: {
+						id
 					}
 				})
 			},

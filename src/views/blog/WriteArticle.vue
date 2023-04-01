@@ -1,7 +1,6 @@
 <template>
 	<el-form :model="form" :rules="formRules" ref="formRef" label-position="top">
 		<el-row :gutter="20">
-			
 			<!-- 文章标题 -->
 			<el-col :span="12">
 				<el-form-item label="文章标题" prop="title">
@@ -17,7 +16,6 @@
 					</el-input>
 				</el-form-item>
 			</el-col>
-			
 		</el-row>
 		
 		<!-- 文章描述 -->
@@ -31,7 +29,6 @@
 		</el-form-item>
 		
 		<el-row :gutter="20">
-			
 			<!-- 分类 -->
 			<el-col :span="8">
 				<el-form-item label="分类" prop="categoryId">
@@ -62,11 +59,9 @@
 					</div>
 				</el-form-item>
 			</el-col>
-			
 		</el-row>
 		
 		<el-row :gutter="20">
-			
 			<!-- 字数 -->
 			<el-col :span="8">
 				<el-form-item label="字数" prop="words">
@@ -91,16 +86,14 @@
 		
 		<!-- 提交表单 -->
 		<el-form-item style="text-align: right;">
-			<el-button type="primary" @click="submit">保存</el-button>
+			<el-button type="primary" @click="submit">{{ buttonText }}</el-button>
 		</el-form-item>
-		
 	</el-form>
 </template>
 
 <script>
-	import Breadcrumb from "@/components/Breadcrumb";
 	import { Notification } from "element-ui";
-	import { saveArticle } from '@/api/Article';
+	import { saveArticle , getArticleById , updateArticle } from '@/api/Article';
 	import { getCategories } from '@/api/Category';
 	import { getTags } from '@/api/Tag';
 	
@@ -109,9 +102,10 @@
 		
 		data() {
 			return {
+				articleId: null,
+				buttonText: null,
 				categories: [],
 				tags: [],
-				radio: 1,
 				form: {
 					title: '',
 					thumbnail: '',
@@ -138,57 +132,162 @@
 		},
 		
 		created() {
-			getCategories().then(res => {
-				if(res.success){
-					this.categories = res.data;
-				}else {
-					this.$message.error(res.msg);
-				}
-			}),
-			getTags().then(res => {
-				if(res.success){
-					this.tags = this.tags.concat(res.data);
-				}else {
-					this.$message.error(res.msg);
-				}
-			})
+			//判断是更新文章还是新增文章
+			if (this.$route.params.id != null) {
+				this.articleId = this.$route.params.id
+			}
+			//获取分类和标签
+			this.getCateAndTag();
+			//更新按钮文本
+			if(this.articleId != null) {
+				this.buttonText = '更新';
+				this.getArticle(this.articleId);
+			} else {
+				this.buttonText = '保存';
+			}
 		},
 		
 		watch: {
 			'form.words'(newValue) {
 				this.form.readTime = newValue ? Math.round(newValue / 200) : null
 			},
+			//路由参数改为：在created中获取一次，无需动态监听
+			// $route: {
+			// 	handler() {
+			// 		this.articleId = this.$route.params.id;
+			// 	},
+			// 	//在created前就能监听到变化
+			// 	immediate: true,
+			// 	//深度监听，同时也可监听到param参数变化
+			// 	deep: true,
+			// }
+
+			//监听articleId变化改变按钮的文本
+			'articleId'(newValue) {
+				if (newValue != null) {
+					this.buttonText = '更新';
+				}else {
+					this.buttonText = "保存";
+				}
+			}
 		},
 		
 		methods: {
+			//通过ID获取文章
+			getArticle(id) {
+				getArticleById(id).then(res => {
+					if(res.success){
+						this.form.title = res.data.title;
+						this.form.thumbnail = res.data.thumbnail;
+						this.form.description = res.data.description;
+						this.form.content = res.data.content;
+						this.form.categoryId = res.data.categoryId;
+						this.form.isPublished = res.data.isPublished;
+						this.form.isCommentEnabled = res.data.isCommentEnabled;
+						this.form.tagIds = res.data.tagIds;
+						this.form.isTop = res.data.isTop;
+						this.form.isRecommend = res.data.isRecommend;
+						this.form.isAppreciation = res.data.isAppreciation;
+						this.form.words = res.data.words;
+						this.form.views = res.data.views;
+					}else {
+						this.$message.error(res.msg);
+					}
+				})
+			},
+			//获取分类和标签
+			getCateAndTag() {
+				getCategories().then(res => {
+					if(res.success){
+						this.categories = res.data;
+					}else {
+						this.$message.error(res.msg);
+					}
+				}),
+				getTags().then(res => {
+					if(res.success){
+						this.tags = this.tags.concat(res.data);
+					}else {
+						this.$message.error(res.msg);
+					}
+				})
+			},
+			//保存文章
 			submit() {
 				this.$refs.formRef.validate(valid => {
 					if (valid) {
-						saveArticle(this.form).then(res => {
-							if (res.success) {
-								Notification({
-									title: '保存成功',
-									type: 'success'
-								})
-							} else {
-								Notification({
-									title: '保存失败',
-									message: res.msg,
-									type: 'error'
-								})
-							}
-						})
+						//判断文章ID存在，存在就更新，否则新增
+						if (this.articleId != null) {
+							this.form.id = this.articleId;
+							updateArticle(this.form).then(res => {
+								if (res.success) {
+									//更新成功清空表单并回到新增状态
+									this.$refs.formRef.resetFields();
+									this.articleId = null;
+									//重置属性值和标签选择框
+									this.form.tagIds = [];
+									this.form.isPublished = true;
+									this.form.isCommentEnabled = true;
+									this.form.isTop = false;
+									this.form.isRecommend = false;
+									this.form.isAppreciation = false
+									//回到页面最上面
+									window.scrollTo({
+										top: 0,
+										behavior: 'smooth'
+									});
+									//弹窗提示
+									Notification({
+										title: '更新成功',
+										type: 'success',
+										duration: 1500
+									})
+								} else {
+									Notification({
+										title: '更新失败',
+										message: res.msg,
+										type: 'error'
+									})
+								}
+							})
+						} else {
+							//文章ID不存在，新增文章
+							saveArticle(this.form).then(res => {
+								if (res.success) {
+									//保存成功清空表单
+									this.$refs.formRef.resetFields();
+									//重置属性和标签选择框
+									this.form.tagIds = [];
+									this.form.isPublished = true;
+									this.form.isCommentEnabled = true;
+									this.form.isTop = false;
+									this.form.isRecommend = false;
+									this.form.isAppreciation = false
+									//回到页面最上面
+									window.scrollTo({
+										top: 0,
+										behavior: 'smooth'
+									});
+									//弹窗提示
+									Notification({
+										title: '保存成功',
+										type: 'success'
+									})
+								} else {
+									Notification({
+										title: '保存失败',
+										message: res.msg,
+										type: 'error'
+									})
+								}
+							})
+						}
 					} else {
 						return this.msgError('请填写必要的表单项')
 					}
 				})
 			}
-		},
-		
-		components: {
-			Breadcrumb
 		}
-		
 	}
 </script>
 
