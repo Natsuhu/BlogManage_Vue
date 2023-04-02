@@ -3,7 +3,7 @@ import request from "@/api/BaseRequest"
 export function saveArticle(form) {
 	return request({
 		method: 'post',
-		url: '/admin/article/save',
+		url: '/admin/article/saveArticle',
 		data: {
 			...form
 		}
@@ -13,7 +13,7 @@ export function saveArticle(form) {
 export function getArticleById(id) {
 	return request({
 		method: 'post',
-		url: '/admin/article/getArticleById',
+		url: '/admin/article/getUpdateArticle',
 		params: {
 			id
 		}
@@ -33,7 +33,7 @@ export function getArticleTable(queryParam) {
 export function updateArticle(updateParam) {
 	return request({
 		method: 'post',
-		url: '/admin/article/update',
+		url: '/admin/article/updateArticle',
 		data: {
 			...updateParam
 		}
