@@ -89,7 +89,6 @@
 </template>
 
 <script>
-	import Breadcrumb from "@/components/Breadcrumb";
 	import { Notification } from "element-ui";
 	import { getCategories } from '@/api/Category';
 	import { getArticleTable , updateArticle } from "@/api/Article";
@@ -201,10 +200,6 @@
 				this.queryParam.pageNo = newPage
 				this.getTableData()
 			}
-		},
-		
-		components: {
-			Breadcrumb
 		}
 	}
 </script>

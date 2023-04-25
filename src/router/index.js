@@ -51,46 +51,32 @@ export const constantRoutes = [
         meta: { title: '写动态', icon: 'el-icon-edit' }
       },
       {
-        path: 'edit/:id',
-        name: 'EditBlog',
-        component: () => import('@/views/dashboard/index'),
-        meta: { title: '编辑文章', icon: 'el-icon-edit' },
-        hidden: true
-      },
-      {
-        path: 'moment/edit/:id',
-        name: 'EditMoment',
-        component: () => import('@/views/dashboard/index'),
-        meta: { title: '编辑动态', icon: 'el-icon-edit' },
-        hidden: true
-      },
-      {
         path: 'manage',
-        name: 'BlogTable',
+        name: 'ArticleTable',
         component: () => import('@/views/blog/ArticleTable'),
         meta: { title: '文章管理', icon: 'el-icon-s-order' }
       },
       {
-        path: 'moment/list',
-        name: 'MomentList',
+        path: 'moment/table',
+        name: 'MomentTable',
         component: () => import('@/views/dashboard/index'),
         meta: { title: '动态管理', icon: 'el-icon-chat-dot-round' }
       },
       {
-        path: 'category/list',
-        name: 'CategoryList',
-        component: () => import('@/views/dashboard/index'),
+        path: 'category/table',
+        name: 'CategoryTable',
+        component: () => import('@/views/blog/CategoryTable'),
         meta: { title: '分类管理', icon: 'el-icon-s-grid' }
       },
       {
-        path: 'tag/list',
-        name: 'TagList',
+        path: 'tag/table',
+        name: 'TagTable',
         component: () => import('@/views/dashboard/index'),
         meta: { title: '标签管理', icon: 'el-icon-paperclip' }
       },
       {
-        path: 'comment/list',
-        name: 'CommentList',
+        path: 'comment/table',
+        name: 'CommentTable',
         component: () => import('@/views/dashboard/index'),
         meta: { title: '评论管理', icon: 'el-icon-s-comment' }
       }
