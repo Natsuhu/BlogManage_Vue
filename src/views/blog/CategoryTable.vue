@@ -26,18 +26,29 @@
 
         <!-- 操作按钮 -->
         <el-table-column label="操作" width="300" align="center">
+            <template slot-scope="scope">
             <!-- <i class="el-icon-edit"/>
             <i class="el-icon-delete"/> -->
-            <el-button @click="changeCategory()" type="primary" icon="el-icon-edit" size="mini">编辑</el-button>
-            <el-button type="danger" icon="el-icon-delete" size="mini">删除</el-button>
+                <el-button @click="changeCategory(scope.row)" type="primary" icon="el-icon-edit" size="mini">编辑</el-button>
+                <el-button @click="removeCategory(scope.row)" type="danger" icon="el-icon-delete" size="mini">删除</el-button>
+            </template>
         </el-table-column>
         </el-table>
 
         <!-- 新增/修改对话框 -->
         <el-dialog :title="dialogTitle" :visible.sync="dialog" modal="false" modal-append-to-body="false">
+
+            <!-- 名称输入表单 -->
+            <el-form ref="form" :model="form" label-width="80px">
+                <el-form-item label="分类名称" prop="name">
+                    <el-input v-model="form.name" placeholder="输入分类名称"></el-input>
+                </el-form-item>
+            </el-form>
+
+            <!-- 操作按钮 -->
             <div slot="footer" class="dialog-footer">
                 <el-button @click="dialog = false">取 消</el-button>
-                <el-button type="primary" @click="dialog = false">确 定</el-button>
+                <el-button type="primary" @click="submit()">确 定</el-button>
             </div>
         </el-dialog>
 
@@ -58,7 +69,11 @@
 
         data() {
             return {
+                //保存标记，1新增2更新
+                saveTag: 0,
+                //对话框标题：新增或更新
                 dialogTitle: null,
+                //对话框激活标记
                 dialog: false,
                 categoryTable: [],
                 totalPage: 0,
@@ -67,6 +82,22 @@
                     keyword: null,
 					pageNo: 1,
 					pageSize: 10
+                },
+                //更新&新增提交表单
+                form: {
+                    id: null,
+                    name: null
+                }
+            }
+        },
+
+        watch: {
+            //监听对话框关闭
+            dialog: function(value) {
+                if (!value) {
+                    this.saveTag = 0;
+                    this.form.id = null;
+                    this.form.name = null;
                 }
             }
         },
@@ -90,13 +121,82 @@
 			},
             //新增分类按钮
             addCategory() {
+                this.saveTag = 1;
                 this.dialog = true;
                 this.dialogTitle = "新增分类";
+                this.form.id = null;
+                this.form.name = null;
             },
             //表格编辑分类按钮
-            changeCategory() {
+            changeCategory(row) {
+                this.saveTag = 2;
                 this.dialog = true;
                 this.dialogTitle = "编辑分类";
+                this.form.id = row.id;
+                this.form.name = row.name;
+            },
+            //对话框确定按钮
+            submit() {
+                if (this.saveTag === 1) {
+                    saveCategory(this.form).then(res => {
+                        if (res.success) {
+                            Notification({
+                                title: '新增成功',
+                                type: 'success',
+                                duration: 1500
+                            })
+                            //刷新表单,关闭对话框
+                            this.getTableData();
+                            this.dialog = false;
+                        } else {
+                            Notification({
+                                title: '新增失败',
+                                message: res.msg,
+							    type: 'error'
+                            })
+                        }
+                    })
+                }
+                if (this.saveTag === 2) {
+                    updateCategory(this.form).then(res =>{
+                        if (res.success) {
+                            Notification({
+                                title: '更新成功',
+                                type: 'success',
+                                duration: 1500
+                            })
+                            //刷新表单,关闭对话框
+                            this.getTableData();
+                            this.dialog = false;
+                        } else {
+                            Notification({
+                                title: '更新失败',
+                                message: res.msg,
+							    type: 'error'
+                            })
+                        }
+                    })
+                }
+            },
+            //表格删除按钮
+            removeCategory(row) {
+                deleteCategory(row).then(res => {
+                    if(res.success){
+                        Notification({
+							title: '删除成功',
+							type: 'success',
+							duration: 1500
+						})
+                        //删除成功刷新表格
+                        this.getTableData();
+					}else {
+						Notification({
+							title: '删除失败',
+							message: res.msg,
+							type: 'error'
+						})
+					}
+                })
             },
             //分页监听，新pageNo
 			handleSizeChange(newSize) {
