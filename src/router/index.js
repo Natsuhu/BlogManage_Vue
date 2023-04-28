@@ -52,30 +52,30 @@ export const constantRoutes = [
       },
       {
         path: 'manage',
-        name: 'ArticleTable',
-        component: () => import('@/views/blog/ArticleTable'),
+        name: 'ArticleManage',
+        component: () => import('@/views/blog/ArticleManage'),
         meta: { title: '文章管理', icon: 'el-icon-s-order' }
       },
       {
-        path: 'moment/table',
+        path: 'moment/manage',
         name: 'MomentTable',
         component: () => import('@/views/dashboard/index'),
         meta: { title: '动态管理', icon: 'el-icon-chat-dot-round' }
       },
       {
-        path: 'category/table',
-        name: 'CategoryTable',
-        component: () => import('@/views/blog/CategoryTable'),
+        path: 'category/manage',
+        name: 'CategoryManage',
+        component: () => import('@/views/blog/CategoryManage'),
         meta: { title: '分类管理', icon: 'el-icon-s-grid' }
       },
       {
-        path: 'tag/table',
-        name: 'TagTable',
-        component: () => import('@/views/dashboard/index'),
+        path: 'tag/manage',
+        name: 'TagManage',
+        component: () => import('@/views/blog/TagManage'),
         meta: { title: '标签管理', icon: 'el-icon-paperclip' }
       },
       {
-        path: 'comment/table',
+        path: 'comment/manage',
         name: 'CommentTable',
         component: () => import('@/views/dashboard/index'),
         meta: { title: '评论管理', icon: 'el-icon-s-comment' }

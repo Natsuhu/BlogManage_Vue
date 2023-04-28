@@ -73,13 +73,13 @@
 			<!-- 操作按钮 -->
 			<el-table-column label="操作" width="150" align="center">
 				<template slot-scope="scope">
-					<el-button type="primary" icon="el-icon-edit" size="mini" @click="editArticle(scope.row.id)">编辑</el-button>
+					<el-button circle icon="el-icon-edit" size="mini" @click="editArticle(scope.row.id)"></el-button>
 				</template>
 			</el-table-column>
 		</el-table>
 		
 		<!--分页-->
-		<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="queryParam.pageNo"
+		<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="queryParam.pageNo"
 					   :page-sizes="[10, 20, 30, 50, 100]" :page-size="queryParam.pageSize" :page-count="totalPage" :total="total"
 					   layout="total, sizes, prev, pager, next, jumper" background style="float: right;">
 		</el-pagination>
@@ -94,7 +94,7 @@
 	import { getArticleTable , updateArticle } from "@/api/Article";
 	
 	export default {
-		name: "ArticleTable",
+		name: "ArticleManage",
 		
 		data() {
 			return {
@@ -145,6 +145,7 @@
 						this.$message.error(res.msg);
 					}
 				})
+				
 			},
 			//获取分类，用于筛选
 			getCategories() {
@@ -160,6 +161,7 @@
 			updateArticleAtt(updateParam) {
 				let attrList = {};
 				attrList.id = updateParam.id;
+				attrList.categoryId = updateParam.categoryId
 				attrList.isPublished = updateParam.isPublished;
 				attrList.isTop = updateParam.isTop;
 				attrList.isCommentEnabled = updateParam.isCommentEnabled;
