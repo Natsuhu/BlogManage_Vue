@@ -73,7 +73,7 @@
 			<!-- 操作按钮 -->
 			<el-table-column label="操作" width="150" align="center">
 				<template slot-scope="scope">
-					<el-button circle icon="el-icon-edit" size="mini" @click="editArticle(scope.row.id)"></el-button>
+					<el-button circle type="primary" plain icon="el-icon-edit" size="mini" @click="editArticle(scope.row.id)"></el-button>
 				</template>
 			</el-table-column>
 		</el-table>

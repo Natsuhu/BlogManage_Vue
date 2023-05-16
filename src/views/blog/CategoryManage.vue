@@ -29,10 +29,10 @@
             <template slot-scope="scope">
             <!-- <i class="el-icon-edit"/>
             <i class="el-icon-delete"/> -->
-                <el-button class="base_margin_r" circle @click="changeCategory(scope.row)" icon="el-icon-edit" size="mini"></el-button>
+                <el-button class="base_margin_r" type="primary" plain circle @click="changeCategory(scope.row)" icon="el-icon-edit" size="mini"></el-button>
                 <el-popconfirm confirm-button-text='好' cancel-button-text='手滑了' icon="el-icon-info" icon-color="red"
                                title="这可是物理删除！" @onConfirm="removeCategory(scope.row)">
-                    <el-button slot="reference" type="danger" circle icon="el-icon-delete" size="mini"></el-button>
+                    <el-button slot="reference" type="danger" plain circle icon="el-icon-delete" size="mini"></el-button>
                 </el-popconfirm>
             </template>
         </el-table-column>

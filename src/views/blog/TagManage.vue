@@ -20,8 +20,8 @@
             <!-- 固定列 -->
             <el-table-column label="序号" type="index" width="50" align="center"/>
             <el-table-column label="名称" prop="name" align="center" show-overflow-tooltip/>
-            <el-table-column label="文章数量" prop="articleCount" width="150" align="center"/>
-            <el-table-column label="标签颜色" width="200" align="center">
+            <el-table-column label="文章数量" prop="articleCount" width="200" align="center"/>
+            <el-table-column label="标签颜色" width="220" align="center">
                 <template slot-scope="scope">
                     <el-button circle :style="'background-color:' + scope.row.color" size="mini"></el-button>
                 </template>
@@ -34,10 +34,10 @@
                 <template slot-scope="scope">
                 <!-- <i class="el-icon-edit"/>
                 <i class="el-icon-delete"/> -->
-                    <el-button class="base_margin_r" circle @click="changeTag(scope.row)" icon="el-icon-edit" size="mini"></el-button>
+                    <el-button class="base_margin_r" type="primary" plain circle @click="changeTag(scope.row)" icon="el-icon-edit" size="mini"></el-button>
                     <el-popconfirm confirm-button-text='好' cancel-button-text='手滑了' icon="el-icon-info" icon-color="red"
                                 title="这可是物理删除！" @onConfirm="removeTag(scope.row)">
-                        <el-button slot="reference" type="danger" circle icon="el-icon-delete" size="mini"></el-button>
+                        <el-button slot="reference" type="danger" plain circle icon="el-icon-delete" size="mini"></el-button>
                     </el-popconfirm>
                 </template>
             </el-table-column>
