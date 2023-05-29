@@ -1,94 +1,96 @@
 <template>
-	<el-form :model="form" :rules="formRules" ref="formRef" label-position="top">
-		<el-row :gutter="20">
-			<!-- 文章标题 -->
-			<el-col :span="12">
-				<el-form-item label="文章标题" prop="title">
-					<el-input v-model="form.title" placeholder="输入标题"></el-input>
-				</el-form-item>
-			</el-col>
+	<el-card>
+		<el-form :model="form" :rules="formRules" ref="formRef" label-position="top">
+			<el-row :gutter="20">
+				<!-- 文章标题 -->
+				<el-col :span="12">
+					<el-form-item label="文章标题" prop="title">
+						<el-input v-model="form.title" placeholder="输入标题"></el-input>
+					</el-form-item>
+				</el-col>
+				
+				<!-- 封面图片 -->
+				<el-col :span="12">
+					<el-form-item label="文章首图" prop="thumbnail">
+						<el-input v-model="form.thumbnail" placeholder="输入图片URL">
+							<el-button slot="append">点击预览</el-button>
+						</el-input>
+					</el-form-item>
+				</el-col>
+			</el-row>
 			
-			<!-- 封面图片 -->
-			<el-col :span="12">
-				<el-form-item label="文章首图" prop="thumbnail">
-					<el-input v-model="form.thumbnail" placeholder="输入图片URL">
-						<el-button slot="append">点击预览</el-button>
-					</el-input>
-				</el-form-item>
-			</el-col>
-		</el-row>
-		
-		<!-- 文章描述 -->
-		<el-form-item label="文章描述" prop="description">
-			<mavon-editor v-model="form.description" />
-		</el-form-item>
-		
-		<!-- 正文 -->
-		<el-form-item label="文章正文" prop="content">
-			<mavon-editor v-model="form.content" />
-		</el-form-item>
-		
-		<el-row :gutter="20">
-			<!-- 分类 -->
-			<el-col :span="8">
-				<el-form-item label="分类" prop="categoryId">
-					<el-select v-model="form.categoryId" placeholder="选择分类" style="width: 100%;">
-						<el-option v-for="item in categories" :key="item.id" :label="item.name" :value="item.id"></el-option>
-					</el-select>
-				</el-form-item>
-			</el-col>
+			<!-- 文章描述 -->
+			<el-form-item label="文章描述" prop="description">
+				<mavon-editor v-model="form.description" />
+			</el-form-item>
 			
-			<!-- 标签 -->
-			<el-col :span="8">
-				<el-form-item label="标签" prop="tags"> 
-					<el-select v-model="form.tagIds" placeholder="选择标签" :multiple="true" style="width: 100%;">
-						<el-option v-for="item in tags" :key="item.id" :label="item.name" :value="item.id"></el-option>
-					</el-select>
-				</el-form-item>
-			</el-col>
+			<!-- 正文 -->
+			<el-form-item label="文章正文" prop="content">
+				<mavon-editor v-model="form.content" />
+			</el-form-item>
 			
-			<!-- 属性 -->
-			<el-col :span="8">
-				<el-form-item label="属性">
-					<div class="base_attr_box">
-						<el-checkbox border v-model="form.isPublished" true-label="true" false-label="false">公开</el-checkbox>
-						<el-checkbox border v-model="form.isCommentEnabled" true-label="true" false-label="false">评论</el-checkbox>
-						<el-checkbox border v-model="form.isTop" true-label="true" false-label="false">置顶</el-checkbox>
-						<el-checkbox border v-model="form.isRecommend" true-label="true" false-label="false">推荐</el-checkbox>
-						<el-checkbox border v-model="form.isAppreciation" true-label="true" false-label="false">赞赏</el-checkbox>
-					</div>
-				</el-form-item>
-			</el-col>
-		</el-row>
-		
-		<el-row :gutter="20">
-			<!-- 字数 -->
-			<el-col :span="8">
-				<el-form-item label="字数" prop="words">
-					<el-input v-model="form.words" placeholder="输入文章字数" type="number"></el-input>
-				</el-form-item>
-			</el-col>
+			<el-row :gutter="20">
+				<!-- 分类 -->
+				<el-col :span="8">
+					<el-form-item label="分类" prop="categoryId">
+						<el-select v-model="form.categoryId" placeholder="选择分类" style="width: 100%;">
+							<el-option v-for="item in categories" :key="item.id" :label="item.name" :value="item.id"></el-option>
+						</el-select>
+					</el-form-item>
+				</el-col>
+				
+				<!-- 标签 -->
+				<el-col :span="8">
+					<el-form-item label="标签" prop="tags"> 
+						<el-select v-model="form.tagIds" placeholder="选择标签" :multiple="true" style="width: 100%;">
+							<el-option v-for="item in tags" :key="item.id" :label="item.name" :value="item.id"></el-option>
+						</el-select>
+					</el-form-item>
+				</el-col>
+				
+				<!-- 属性 -->
+				<el-col :span="8">
+					<el-form-item label="权限">
+						<div class="base_attr_box">
+							<el-checkbox border v-model="form.isPublished" true-label="true" false-label="false">公开</el-checkbox>
+							<el-checkbox border v-model="form.isCommentEnabled" true-label="true" false-label="false">评论</el-checkbox>
+							<el-checkbox border v-model="form.isTop" true-label="true" false-label="false">置顶</el-checkbox>
+							<el-checkbox border v-model="form.isRecommend" true-label="true" false-label="false">推荐</el-checkbox>
+							<el-checkbox border v-model="form.isAppreciation" true-label="true" false-label="false">赞赏</el-checkbox>
+						</div>
+					</el-form-item>
+				</el-col>
+			</el-row>
 			
-			<!-- 阅读时长 -->
-			<el-col :span="8">
-				<el-form-item label="阅读时长" prop="readTime">
-					<el-input v-model="form.readTime" placeholder="输入阅读时长(分钟)" type="number"></el-input>
-				</el-form-item>
-			</el-col>
+			<el-row :gutter="20">
+				<!-- 字数 -->
+				<el-col :span="8">
+					<el-form-item label="字数" prop="words">
+						<el-input v-model="form.words" placeholder="输入文章字数" type="number"></el-input>
+					</el-form-item>
+				</el-col>
+				
+				<!-- 阅读时长 -->
+				<el-col :span="8">
+					<el-form-item label="阅读时长" prop="readTime">
+						<el-input v-model="form.readTime" placeholder="输入阅读时长(分钟)" type="number"></el-input>
+					</el-form-item>
+				</el-col>
+				
+				<!-- 浏览次数 -->
+				<el-col :span="8">
+					<el-form-item label="浏览次数" prop="views">
+						<el-input v-model="form.views" placeholder="输入文章字数,默认为0" type="number"></el-input>
+					</el-form-item>
+				</el-col>
+			</el-row>
 			
-			<!-- 浏览次数 -->
-			<el-col :span="8">
-				<el-form-item label="浏览次数" prop="views">
-					<el-input v-model="form.views" placeholder="输入文章字数,默认为0" type="number"></el-input>
-				</el-form-item>
-			</el-col>
-		</el-row>
-		
-		<!-- 提交表单 -->
-		<el-form-item style="text-align: right;">
-			<el-button type="primary" @click="submit">{{ buttonText }}</el-button>
-		</el-form-item>
-	</el-form>
+			<!-- 提交表单 -->
+			<el-form-item style="text-align: right;">
+				<el-button type="primary" @click="submit">{{ buttonText }}</el-button>
+			</el-form-item>
+		</el-form>
+	</el-card>
 </template>
 
 <script>

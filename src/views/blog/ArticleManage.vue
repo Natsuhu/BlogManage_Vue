@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<el-card>
 		<!-- 筛选面板 -->
 		<el-row :gutter="24" class="base_margin_tb">
 			<!-- 搜索标题 -->
@@ -32,7 +32,7 @@
 			<el-table-column label="字数" prop="words" width="100" align="center"/>
 
 			<!-- 可快捷更新列 -->
-			<el-table-column label="编辑属性" width="150" align="center">
+			<el-table-column label="权限" width="150" align="center">
 				<template slot-scope="scope">
 					<el-popover placement="bottom" width="220" :ref="`popover-${scope.$index}`">
 						<el-row :gutter="20" class="base_margin_b">
@@ -81,9 +81,9 @@
 		<!--分页-->
 		<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="queryParam.pageNo"
 					   :page-sizes="[10, 20, 30, 50, 100]" :page-size="queryParam.pageSize" :page-count="totalPage" :total="total"
-					   layout="total, sizes, prev, pager, next, jumper" background style="float: right;">
+					   layout="total, sizes, prev, pager, next, jumper" background style="float: right;" class="base_margin_b">
 		</el-pagination>
-	</div>
+	</el-card>
 	
 	
 </template>

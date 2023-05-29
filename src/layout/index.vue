@@ -60,6 +60,7 @@ export default {
 
 .app-wrapper {
   @include clearfix;
+  background-color: #F2F2F9;
   position: relative;
   height: 100%;
   width: 100%;

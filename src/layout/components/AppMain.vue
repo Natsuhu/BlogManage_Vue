@@ -19,14 +19,15 @@
 
 <style scoped>
 	.fixed-header + .app-main {
-		padding-top: 60px;
+		padding-top: 65px;
 	}
 	.app-main {
+		background-color: #F2F2F9;
 		min-height: calc(100vh - 50px);
 		width: 100%;
 		position: relative;
 		overflow: hidden;
-		padding: 20px;
+		padding: 15px;
 	}
 </style>
 

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <el-card>
 		<!-- 操作面板 -->
 		<el-row :gutter="24" class="base_margin_tb">
 
@@ -63,9 +63,9 @@
         <!--分页-->
         <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="queryParam.pageNo"
                 :page-sizes="[10, 20, 30]" :page-size="queryParam.pageSize" :page-count="totalPage" :total="total"
-                layout="total, sizes, prev, pager, next, jumper" background style="float: right;">
+                layout="total, sizes, prev, pager, next, jumper" background style="float: right;" class="base_margin_b">
         </el-pagination>
-    </div>
+    </el-card>
 </template>
 
 <script>
