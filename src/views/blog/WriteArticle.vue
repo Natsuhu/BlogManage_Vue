@@ -4,7 +4,7 @@
 			<el-row class="base_margin_b_large">
 				<el-container>
 					<el-header>
-						<div style="border-left: 3px solid #00A7E0; padding-left: 1rem; color: #00A7E0; font-size: 18px">
+						<div style="border-left: 3px solid #1882C4; padding-left: 1rem; color: #1882C4; font-size: 18px">
               写文章
             </div>
 						<div>
@@ -83,7 +83,7 @@
 			<el-row>
 				<el-container>
           <el-header>
-            <div style="border-left: 3px solid #00A7E0; padding-left: 1rem; color: #00A7E0; font-size: 18px">
+            <div style="border-left: 3px solid #1882C4; padding-left: 1rem; color: #1882C4; font-size: 18px">
               编辑内容
             </div>
           </el-header>
@@ -97,12 +97,12 @@
 
 						<!-- 文章描述 -->
 						<el-form-item label="文章描述" prop="description">
-							<mavon-editor :boxShadow="false" v-model="form.description" />
+							<mavon-editor :autofocus="false" :boxShadow="false" v-model="form.description" />
 						</el-form-item>
 
 						<!-- 正文 -->
 						<el-form-item label="文章正文" prop="content">
-							<mavon-editor :boxShadow="false" v-model="form.content" />
+							<mavon-editor :autofocus="false" :boxShadow="false" v-model="form.content" />
 						</el-form-item>
 					</el-main>
 				</el-container>
