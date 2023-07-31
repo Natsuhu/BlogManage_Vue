@@ -4,13 +4,15 @@
 			<el-row class="base_margin_b_large">
 				<el-container>
 					<el-header>
-						<div style="border-left: 3px solid #00A7E0; padding-left: 1rem;">编辑文章</div>
+						<div style="border-left: 3px solid #00A7E0; padding-left: 1rem; color: #00A7E0; font-size: 18px">
+              写文章
+            </div>
 						<div>
 							<!-- 提交表单 -->
 							<el-button type="primary" @click="submit">{{ buttonText }}</el-button>
 						</div>
 					</el-header>
-					
+
 					<el-main>
 						<el-row :gutter="20">
 							<!-- 文章标题 -->
@@ -19,7 +21,7 @@
 									<el-input v-model="form.title" placeholder="输入标题"></el-input>
 								</el-form-item>
 							</el-col>
-							
+
 							<!-- 分类 -->
 							<el-col :span="6">
 								<el-form-item label="分类" prop="categoryId">
@@ -28,16 +30,16 @@
 									</el-select>
 								</el-form-item>
 							</el-col>
-							
+
 							<!-- 标签 -->
 							<el-col :span="6">
-								<el-form-item label="标签" prop="tags"> 
+								<el-form-item label="标签" prop="tags">
 									<el-select v-model="form.tagIds" placeholder="选择标签" :multiple="true" style="width: 100%;">
 										<el-option v-for="item in tags" :key="item.id" :label="item.name" :value="item.id"></el-option>
 									</el-select>
 								</el-form-item>
 							</el-col>
-							
+
 							<!-- 字数 -->
 							<el-col :span="6">
 								<el-form-item label="字数" prop="words">
@@ -45,7 +47,7 @@
 								</el-form-item>
 							</el-col>
 						</el-row>
-						
+
 						<el-row :gutter="20">
 							<!-- 阅读时长 -->
 							<el-col :span="6">
@@ -53,14 +55,14 @@
 									<el-input v-model="form.readTime" placeholder="输入阅读时长(分钟)" type="number"></el-input>
 								</el-form-item>
 							</el-col>
-							
+
 							<!-- 浏览次数 -->
 							<el-col :span="6">
 								<el-form-item label="浏览次数" prop="views">
 									<el-input v-model="form.views" placeholder="输入文章字数,默认为0" type="number"></el-input>
 								</el-form-item>
 							</el-col>
-							
+
 							<!-- 属性 -->
 							<el-col :span="7">
 								<el-form-item label="权限">
@@ -77,22 +79,27 @@
 					</el-main>
 				</el-container>
 			</el-row>
-			
+
 			<el-row>
 				<el-container>
+          <el-header>
+            <div style="border-left: 3px solid #00A7E0; padding-left: 1rem; color: #00A7E0; font-size: 18px">
+              编辑内容
+            </div>
+          </el-header>
 					<el-main>
 						<!-- 图片库 -->
 						<el-form-item label="文章首图" prop="thumbnail">
 							<el-input v-model="form.thumbnail" placeholder="输入图片URL">
 								<el-button slot="append">点击预览</el-button>
 							</el-input>
-						</el-form-item>			
-						
+						</el-form-item>
+
 						<!-- 文章描述 -->
 						<el-form-item label="文章描述" prop="description">
 							<mavon-editor :boxShadow="false" v-model="form.description" />
 						</el-form-item>
-						
+
 						<!-- 正文 -->
 						<el-form-item label="文章正文" prop="content">
 							<mavon-editor :boxShadow="false" v-model="form.content" />
@@ -109,10 +116,10 @@
 	import { saveArticle , getArticleById , updateArticle } from '@/api/Article';
 	import { getCategories } from '@/api/Category';
 	import { getTags } from '@/api/Tag';
-	
+
 	export default {
 		name: "WriteArticle",
-		
+
 		data() {
 			return {
 				articleId: null,
@@ -143,7 +150,7 @@
 				}
 			}
 		},
-		
+
 		created() {
 			//判断是更新文章还是新增文章
 			if (this.$route.params.id != null) {
@@ -159,7 +166,7 @@
 				this.buttonText = '保存';
 			}
 		},
-		
+
 		watch: {
 			'form.words'(newValue) {
 				this.form.readTime = newValue ? Math.round(newValue / 200) : null
@@ -184,7 +191,7 @@
 				}
 			}
 		},
-		
+
 		methods: {
 			//通过ID获取文章
 			getArticle(id) {
@@ -307,7 +314,7 @@
 <style scoped>
 	.el-container {
 		background-color: #FFFFFF;
-		border: 2px solid rgb(241, 242, 243);
+		border: 1px solid rgb(241, 242, 243);
 		box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
 	}
 	.el-header {
@@ -316,7 +323,7 @@
 		justify-content: space-between;
 		border-bottom: 2px solid rgb(241, 242, 243);
 	}
-	
+
 	.base_attr_box {
 		width: 100%;
 		display: flex;
