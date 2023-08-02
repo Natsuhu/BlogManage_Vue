@@ -90,9 +90,11 @@
 					<el-main>
 						<!-- 图片库 -->
 						<el-form-item label="文章首图" prop="thumbnail">
-							<el-input v-model="form.thumbnail" placeholder="输入图片URL">
-								<el-button slot="append">点击预览</el-button>
-							</el-input>
+              <el-image :src="form.thumbnail" class="lit-pic">
+                <div slot="error" class="el-upload--picture-card">
+                  <i class="el-icon-plus"></i>
+                </div>
+              </el-image>
 						</el-form-item>
 
 						<!-- 文章描述 -->
@@ -314,7 +316,6 @@
 <style scoped>
 	.el-container {
 		background-color: #FFFFFF;
-		border: 1px solid rgb(241, 242, 243);
 		box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
 	}
 	.el-header {
@@ -339,4 +340,15 @@
 		z-index: 9 !important;
 		border: 1px solid rgb(220, 223, 230) !important;
 	}
+
+  .lit-pic {
+    width: 200px;
+    height: 140px;
+  }
+  ::v-deep .lit-pic .el-upload--picture-card {
+    width: 200px;
+    height: 140px;
+    line-height: 145px;
+    text-align: center;
+  }
 </style>
