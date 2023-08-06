@@ -1,66 +1,75 @@
 <template>
-    <el-card>
+    <div>
 		<!-- 操作面板 -->
-		<el-row :gutter="24" class="base_margin_tb">
+		<el-row class="base_margin_b">
+            <el-container>
+                <el-header>
+                    <!-- 搜索名称 -->
+                    <div>
+                        <el-input v-model="queryParam.keyword" @input="getTableData()" clearable placeholder="搜索分类名称..." style="width: 100%;" prefix-icon="el-icon-search"/>
+                    </div>
 
-            <!-- 新增按钮 -->
-            <el-col style="width: 100px">
-                <el-button @click="addCategory()" type="primary" icon="el-icon-plus">新增</el-button>
-            </el-col>
-
-			<!-- 搜索名称 -->
-			<el-col :span="5">
-				<el-input v-model="queryParam.keyword" @input="getTableData()" clearable placeholder="搜索分类名称..." style="width: 100%;" prefix-icon="el-icon-search"/>
-			</el-col>
+                    <!-- 新增按钮 -->
+                    <div>
+                        <el-button @click="addCategory()" type="primary">新增</el-button>
+                    </div>
+                </el-header>
+            </el-container>
 		</el-row>
 
-		<!-- 分类表格 -->
-		<el-table :data="categoryTable" :header-cell-style="{background:'#f5f7fa'}" class="base_margin_b_large">
+        <el-row>
+            <el-container>
+                <el-main>
+                    <!-- 分类表格 -->
+                    <el-table :data="categoryTable" :header-cell-style="{background:'#f5f7fa'}" class="base_margin_b_large">
 
-        <!-- 固定列 -->
-        <el-table-column label="序号" type="index" width="50" align="center"/>
-        <el-table-column label="名称" prop="name" align="center" show-overflow-tooltip/>
-        <el-table-column label="文章数量" prop="articleCount" width="270" align="center"/>
-        <el-table-column label="创建时间" prop="createTime" width="270" align="center"/>
-        <el-table-column label="更新时间" prop="updateTime" width="270" align="center"/>
+                    <!-- 固定列 -->
+                    <el-table-column label="序号" type="index" width="50" align="center"/>
+                    <el-table-column label="名称" prop="name" align="center" show-overflow-tooltip/>
+                    <el-table-column label="文章数量" prop="articleCount" width="270" align="center"/>
+                    <el-table-column label="创建时间" prop="createTime" width="270" align="center"/>
+                    <el-table-column label="更新时间" prop="updateTime" width="270" align="center"/>
 
-        <!-- 操作按钮 -->
-        <el-table-column label="操作" width="300" align="center">
-            <template slot-scope="scope">
-            <!-- <i class="el-icon-edit"/>
-            <i class="el-icon-delete"/> -->
-                <el-button class="base_margin_r" type="primary" plain circle @click="changeCategory(scope.row)" icon="el-icon-edit" size="mini"></el-button>
-                <el-popconfirm confirm-button-text='好' cancel-button-text='手滑了' icon="el-icon-info" icon-color="red"
-                               title="这可是物理删除！" @onConfirm="removeCategory(scope.row)">
-                    <el-button slot="reference" type="danger" plain circle icon="el-icon-delete" size="mini"></el-button>
-                </el-popconfirm>
-            </template>
-        </el-table-column>
-        </el-table>
+                    <!-- 操作按钮 -->
+                    <el-table-column label="操作" width="300" align="center">
+                        <template slot-scope="scope">
+                        <!-- <i class="el-icon-edit"/>
+                        <i class="el-icon-delete"/> -->
+                            <el-button class="base_margin_r" type="primary" plain circle @click="changeCategory(scope.row)" icon="el-icon-edit" size="mini"></el-button>
+                            <el-popconfirm confirm-button-text='好' cancel-button-text='手滑了' icon="el-icon-info" icon-color="red"
+                                        title="这可是物理删除！" @onConfirm="removeCategory(scope.row)">
+                                <el-button slot="reference" type="danger" plain circle icon="el-icon-delete" size="mini"></el-button>
+                            </el-popconfirm>
+                        </template>
+                    </el-table-column>
+                    </el-table>
+
+                    <!--分页-->
+                    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="queryParam.pageNo"
+                            :page-sizes="[10, 20, 30]" :page-size="queryParam.pageSize" :page-count="totalPage" :total="total"
+                            layout="total, sizes, prev, pager, next, jumper" background style="float: right;" class="base_margin_b">
+                    </el-pagination>
+                </el-main>
+            </el-container>
+        </el-row>
 
         <!-- 新增/修改对话框 -->
         <el-dialog :title="dialogTitle" :visible.sync="dialog" modal="false" modal-append-to-body="false">
 
-            <!-- 名称输入表单 -->
-            <el-form ref="form" :model="form" label-width="80px">
-                <el-form-item label="分类名称" prop="name">
-                    <el-input v-model="form.name" placeholder="输入分类名称"></el-input>
-                </el-form-item>
-            </el-form>
+        <!-- 名称输入表单 -->
+        <el-form ref="form" :model="form" label-width="80px">
+            <el-form-item label="分类名称" prop="name">
+                <el-input v-model="form.name" placeholder="输入分类名称"></el-input>
+            </el-form-item>
+        </el-form>
 
-            <!-- 操作按钮 -->
-            <div slot="footer" class="dialog-footer">
-                <el-button @click="dialog = false">取 消</el-button>
-                <el-button type="primary" @click="submit()">确 定</el-button>
-            </div>
+        <!-- 操作按钮 -->
+        <div slot="footer" class="dialog-footer">
+            <el-button @click="dialog = false">取 消</el-button>
+            <el-button type="primary" @click="submit()">确 定</el-button>
+        </div>
         </el-dialog>
-
-        <!--分页-->
-        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="queryParam.pageNo"
-                :page-sizes="[10, 20, 30]" :page-size="queryParam.pageSize" :page-count="totalPage" :total="total"
-                layout="total, sizes, prev, pager, next, jumper" background style="float: right;" class="base_margin_b">
-        </el-pagination>
-    </el-card>
+    </div>
 </template>
 
 <script>
@@ -216,6 +225,15 @@
     }
 </script>
 
-<style>
-
+<style scoped>
+	.el-container {
+		background-color: #FFFFFF;
+		box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+	}
+	.el-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		border-bottom: 2px solid rgb(241, 242, 243);
+	}
 </style>
