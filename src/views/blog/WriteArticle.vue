@@ -90,7 +90,7 @@
 					<el-main>
 						<!-- 图片库 -->
 						<el-form-item label="文章首图" prop="thumbnail">
-              <el-image :src="form.thumbnail" class="lit-pic">
+              <el-image :src="imageUrl + '/admin/annex/download/' + form.thumbnail" class="lit-pic">
                 <div slot="error" class="el-upload--picture-card">
                   <i class="el-icon-plus"></i>
                 </div>
@@ -124,6 +124,7 @@
 
 		data() {
 			return {
+			  imageUrl: window.env.API_BASE_URL,
 				articleId: null,
 				buttonText: null,
 				categories: [],
@@ -342,13 +343,14 @@
 	}
 
   .lit-pic {
-    width: 200px;
-    height: 140px;
+    width: 210px;
+    height: 150px;
   }
+
   ::v-deep .lit-pic .el-upload--picture-card {
-    width: 200px;
-    height: 140px;
-    line-height: 145px;
+    width: 210px;
+    height: 150px;
+    line-height: 150px;
     text-align: center;
   }
 </style>
