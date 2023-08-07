@@ -5,8 +5,8 @@
 				<el-container>
 					<el-header>
 						<div style="border-left: 3px solid #1882C4; padding-left: 1rem; color: #1882C4; font-size: 18px">
-              写文章
-            </div>
+							写文章
+						</div>
 						<div>
 							<!-- 提交表单 -->
 							<el-button type="primary" @click="submit">{{ buttonText }}</el-button>
@@ -82,19 +82,19 @@
 
 			<el-row>
 				<el-container>
-          <el-header>
-            <div style="border-left: 3px solid #1882C4; padding-left: 1rem; color: #1882C4; font-size: 18px">
-              编辑内容
-            </div>
-          </el-header>
+					<el-header>
+						<div style="border-left: 3px solid #1882C4; padding-left: 1rem; color: #1882C4; font-size: 18px">
+						编辑内容
+						</div>
+					</el-header>
 					<el-main>
 						<!-- 图片库 -->
 						<el-form-item label="文章首图" prop="thumbnail">
-              <el-image :src="imageUrl + '/admin/annex/download/' + form.thumbnail" class="lit-pic">
-                <div slot="error" class="el-upload--picture-card">
-                  <i class="el-icon-plus"></i>
-                </div>
-              </el-image>
+							<el-image :src="form.thumbnail" class="lit-pic">
+								<div slot="error" class="el-upload--picture-card">
+								<i class="el-icon-plus"></i>
+								</div>
+							</el-image>
 						</el-form-item>
 
 						<!-- 文章描述 -->
@@ -124,7 +124,6 @@
 
 		data() {
 			return {
-			  imageUrl: window.env.API_BASE_URL,
 				articleId: null,
 				buttonText: null,
 				categories: [],
@@ -254,11 +253,6 @@
 									this.form.isTop = false;
 									this.form.isRecommend = false;
 									this.form.isAppreciation = false
-									//回到页面最上面
-									window.scrollTo({
-										top: 0,
-										behavior: 'smooth'
-									});
 									//弹窗提示
 									Notification({
 										title: '更新成功',
@@ -286,11 +280,6 @@
 									this.form.isTop = false;
 									this.form.isRecommend = false;
 									this.form.isAppreciation = false
-									//回到页面最上面
-									window.scrollTo({
-										top: 0,
-										behavior: 'smooth'
-									});
 									//弹窗提示
 									Notification({
 										title: '保存成功',
@@ -343,14 +332,13 @@
 	}
 
   .lit-pic {
-    width: 210px;
-    height: 150px;
+    width: 200px;
+    height: 140px;
   }
-
   ::v-deep .lit-pic .el-upload--picture-card {
-    width: 210px;
-    height: 150px;
-    line-height: 150px;
+    width: 200px;
+    height: 140px;
+    line-height: 145px;
     text-align: center;
   }
 </style>
