@@ -58,7 +58,7 @@ export const constantRoutes = [
       },
       {
         path: 'moment/manage',
-        name: 'MomentTable',
+        name: 'MomentManage',
         component: () => import('@/views/dashboard/index'),
         meta: { title: '动态管理', icon: 'el-icon-chat-dot-round' }
       },
@@ -76,8 +76,8 @@ export const constantRoutes = [
       },
       {
         path: 'comment/manage',
-        name: 'CommentTable',
-        component: () => import('@/views/dashboard/index'),
+        name: 'CommentManage',
+        component: () => import('@/views/blog/CommentManage'),
         meta: { title: '评论管理', icon: 'el-icon-s-comment' }
       }
     ]
