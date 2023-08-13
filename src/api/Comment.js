@@ -19,3 +19,10 @@ export function updateComment(updateParam) {
         }
     })
 }
+
+export function getArticleSelector() {
+    return request({
+        method: 'post',
+        url: '/admin/comment/getArticleSelector'
+    })
+}

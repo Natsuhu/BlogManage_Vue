@@ -11,7 +11,7 @@
 
                     <!-- 新增按钮 -->
                     <div>
-                        <el-button @click="addTag()" type="primary">新增</el-button>
+                        <el-button @click="addTag()" size="small" type="primary">新增</el-button>
                     </div>
                 </el-header>
             </el-container>
@@ -19,6 +19,9 @@
 
         <el-row>
             <el-container>
+                <el-header>
+                    <div style="border-left: 3px solid #1882C4; padding-left: 1rem; color: #1882C4; font-size: 18px">标签管理</div>
+                </el-header>
                 <el-main>
                     <!-- 标签表格 -->
                     <el-table :data="tagTable" :header-cell-style="{background:'#f5f7fa'}" class="base_margin_b_large">

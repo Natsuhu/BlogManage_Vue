@@ -40,16 +40,33 @@
           <el-table :data="commentTable" :header-cell-style="{background:'#f5f7fa'}" class="base_margin_b_large">
             <!-- 固定列 -->
             <el-table-column label="序号" type="index" width="50" align="center"/>
-            <el-table-column label="头像" prop="" align="center" show-overflow-tooltip/>
-            <el-table-column label="昵称" prop="nickname"  align="center"/>
-            <el-table-column label="内容" prop="content"  align="center"/>
-            <el-table-column label="页面" prop="pageName"  align="center"/>
-            <el-table-column label="权限" prop="isPublished" align="center"/>
+            <el-table-column label="头像" align="center">
+              <template slot-scope="scope">
+                <el-avatar shape="square" size="medium" :src="scope.row.avatar"></el-avatar>
+              </template>
+            </el-table-column>
+            <el-table-column label="昵称" width="100" prop="nickname"  align="center" show-overflow-tooltip/>
+            <el-table-column label="内容" prop="content" align="center" show-overflow-tooltip/>
+            <el-table-column label="页面" width="150" prop="pageName" align="center" show-overflow-tooltip/>
+            <el-table-column label="公开" width="150" align="center">
+              <template slot-scope="scope">
+								<el-switch v-model="scope.row.isPublished" @change="updateCommentAtt(scope.row)" />
+							</template>
+            </el-table-column>
             <el-table-column label="城市" prop="city" align="center"/>
-            <el-table-column label="邮箱" prop="email" align="center"/>
-            <el-table-column label="主页" prop="website" align="center"/>
-            <el-table-column label="QQ" prop="qq" align="center"/>
-            <el-table-column label="评论时间" prop="createTime" align="center"/>
+            <el-table-column label="邮箱" prop="email" align="center" show-overflow-tooltip/>
+            <el-table-column label="主页" prop="website" align="center" show-overflow-tooltip/>
+            <el-table-column label="QQ" prop="qq" align="center" show-overflow-tooltip/>
+            <el-table-column label="评论时间" prop="createTime" align="center" show-overflow-tooltip/>
+            <el-table-column label="操作" width="150" align="center">
+              <template slot-scope="scope">
+                  <el-button class="base_margin_r" type="primary" plain circle @click="changeTag(scope.row)" icon="el-icon-edit" size="mini"></el-button>
+                  <el-popconfirm confirm-button-text='好' cancel-button-text='手滑了' icon="el-icon-info" icon-color="red"
+                              title="这可是物理删除！" @onConfirm="">
+                      <el-button slot="reference" type="danger" plain circle icon="el-icon-delete" size="mini"></el-button>
+                  </el-popconfirm>
+              </template>
+            </el-table-column>
           </el-table>
 
           <!--分页-->
@@ -66,7 +83,7 @@
 <script>
   import { Notification } from "element-ui";
   import { getCategories } from '@/api/Category';
-  import { getCommentTable , updateComment } from "@/api/Comment";
+  import { getCommentTable, updateComment,  getArticleSelector} from "@/api/Comment";
 
   export default {
     name: "CommentManage",
@@ -89,6 +106,7 @@
     },
 
     created() {
+      this.articleSelector()
       this.getTableData()
     },
 
@@ -114,6 +132,41 @@
           }else {
             this.$message.error(res.msg);
           }
+        })
+      },
+      updateCommentAtt(updateParam) {
+        let attrList = {};
+        attrList.id = updateParam.id;
+        attrList.isPublished = updateParam.isPublished;
+        attrList.content = updateParam.content;
+        updateComment(attrList).then(res => {
+          if (res.success) {
+            this.getTableData();
+						Notification({
+							title: '更新成功',
+							type: 'success',
+							duration: 1500
+						})
+					} else {
+						Notification({
+							title: '更新失败',
+							message: res.msg,
+							type: 'error'
+						})
+					}
+        })
+      },
+      articleSelector() {
+        getArticleSelector().then(res => {
+          if (res.success) {
+            this.articles = res.data;
+          } else {
+						Notification({
+							title: '获取文章下拉框失败',
+							message: res.msg,
+							type: 'error'
+						})
+					}
         })
       },
       //分页监听，新pageNo
