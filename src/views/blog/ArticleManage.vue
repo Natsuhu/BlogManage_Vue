@@ -27,6 +27,9 @@
 
 		<el-row>
 			<el-container>
+        <el-header>
+          <div style="border-left: 3px solid #1882C4; padding-left: 1rem; color: #1882C4; font-size: 18px">文章管理</div>
+        </el-header>
 				<el-main>
 					<!-- 文章表格 -->
 					<el-table :data="articleTable" :header-cell-style="{background:'#f5f7fa'}" class="base_margin_b_large">
@@ -222,5 +225,6 @@
 	.el-header {
 		display: flex;
 		align-items: center;
+    border-bottom: 2px solid rgb(241, 242, 243);
 	}
 </style>

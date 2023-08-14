@@ -47,7 +47,7 @@ export const constantRoutes = [
       {
         path: 'moment/write',
         name: 'WriteMoment',
-        component: () => import('@/views/dashboard/index'),
+        component: () => import('@/views/blog/WriteMoment'),
         meta: { title: '写动态', icon: 'el-icon-edit' }
       },
       {
@@ -59,7 +59,7 @@ export const constantRoutes = [
       {
         path: 'moment/manage',
         name: 'MomentManage',
-        component: () => import('@/views/dashboard/index'),
+        component: () => import('@/views/blog/MomentManage'),
         meta: { title: '动态管理', icon: 'el-icon-chat-dot-round' }
       },
       {
