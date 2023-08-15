@@ -3,7 +3,7 @@
     <!-- 筛选面板 -->
     <el-row class="base_margin_b">
       <el-container>
-        <el-header>
+        <el-header height="80px">
           <!-- 搜索标题 -->
           <div class="base_margin_r">
             <el-input v-model="queryParam.keyword" @input="getTableData()" clearable placeholder="搜索内容" prefix-icon="el-icon-search"/>
@@ -56,7 +56,7 @@
             <!-- 操作按钮 -->
             <el-table-column label="操作" width="300" align="center">
               <template slot-scope="scope">
-                <el-button class="base_margin_r" type="primary" plain circle @click="changeCategory(scope.row)" icon="el-icon-edit" size="mini"></el-button>
+                <el-button class="base_margin_r" type="primary" plain circle @click="editMoment(scope.row.id)" icon="el-icon-edit" size="mini"></el-button>
                 <el-popconfirm confirm-button-text='好' cancel-button-text='手滑了' icon="el-icon-info" icon-color="red"
                                title="这可是物理删除！" @onConfirm="removeCategory(scope.row)">
                   <el-button slot="reference" type="danger" plain circle icon="el-icon-delete" size="mini"></el-button>
@@ -146,6 +146,15 @@
           }
         })
       },
+      //编辑按钮跳转，编辑动态
+      editMoment(id) {
+        this.$router.push({
+          name: 'WriteMoment',
+          params: {
+            id
+          }
+        })
+      },
       //分页监听，新pageNo
       handleSizeChange(newSize) {
         this.queryParam.pageSize = newSize
@@ -163,7 +172,6 @@
 <style scoped>
   .el-container {
     background-color: #FFFFFF;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
   }
   .el-header {
     display: flex;

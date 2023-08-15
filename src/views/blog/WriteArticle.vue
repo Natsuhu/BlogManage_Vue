@@ -212,7 +212,7 @@
 						this.form.isAppreciation = res.data.isAppreciation;
 						this.form.words = res.data.words;
 						this.form.views = res.data.views;
-					}else {
+					} else {
 						this.$message.error(res.msg);
 					}
 				})
@@ -306,7 +306,6 @@
 <style scoped>
 	.el-container {
 		background-color: #FFFFFF;
-		box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
 	}
 	.el-header {
 		display: flex;

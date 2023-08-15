@@ -3,7 +3,7 @@
 		<!-- 操作面板 -->
 		<el-row class="base_margin_b">
             <el-container>
-                <el-header>
+                <el-header height="80px">
                     <!-- 搜索名称 -->
                     <div>
                         <el-input v-model="queryParam.keyword" @input="getTableData()" clearable placeholder="搜索分类名称..." style="width: 100%;" prefix-icon="el-icon-search"/>
@@ -231,7 +231,6 @@
 <style scoped>
 	.el-container {
 		background-color: #FFFFFF;
-		box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
 	}
 	.el-header {
 		display: flex;
