@@ -6,12 +6,12 @@
         <el-header height="80px">
           <!-- 搜索标题 -->
           <div class="base_margin_r">
-            <el-input v-model="queryParam.keyword" @input="getTableData()" clearable placeholder="搜索内容" prefix-icon="el-icon-search"/>
+            <el-input v-model="queryParam.keyword" @input="getTableData(true)" clearable placeholder="搜索内容" prefix-icon="el-icon-search"/>
           </div>
 
           <!-- 时间范围 -->
           <div class="base_margin_r">
-            <el-date-picker type="daterange" v-model="queryParam.time" @input="getTableData()" range-separator="至" start-placeholder="开始时间"
+            <el-date-picker type="daterange" v-model="queryParam.time" @input="getTableData(true)" range-separator="至" start-placeholder="开始时间"
                             value-format="yyyy-MM-dd" clearable end-placeholder="结束时间" placeholder="选择时间范围" />
           </div>
         </el-header>
@@ -31,11 +31,11 @@
             <el-table-column label="序号" type="index" width="50" align="center"/>
             <el-table-column label="头像" prop="avatar" align="center"/>
             <el-table-column label="作者" prop="author" align="center"/>
-            <el-table-column label="内容" prop="content" align="center" show-overflow-tooltip/>
+            <el-table-column label="内容" width="350" prop="content" align="center" show-overflow-tooltip/>
             <el-table-column label="点赞数" prop="likes" align="center"/>
             <el-table-column label="权限" prop="isPublished" align="center">
               <template slot-scope="scope">
-                <el-popover placement="bottom" width="220" :ref="`popover-${scope.$index}`">
+                <el-popover placement="bottom" :ref="`popover-${scope.$index}`">
                   <el-row :gutter="20">
                     <el-col :span="12">
                       <span class="base_margin_r">公开</span>
@@ -50,11 +50,11 @@
                 </el-popover>
               </template>
             </el-table-column>
-            <el-table-column label="发布时间" prop="publishTime" width="270" align="center"/>
-            <el-table-column label="编辑时间" prop="editTime" width="270" align="center"/>
+            <el-table-column label="发布时间" prop="publishTime" align="center"/>
+            <el-table-column label="编辑时间" prop="editTime" align="center"/>
 
             <!-- 操作按钮 -->
-            <el-table-column label="操作" width="300" align="center">
+            <el-table-column label="操作" align="center">
               <template slot-scope="scope">
                 <el-button class="base_margin_r" type="primary" plain circle @click="editMoment(scope.row.id)" icon="el-icon-edit" size="mini"></el-button>
                 <el-popconfirm confirm-button-text='好' cancel-button-text='手滑了' icon="el-icon-info" icon-color="red"
@@ -102,7 +102,11 @@
 
     methods: {
       //获取动态表格
-      getTableData() {
+      getTableData(clearPageNo) {
+        //重置到第一页
+        if (clearPageNo != null && clearPageNo) {
+          this.queryParam.pageNo = 1;
+        }
         //处理时间筛选，将对象转为数组
         let time = null;
         time = this.queryParam.time;

@@ -6,19 +6,19 @@
 				<el-header height="80px">
 					<!-- 搜索标题 -->
 					<div class="base_margin_r">
-						<el-input v-model="queryParam.keyword" @input="getTableData()" clearable placeholder="搜索标题" prefix-icon="el-icon-search"/>
+						<el-input v-model="queryParam.keyword" @input="getTableData(true)" clearable placeholder="搜索标题" prefix-icon="el-icon-search"/>
 					</div>
 
 					<!-- 选择分类 -->
 					<div class="base_margin_r">
-						<el-select v-model="queryParam.categoryId" @input="getTableData()" clearable placeholder="筛选分类">
+						<el-select v-model="queryParam.categoryId" @input="getTableData(true)" clearable placeholder="筛选分类">
 							<el-option v-for="item in categories" :key="item.index" :label="item.name" :value="item.id" />
 						</el-select>
 					</div>
 
 					<!-- 时间范围 -->
 					<div class="base_margin_r">
-						<el-date-picker type="daterange" v-model="queryParam.time" @input="getTableData()" range-separator="至" start-placeholder="开始时间"
+						<el-date-picker type="daterange" v-model="queryParam.time" @input="getTableData(true)" range-separator="至" start-placeholder="开始时间"
 										value-format="yyyy-MM-dd" clearable end-placeholder="结束时间" placeholder="选择时间范围" />
 					</div>
 				</el-header>
@@ -135,7 +135,11 @@
 
 		methods: {
 			//获取文章表格
-			getTableData() {
+			getTableData(clearPageNo) {
+			  //重置到第一页
+			  if (clearPageNo != null && clearPageNo) {
+			    this.queryParam.pageNo = 1;
+        }
 				//处理时间筛选，将对象转为数组
 				let time = null;
 				time = this.queryParam.time;

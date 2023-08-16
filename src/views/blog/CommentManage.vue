@@ -6,12 +6,12 @@
         <el-header>
           <!-- 搜索内容 -->
           <div class="base_margin_r">
-            <el-input v-model="queryParam.keyword" @input="getTableData()" clearable placeholder="昵称\评论内容" prefix-icon="el-icon-search"/>
+            <el-input v-model="queryParam.keyword" @input="getTableData(true)" clearable placeholder="昵称\评论内容" prefix-icon="el-icon-search"/>
           </div>
 
           <!-- 选择页面 -->
           <div class="base_margin_r">
-            <el-select v-model="queryParam.page" @input="getTableData()" clearable placeholder="页面">
+            <el-select v-model="queryParam.page" @input="getTableData(true)" clearable placeholder="页面">
               <el-option :label="'友链'" :value="2" />
               <el-option :label="'关于我'" :value="3" />
             </el-select>
@@ -19,14 +19,14 @@
 
           <!-- 选择文章 -->
           <div class="base_margin_r">
-            <el-select v-model="queryParam.articleId" @input="getTableData()" clearable placeholder="文章">
+            <el-select v-model="queryParam.articleId" @input="getTableData(true)" clearable placeholder="文章">
               <el-option v-for="item in articles" :key="item.index" :label="item.title" :value="item.id" />
             </el-select>
           </div>
 
           <!-- 时间范围 -->
           <div class="base_margin_r">
-            <el-date-picker type="daterange" v-model="queryParam.time" @input="getTableData()" range-separator="至" start-placeholder="开始时间"
+            <el-date-picker type="daterange" v-model="queryParam.time" @input="getTableData(true)" range-separator="至" start-placeholder="开始时间"
                             value-format="yyyy-MM-dd" clearable end-placeholder="结束时间" placeholder="选择时间范围" />
           </div>
         </el-header>
@@ -112,7 +112,11 @@
 
     methods: {
       //获取文章表格
-      getTableData() {
+      getTableData(clearPageNo) {
+        //重置到第一页
+        if (clearPageNo != null && clearPageNo) {
+          this.queryParam.pageNo = 1;
+        }
         //处理时间筛选，将对象转为数组
         let time = null;
         time = this.queryParam.time;

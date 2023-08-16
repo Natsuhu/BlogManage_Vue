@@ -6,12 +6,12 @@
                 <el-header height="80px">
                     <!-- 搜索名称 -->
                     <div>
-                        <el-input v-model="queryParam.keyword" @input="getTableData()" clearable placeholder="搜索标签名称..." style="width: 100%;" prefix-icon="el-icon-search"/>
+                        <el-input v-model="queryParam.keyword" @input="getTableData(true)" clearable placeholder="搜索标签名称..." style="width: 100%;" prefix-icon="el-icon-search"/>
                     </div>
 
                     <!-- 新增按钮 -->
                     <div>
-                        <el-button @click="addTag()" size="small" type="primary">新增</el-button>
+                        <el-button @click="addTag()" type="primary">新增</el-button>
                     </div>
                 </el-header>
             </el-container>
@@ -129,7 +129,11 @@
 
         methods: {
             //获取标签表格
-			getTableData() {
+			getTableData(clearPageNo) {
+        //重置到第一页
+        if (clearPageNo != null && clearPageNo) {
+          this.queryParam.pageNo = 1;
+        }
 				getTagTable(this.queryParam).then(res => {
 					if(res.success){
 						this.tagTable = res.data;
