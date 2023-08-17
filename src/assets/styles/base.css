@@ -141,6 +141,22 @@ footer {
 	margin-right: 1em !important;
 }
 
+.base_margin_l {
+    margin-left: 1em !important;
+}
+
+.base_margin_l_mini {
+    margin-left: 0.2em !important;
+}
+
+.base_margin_l_large {
+    margin-left: 2em !important;
+}
+
+.base_margin_l_big {
+    margin-left: 3em !important;
+}
+
 .base_right_top {
     position: absolute;
     top: 0;
@@ -412,6 +428,12 @@ footer {
 .base_color_btn:hover::before,
 .base_color_btn:hover {
     animation: sun 8s infinite;
+}
+
+.base_refresh_btn {
+    min-width: auto;
+    padding: 6px;
+    font-size: 20px;
 }
 
 @keyframes sun {
