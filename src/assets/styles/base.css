@@ -141,8 +141,16 @@ footer {
 	margin-right: 1em !important;
 }
 
+.base_margin_r_small {
+    margin-right: 0.5em !important;
+}
+
 .base_margin_l {
     margin-left: 1em !important;
+}
+
+.base_margin_l_small {
+    margin-left: 0.5em !important;
 }
 
 .base_margin_l_mini {

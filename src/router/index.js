@@ -83,12 +83,18 @@ export const constantRoutes = [
     ]
   },
   {
-    path: '/page',
-    name: 'Page',
-    redirect: '/page/site',
+    path: '/system',
+    name: 'System',
+    redirect: '/file/manage',
     component: Layout,
-    meta: { title: '页面管理', icon: 'el-icon-document-copy' },
+    meta: { title: '系统管理', icon: 'el-icon-s-platform' },
     children: [
+      {
+        path: 'file/manage',
+        name: 'FileManage',
+        component: () => import('@/views/system/fileManage'),
+        meta: { title: '文件管理', icon: 'el-icon-folder' }
+      },
       {
         path: 'site',
         name: 'SiteSetting',
@@ -110,38 +116,11 @@ export const constantRoutes = [
     ]
   },
   {
-    path: '/pictureHosting',
-    name: 'PictureHosting',
-    redirect: '/pictureHosting/setting',
-    component: Layout,
-    meta: { title: '图床管理', icon: 'el-icon-picture' },
-    children: [
-      {
-        path: 'setting',
-        name: 'Setting',
-        component: () => import('@/views/dashboard/index'),
-        meta: { title: '配置', icon: 'el-icon-setting' }
-      },
-      {
-        path: 'github',
-        name: 'GithubManage',
-        component: () => import('@/views/dashboard/index'),
-        meta: { title: 'GitHub', icon: 'el-icon-folder-opened' }
-      },
-      {
-        path: 'upyun',
-        name: 'UpyunManage',
-        component: () => import('@/views/dashboard/index'),
-        meta: { title: '又拍云', icon: 'el-icon-folder-opened' }
-      }
-    ]
-  },
-  {
-    path: '/system',
-    name: 'System',
+    path: '/aa',
+    name: 'Aa',
     redirect: '/system/job',
     component: Layout,
-    meta: { title: '系统管理', icon: 'el-icon-s-tools' },
+    meta: { title: '系统管理', icon: 'el-icon-s-platform' },
     children: [
       {
         path: 'job',
