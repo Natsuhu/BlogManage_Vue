@@ -34,3 +34,13 @@ export function getAnnexTable(queryParam) {
         }
     })
 }
+
+export function updateAnnex(data) {
+    return request({
+        method: 'post',
+        url: '/admin/annex/updateAnnex',
+        data: {
+            ...data
+        }
+    })
+}

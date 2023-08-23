@@ -92,7 +92,7 @@ export const constantRoutes = [
       {
         path: 'file/manage',
         name: 'FileManage',
-        component: () => import('@/views/system/fileManage'),
+        component: () => import('@/views/system/FileManage'),
         meta: { title: '文件管理', icon: 'el-icon-folder' }
       },
       {

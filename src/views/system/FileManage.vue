@@ -56,10 +56,10 @@
             <el-table-column label="序号" type="index" width="50" align="center"/>
             <el-table-column label="文件名" prop="name" align="center" show-overflow-tooltip/>
             <el-table-column label="后缀名" prop="suffix" width="160" align="center"/>
-            <el-table-column label="体积" prop="size" width="160" align="center"/>
-            <el-table-column label="权限" width="160" align="center">
+            <el-table-column label="体积" prop="formatSize" width="160" align="center"/>
+            <el-table-column label="公开" width="160" align="center">
               <template slot-scope="scope">
-                <el-switch v-model="scope.row.isPublished" @change="updateAnnex(scope.row)"/>
+                <el-switch v-model="scope.row.isPublished" @change="updateAnnexAtt(scope.row)"/>
               </template>
             </el-table-column>
             <el-table-column label="上传时间" width="200" prop="createTime" align="center"/>
@@ -92,18 +92,36 @@
         </el-main>
       </el-container>
     </el-row>
+    <!-- 新增/修改对话框 -->
+    <el-dialog :title="dialogTitle" :visible.sync="dialog" model="false" model-append-to-body="false">
+
+      <!-- 名称输入表单 -->
+      <el-form ref="form" :model="updateForm" label-width="80px">
+        <el-form-item label="文件名" prop="name">
+          <el-input v-model="updateForm.name" placeholder="输入分类名称"></el-input>
+        </el-form-item>
+      </el-form>
+
+      <!-- 操作按钮 -->
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialog = false">取 消</el-button>
+        <el-button type="primary" @click="updateAnnexAtt(false)">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import {Notification} from "element-ui";
-import {getAnnexTable, upload, getSuffixSelector} from "@/api/Annex"
+import {getAnnexTable, upload, getSuffixSelector, updateAnnex} from "@/api/Annex"
 
 export default {
-  name: "AnnexManage",
+  name: "FileManage",
 
   data() {
     return {
+      dialogTitle: null,
+      dialog: null,
       annexTable: [],
       suffixList: [],
       totalPage: 0,
@@ -115,6 +133,10 @@ export default {
         keyword: null,
         pageNo: 1,
         pageSize: 10
+      },
+      updateForm: {
+        id: null,
+        name: null,
       }
     }
   },
@@ -148,6 +170,16 @@ export default {
   created() {
     this.suffixSelector()
     this.getTableData()
+  },
+
+  watch: {
+    //监听对话框关闭
+    dialog: function (value) {
+      if (!value) {
+        this.updateForm.id = null;
+        this.updateForm.name = null;
+      }
+    }
   },
 
   methods: {
@@ -209,6 +241,40 @@ export default {
         a.click()
         a.parentNode.removeChild(a)
         window.URL.revokeObjectURL(url)
+      })
+    },
+    changeAnnex(row) {
+      this.dialog = true;
+      this.dialogTitle = row.name;
+      this.updateForm.id = row.id;
+      this.updateForm.extra = row.extra;
+      this.updateForm.name = row.name;
+    },
+    //更新文件属性
+    updateAnnexAtt(isRow) {
+      let data = {};
+      if (isRow) {
+        data.id = isRow.id;
+        data.isPublished = isRow.isPublished;
+      } else {
+        data = this.updateForm
+      }
+      updateAnnex(data).then(res => {
+        if (res.success) {
+          this.getTableData()
+          this.dialog = false
+          Notification({
+            title: '更新成功',
+            type: 'success',
+            duration: 1500
+          })
+        } else {
+          Notification({
+            title: '更新失败',
+            message: res.msg,
+            type: 'error'
+          })
+        }
       })
     },
     //分页监听，新pageNo
