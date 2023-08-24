@@ -4,9 +4,9 @@ export function upload(form) {
     return request({
         method: 'post',
         url: '/admin/annex/upload',
-        data: {
-            ...form
-        }
+        //这个headers可以不用加，axios会自动补上，原理不是很懂
+        headers: {'Content-Type': 'multipart/form-data'},
+        data: form
     })
 }
 
@@ -44,3 +44,14 @@ export function updateAnnex(data) {
         }
     })
 }
+
+export function deleteAnnex(data) {
+    return request({
+        method: 'post',
+        url: '/admin/annex/deleteAnnex',
+        data: {
+            ...data
+        }
+    })
+}
+

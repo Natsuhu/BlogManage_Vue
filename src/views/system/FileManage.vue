@@ -19,8 +19,8 @@
           <!-- 选择是否公开 -->
           <div class="base_margin_r">
             <el-select v-model="queryParam.isPublished" @input="getTableData(true)" clearable placeholder="筛选是否公开">
-              <el-option label="公开" :value="true"/>
-              <el-option label="私人" :value="false"/>
+              <el-option label="公开文件" :value="true"/>
+              <el-option label="个人文件" :value="false"/>
             </el-select>
           </div>
 
@@ -42,7 +42,9 @@
           </div>
           <div style="width: 50%; display: flex; justify-content: flex-end">
             <!-- 上传按钮 -->
-            <el-button size="medium" type="primary">上传</el-button>
+            <el-upload ref="upload" :limit="1" :show-file-list="false" :http-request="uploadAnnex" action="">
+              <el-button icon="el-icon-upload" size="medium" type="primary">上传</el-button>
+            </el-upload>
             <el-button @click="getTableData(false)" size="medium" plain type="info"
                        class="base_refresh_btn base_margin_l_small"
                        icon="el-icon-refresh-right"/>
@@ -113,7 +115,7 @@
 
 <script>
 import {Notification} from "element-ui";
-import {getAnnexTable, upload, getSuffixSelector, updateAnnex} from "@/api/Annex"
+import {getAnnexTable, upload, getSuffixSelector, updateAnnex, deleteAnnex} from "@/api/Annex"
 
 export default {
   name: "FileManage",
@@ -128,7 +130,7 @@ export default {
       total: 0,
       queryParam: {
         suffix: null,
-        isPublished: null,
+        isPublished: false,
         time: null,
         keyword: null,
         pageNo: 1,
@@ -243,6 +245,7 @@ export default {
         window.URL.revokeObjectURL(url)
       })
     },
+    //表格中的编辑按钮
     changeAnnex(row) {
       this.dialog = true;
       this.dialogTitle = row.name;
@@ -276,6 +279,49 @@ export default {
           })
         }
       })
+    },
+    //删除文件
+    removeAnnex(row) {
+      deleteAnnex(row).then(res => {
+        if (res.success) {
+          Notification({
+            title: '删除成功',
+            type: 'success',
+            duration: 1500
+          })
+          this.getTableData();
+        } else {
+          Notification({
+            title: '删除失败',
+            message: res.msg,
+            type: 'error'
+          })
+        }
+      })
+    },
+    //上传文件
+    uploadAnnex(param) {
+      let form = new FormData();
+      form.append('file', param.file);
+      form.append('isPublished', false);
+      upload(form).then(res => {
+        if (res.success) {
+          Notification({
+            title: '上传成功',
+            type: 'success',
+            duration: 1500
+          })
+          this.getTableData();
+        } else {
+          Notification({
+            title: '上传失败',
+            message: res.msg,
+            type: 'error'
+          })
+        }
+      })
+      //上传完成后清除文件列表，否则会导致下次点上传无反应
+      this.$refs.upload.clearFiles();
     },
     //分页监听，新pageNo
     handleSizeChange(newSize) {
