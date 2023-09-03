@@ -93,8 +93,9 @@
             <!-- 操作按钮 -->
             <el-table-column label="操作" width="150" align="center">
               <template slot-scope="scope">
-                <el-button circle type="primary" plain icon="el-icon-edit" size="mini"
-                           @click="editArticle(scope.row.id)"></el-button>
+                <el-tooltip effect="dark" content="编辑文章" placement="top">
+                  <i class="el-icon-edit-outline base_text_point" @click="editArticle(scope.row.id)"/>
+                </el-tooltip>
               </template>
             </el-table-column>
           </el-table>
@@ -244,5 +245,15 @@ export default {
   display: flex;
   align-items: center;
   border-bottom: 2px solid rgb(241, 242, 243);
+}
+
+.el-icon-edit-outline {
+  font-size: 1rem;
+  font-weight: 100;
+  color: #606266;
+  transition: color .15s linear;
+}
+.el-icon-edit-outline:hover {
+  color: #66ccff;
 }
 </style>

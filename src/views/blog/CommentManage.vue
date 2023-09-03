@@ -71,11 +71,12 @@
             <el-table-column label="评论时间" prop="createTime" align="center" show-overflow-tooltip/>
             <el-table-column label="操作" width="150" align="center">
               <template slot-scope="scope">
-                <el-button class="base_margin_r" type="primary" plain circle @click="changeTag(scope.row)"
-                           icon="el-icon-edit" size="mini"></el-button>
+                <el-tooltip effect="dark" content="编辑评论" placement="top">
+                  <i class="el-icon-edit-outline base_text_point base_margin_r" @click="changeTag(scope.row)"/>
+                </el-tooltip>
                 <el-popconfirm confirm-button-text='好' cancel-button-text='手滑了' icon="el-icon-info" icon-color="red"
                                title="这可是物理删除！" @onConfirm="">
-                  <el-button slot="reference" type="danger" plain circle icon="el-icon-delete" size="mini"></el-button>
+                  <i slot="reference" class="el-icon-delete base_text_point" />
                 </el-popconfirm>
               </template>
             </el-table-column>
@@ -211,5 +212,23 @@ export default {
   display: flex;
   align-items: center;
   border-bottom: 2px solid rgb(241, 242, 243);
+}
+
+
+.el-icon-edit-outline {
+  font-size: 1rem;
+  font-weight: 100;
+  color: #606266;
+  transition: color .15s linear;
+}
+
+.el-icon-edit-outline:hover {
+  color: #66ccff;
+}
+
+.el-icon-delete {
+  font-size: 1rem;
+  font-weight: 100;
+  color: #F56C6C;
 }
 </style>

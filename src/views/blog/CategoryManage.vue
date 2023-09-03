@@ -39,13 +39,14 @@
             <!-- 操作按钮 -->
             <el-table-column label="操作" width="300" align="center">
               <template slot-scope="scope">
-                <!-- <i class="el-icon-edit"/>
+                <!-- <i class="el-icon-edit-outline"/>
                 <i class="el-icon-delete"/> -->
-                <el-button class="base_margin_r" type="primary" plain circle @click="changeCategory(scope.row)"
-                           icon="el-icon-edit" size="mini"></el-button>
+                <el-tooltip effect="dark" content="编辑分类" placement="top">
+                  <i class="el-icon-edit-outline base_text_point base_margin_r" @click="changeCategory(scope.row)"/>
+                </el-tooltip>
                 <el-popconfirm confirm-button-text='好' cancel-button-text='手滑了' icon="el-icon-info" icon-color="red"
                                title="这可是物理删除！" @onConfirm="removeCategory(scope.row)">
-                  <el-button slot="reference" type="danger" plain circle icon="el-icon-delete" size="mini"></el-button>
+                  <i slot="reference" class="el-icon-delete base_text_point" />
                 </el-popconfirm>
               </template>
             </el-table-column>
@@ -249,5 +250,23 @@ export default {
   align-items: center;
   justify-content: space-between;
   border-bottom: 2px solid rgb(241, 242, 243);
+}
+
+
+.el-icon-edit-outline {
+  font-size: 1rem;
+  font-weight: 100;
+  color: #606266;
+  transition: color .15s linear;
+}
+
+.el-icon-edit-outline:hover {
+  color: #66ccff;
+}
+
+.el-icon-delete {
+  font-size: 1rem;
+  font-weight: 100;
+  color: #F56C6C;
 }
 </style>

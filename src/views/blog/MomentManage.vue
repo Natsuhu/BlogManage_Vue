@@ -54,7 +54,7 @@
                       <el-switch v-model="scope.row.isCommentEnabled" @change="updateMomentAtt(scope.row)"/>
                     </el-col>
                   </el-row>
-                  <el-link slot="reference" icon="el-icon-edit" :underline="false">
+                  <el-link slot="reference" icon="el-icon-edit-outline" :underline="false">
                     {{ scope.row.isPublished ? "公开" : "私人" }}
                   </el-link>
                 </el-popover>
@@ -66,11 +66,12 @@
             <!-- 操作按钮 -->
             <el-table-column label="操作" align="center">
               <template slot-scope="scope">
-                <el-button class="base_margin_r" type="primary" plain circle @click="editMoment(scope.row.id)"
-                           icon="el-icon-edit" size="mini"></el-button>
+                <el-tooltip effect="dark" content="编辑动态" placement="top">
+                  <i class="el-icon-edit-outline base_text_point base_margin_r" @click="editMoment(scope.row.id)" />
+                </el-tooltip>
                 <el-popconfirm confirm-button-text='好' cancel-button-text='手滑了' icon="el-icon-info" icon-color="red"
                                title="这可是物理删除！" @onConfirm="removeCategory(scope.row)">
-                  <el-button slot="reference" type="danger" plain circle icon="el-icon-delete" size="mini"></el-button>
+                  <i slot="reference" class="el-icon-delete base_text_point" />
                 </el-popconfirm>
               </template>
             </el-table-column>
@@ -196,5 +197,20 @@ export default {
   display: flex;
   align-items: center;
   border-bottom: 2px solid rgb(241, 242, 243);
+}
+
+.el-icon-edit-outline {
+  font-size: 1rem;
+  font-weight: 100;
+  color: #606266;
+  transition: color .15s linear;
+}
+.el-icon-edit-outline:hover {
+  color: #66ccff;
+}
+.el-icon-delete {
+  font-size: 1rem;
+  font-weight: 100;
+  color: #F56C6C;
 }
 </style>
