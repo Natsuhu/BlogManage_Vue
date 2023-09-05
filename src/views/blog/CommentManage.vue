@@ -72,11 +72,11 @@
             <el-table-column label="操作" width="150" align="center">
               <template slot-scope="scope">
                 <el-tooltip effect="dark" content="编辑评论" placement="top">
-                  <i class="el-icon-edit-outline base_text_point base_margin_r" @click="changeTag(scope.row)"/>
+                  <i class="el-icon-edit-outline base_text_point base_margin_r" @click="changeComment(scope.row)"/>
                 </el-tooltip>
                 <el-popconfirm confirm-button-text='好' cancel-button-text='手滑了' icon="el-icon-info" icon-color="red"
-                               title="这可是物理删除！" @onConfirm="">
-                  <i slot="reference" class="el-icon-delete base_text_point" />
+                               title="将会删除其所有子评论！" @onConfirm="">
+                  <i slot="reference" class="el-icon-delete base_text_point"/>
                 </el-popconfirm>
               </template>
             </el-table-column>
@@ -93,6 +93,36 @@
         </el-main>
       </el-container>
     </el-row>
+
+    <!-- 新增/修改对话框 -->
+    <el-dialog title="编辑评论" :visible.sync="dialog" model="false" model-append-to-body="false">
+
+      <!-- 名称输入表单 -->
+      <el-form ref="updateForm" :model="updateForm" label-width="80px">
+        <el-form-item label="QQ" prop="qq">
+          <el-input v-model="updateForm.qq" placeholder="输入QQ号"></el-input>
+        </el-form-item>
+
+        <el-form-item label="邮箱" prop="email">
+          <el-input v-model="updateForm.email" placeholder="输入邮箱"></el-input>
+        </el-form-item>
+
+        <el-form-item label="主页" prop="website">
+          <el-input v-model="updateForm.website" placeholder="输入主页"></el-input>
+        </el-form-item>
+
+        <el-form-item label="内容" prop="content">
+          <el-input :rows="5" type="textarea" v-model="updateForm.content" placeholder="输入评论内容"></el-input>
+        </el-form-item>
+
+      </el-form>
+
+      <!-- 操作按钮 -->
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialog = false">取 消</el-button>
+        <el-button type="primary" @click="updateCommentAtt(false)">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -106,6 +136,7 @@ export default {
 
   data() {
     return {
+      dialog: null,
       articles: [],
       commentTable: [],
       totalPage: 0,
@@ -117,6 +148,26 @@ export default {
         time: null,
         page: null,
         articleId: null
+      },
+      updateForm: {
+        id: null,
+        qq: null,
+        email: null,
+        website: null,
+        content: null
+      }
+    }
+  },
+
+  watch: {
+    //监听对话框关闭
+    dialog: function (value) {
+      if (!value) {
+        this.updateForm.id = null;
+        this.updateForm.qq = null;
+        this.updateForm.email = null;
+        this.updateForm.website = null;
+        this.updateForm.content = null;
       }
     }
   },
@@ -127,7 +178,7 @@ export default {
   },
 
   methods: {
-    //获取文章表格
+    //获取评论表格
     getTableData(clearPageNo) {
       //重置到第一页
       if (clearPageNo != null && clearPageNo) {
@@ -154,14 +205,28 @@ export default {
         }
       })
     },
-    updateCommentAtt(updateParam) {
+    //表格中的编辑按钮
+    changeComment(row) {
+      this.dialog = true;
+      this.updateForm.id = row.id;
+      this.updateForm.qq = row.qq;
+      this.updateForm.email = row.email;
+      this.updateForm.website = row.website;
+      this.updateForm.content = row.content;
+    },
+    //更新评论
+    updateCommentAtt(isRow) {
       let attrList = {};
-      attrList.id = updateParam.id;
-      attrList.isPublished = updateParam.isPublished;
-      attrList.content = updateParam.content;
+      if (isRow) {
+        attrList.id = isRow.id;
+        attrList.isPublished = isRow.isPublished;
+      } else {
+        attrList = this.updateForm;
+      }
       updateComment(attrList).then(res => {
         if (res.success) {
           this.getTableData();
+          this.dialog = false;
           Notification({
             title: '更新成功',
             type: 'success',
@@ -176,6 +241,7 @@ export default {
         }
       })
     },
+    //获取文章下拉框
     articleSelector() {
       getArticleSelector().then(res => {
         if (res.success) {
@@ -216,7 +282,7 @@ export default {
 
 
 .el-icon-edit-outline {
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 100;
   color: #606266;
   transition: color .15s linear;
@@ -227,7 +293,7 @@ export default {
 }
 
 .el-icon-delete {
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 100;
   color: #F56C6C;
 }

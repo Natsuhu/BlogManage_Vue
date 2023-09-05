@@ -259,7 +259,7 @@ export default {
 }
 
 .el-icon-edit-outline {
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 100;
   color: #606266;
   transition: color .15s linear;
@@ -270,7 +270,7 @@ export default {
 }
 
 .el-icon-delete {
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 100;
   color: #F56C6C;
 }

@@ -39,7 +39,7 @@
             <el-table-column label="序号" type="index" width="50" align="center"/>
             <el-table-column label="头像" prop="avatar" align="center"/>
             <el-table-column label="作者" prop="author" align="center"/>
-            <el-table-column label="内容" width="350" prop="content" align="center" show-overflow-tooltip/>
+            <el-table-column label="内容" width="300" prop="content" align="center" show-overflow-tooltip/>
             <el-table-column label="点赞数" prop="likes" align="center"/>
             <el-table-column label="权限" prop="isPublished" align="center">
               <template slot-scope="scope">
@@ -54,7 +54,7 @@
                       <el-switch v-model="scope.row.isCommentEnabled" @change="updateMomentAtt(scope.row)"/>
                     </el-col>
                   </el-row>
-                  <el-link slot="reference" icon="el-icon-edit-outline" :underline="false">
+                  <el-link slot="reference" icon="el-icon-edit" :underline="false">
                     {{ scope.row.isPublished ? "公开" : "私人" }}
                   </el-link>
                 </el-popover>
@@ -67,11 +67,11 @@
             <el-table-column label="操作" align="center">
               <template slot-scope="scope">
                 <el-tooltip effect="dark" content="编辑动态" placement="top">
-                  <i class="el-icon-edit-outline base_text_point base_margin_r" @click="editMoment(scope.row.id)" />
+                  <i class="el-icon-edit-outline base_text_point base_margin_r" @click="editMoment(scope.row.id)"/>
                 </el-tooltip>
                 <el-popconfirm confirm-button-text='好' cancel-button-text='手滑了' icon="el-icon-info" icon-color="red"
-                               title="这可是物理删除！" @onConfirm="removeCategory(scope.row)">
-                  <i slot="reference" class="el-icon-delete base_text_point" />
+                               title="这可是物理删除！" @onConfirm="removeMoment(scope.row)">
+                  <i slot="reference" class="el-icon-delete base_text_point"/>
                 </el-popconfirm>
               </template>
             </el-table-column>
@@ -92,7 +92,7 @@
 
 <script>
 import {Notification} from "element-ui";
-import {getMomentTable, updateMoment} from "@/api/Moment";
+import {getMomentTable, updateMoment, deleteMoment} from "@/api/Moment";
 
 export default {
   name: "MomentManage",
@@ -174,6 +174,26 @@ export default {
         }
       })
     },
+    //删除动态
+    removeMoment(row) {
+      deleteMoment(row).then(res => {
+        if (res.success) {
+          Notification({
+            title: '删除成功',
+            type: 'success',
+            duration: 1500
+          })
+          //删除成功刷新表格
+          this.getTableData();
+        } else {
+          Notification({
+            title: '删除失败',
+            message: res.msg,
+            type: 'error'
+          })
+        }
+      })
+    },
     //分页监听，新pageNo
     handleSizeChange(newSize) {
       this.queryParam.pageSize = newSize
@@ -200,16 +220,18 @@ export default {
 }
 
 .el-icon-edit-outline {
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 100;
   color: #606266;
   transition: color .15s linear;
 }
+
 .el-icon-edit-outline:hover {
   color: #66ccff;
 }
+
 .el-icon-delete {
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 100;
   color: #F56C6C;
 }
