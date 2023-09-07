@@ -75,7 +75,7 @@
                   <i class="el-icon-edit-outline base_text_point base_margin_r" @click="changeComment(scope.row)"/>
                 </el-tooltip>
                 <el-popconfirm confirm-button-text='好' cancel-button-text='手滑了' icon="el-icon-info" icon-color="red"
-                               title="将会删除其所有子评论！" @onConfirm="">
+                               title="将会删除其所有子评论！" @onConfirm="removeComment(scope.row)">
                   <i slot="reference" class="el-icon-delete base_text_point"/>
                 </el-popconfirm>
               </template>
@@ -95,7 +95,7 @@
     </el-row>
 
     <!-- 新增/修改对话框 -->
-    <el-dialog title="编辑评论" :visible.sync="dialog" model="false" model-append-to-body="false">
+    <el-dialog title="编辑评论" :visible.sync="dialog" :lock-scroll="false">
 
       <!-- 名称输入表单 -->
       <el-form ref="updateForm" :model="updateForm" label-width="80px">
@@ -128,8 +128,7 @@
 
 <script>
 import {Notification} from "element-ui";
-import {getCategories} from '@/api/Category';
-import {getCommentTable, updateComment, getArticleSelector} from "@/api/Comment";
+import {getCommentTable, updateComment, getArticleSelector, deleteComment} from "@/api/Comment";
 
 export default {
   name: "CommentManage",
@@ -229,6 +228,26 @@ export default {
           this.dialog = false;
           Notification({
             title: '更新成功',
+            type: 'success',
+            duration: 1500
+          })
+        } else {
+          Notification({
+            title: '更新失败',
+            message: res.msg,
+            type: 'error'
+          })
+        }
+      })
+    },
+    //删除评论
+    removeComment(row) {
+      deleteComment(row).then(res => {
+        if (res.success) {
+          this.getTableData();
+          Notification({
+            title: '删除成功',
+            message: '共删除' + res.data + '条记录',
             type: 'success',
             duration: 1500
           })

@@ -26,3 +26,13 @@ export function getArticleSelector() {
         url: '/admin/comment/getArticleSelector'
     })
 }
+
+export function deleteComment(deleteParam) {
+    return request({
+        method: 'post',
+        url: '/admin/comment/deleteComment',
+        data: {
+            ...deleteParam
+        }
+    })
+}

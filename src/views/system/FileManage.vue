@@ -95,7 +95,7 @@
       </el-container>
     </el-row>
     <!-- 新增/修改对话框 -->
-    <el-dialog :title="dialogTitle" :visible.sync="dialog" model="false" model-append-to-body="false">
+    <el-dialog :title="dialogTitle" :visible.sync="dialog" :lock-scroll="false">
 
       <!-- 名称输入表单 -->
       <el-form ref="form" :model="updateForm" label-width="80px">
