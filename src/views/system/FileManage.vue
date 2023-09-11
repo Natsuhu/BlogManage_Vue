@@ -52,7 +52,7 @@
         </el-header>
         <el-main>
           <!-- 文件表格 -->
-          <el-table :data="annexTable" :header-cell-style="{background:'#f5f7fa'}" class="base_margin_b_large">
+          <el-table :data="annexTable" class="base_margin_b_large">
 
             <!-- 固定列 -->
             <el-table-column label="序号" type="index" width="50" align="center"/>

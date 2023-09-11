@@ -13,6 +13,6 @@ module.exports = {
    * @description Whether show the logo in sidebar
    */
   sidebarLogo: false,
-  
-  avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif'
+
+  avatar: 'http://127.0.0.1:8090/admin/annex/download/0b1b4c853fcb27a3f9bbeb35eee910cd'
 }

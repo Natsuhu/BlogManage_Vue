@@ -27,7 +27,7 @@
         </el-header>
         <el-main>
           <!-- 分类表格 -->
-          <el-table :data="categoryTable" :header-cell-style="{background:'#f5f7fa'}" class="base_margin_b_large">
+          <el-table :data="categoryTable" class="base_margin_b_large">
 
             <!-- 固定列 -->
             <el-table-column label="序号" type="index" width="50" align="center"/>

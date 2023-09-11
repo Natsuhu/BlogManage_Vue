@@ -40,7 +40,7 @@
         </el-header>
         <el-main>
           <!-- 文章表格 -->
-          <el-table :data="articleTable" :header-cell-style="{background:'#f5f7fa'}" class="base_margin_b_large">
+          <el-table :data="articleTable" class="base_margin_b_large">
 
             <!-- 固定列 -->
             <el-table-column label="序号" type="index" width="50" align="center"/>

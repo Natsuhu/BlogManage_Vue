@@ -48,12 +48,13 @@
           </div>
         </el-header>
         <el-main>
-          <el-table :data="commentTable" :header-cell-style="{background:'#f5f7fa'}" class="base_margin_b_large">
+          <el-table :data="commentTable"  class="base_margin_b_large">
             <!-- 固定列 -->
             <el-table-column label="序号" type="index" width="50" align="center"/>
             <el-table-column label="头像" align="center">
               <template slot-scope="scope">
-                <el-avatar shape="square" size="medium" :src="scope.row.avatar"></el-avatar>
+                <!--  给此组件绑定一个key，以解决src更新后，图片没及时更新的问题  -->
+                <el-avatar shape="square" size="medium" :src="scope.row.avatar" :key="scope.row.avatar"></el-avatar>
               </template>
             </el-table-column>
             <el-table-column label="昵称" width="100" prop="nickname" align="center" show-overflow-tooltip/>

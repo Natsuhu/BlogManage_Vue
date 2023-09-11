@@ -29,7 +29,7 @@
         </el-header>
         <el-main>
           <!-- 标签表格 -->
-          <el-table :data="tagTable" :header-cell-style="{background:'#f5f7fa'}" class="base_margin_b_large">
+          <el-table :data="tagTable" class="base_margin_b_large">
 
             <!-- 固定列 -->
             <el-table-column label="序号" type="index" width="50" align="center"/>
