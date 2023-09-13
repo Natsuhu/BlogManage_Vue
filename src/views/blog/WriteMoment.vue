@@ -214,8 +214,13 @@ export default {
 }
 
 .v-note-wrapper {
-  z-index: 9 !important;
+  font-family: inherit;
+  letter-spacing: 1px;
+  position: static !important;
   border: 1px solid rgb(220, 223, 230) !important;
+}
+::v-deep .v-note-op {
+  z-index: unset !important;
 }
 
 .el-date-editor {

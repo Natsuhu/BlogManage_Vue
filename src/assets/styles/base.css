@@ -1,6 +1,7 @@
 html,
 body,
 #app {
+    /*全局样式*/
     font-family: "myfonts", sans-serif;
 	height: 100%;
     margin: 0;
@@ -55,12 +56,6 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
     -moz-appearance: textfield;
 }
-
-footer {
-    font-family: 'Varela Round', "Microsoft YaHei", "Source Sans Pro", "Helvetica Neue", Menlo, Monaco, monospace, "Lucida Console", sans-serif, Helvetica, "Hiragino Sans GB", "Hiragino Sans GB W3", Source Han Sans CN Regular, WenQuanYi Micro Hei, Arial, sans-serif;
-}
-
-
 
 /*----margin----*/
 .base_center {

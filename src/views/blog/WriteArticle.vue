@@ -331,10 +331,22 @@ export default {
   margin-right: 0px !important;
 }
 
-/* 设置markdown编辑区域的图层，避免其覆盖header */
+/*
+  解决markdown编辑器图层的问题。
+  1.避免覆盖header。
+  2.避免编辑器区域图层高于对话框。
+  3.避免分割线只出现部分。
+  4.设置为全局字体
+ */
 .v-note-wrapper {
-  z-index: 9 !important;
+  /*display: block !important;*/
+  font-family: inherit;
+  letter-spacing: 1px;
+  position: static !important;
   border: 1px solid rgb(220, 223, 230) !important;
+}
+::v-deep .v-note-op {
+  z-index: unset !important;
 }
 
 .lit-pic {
