@@ -45,8 +45,8 @@
               <!-- 权限 -->
               <el-col :span="6">
                 <el-form-item label="权限">
-                  <el-checkbox border v-model="form.isPublished" true-label="true" false-label="false">公开</el-checkbox>
-                  <el-checkbox border v-model="form.isCommentEnabled" true-label="true" false-label="false">评论
+                  <el-checkbox v-model="form.isPublished" true-label="true" false-label="false">公开</el-checkbox>
+                  <el-checkbox v-model="form.isCommentEnabled" true-label="true" false-label="false">评论
                   </el-checkbox>
                 </el-form-item>
               </el-col>

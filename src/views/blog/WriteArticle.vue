@@ -68,14 +68,14 @@
               <el-col :span="7">
                 <el-form-item label="权限">
                   <div class="base_attr_box">
-                    <el-checkbox border v-model="form.isPublished" true-label="true" false-label="false">公开
+                    <el-checkbox v-model="form.isPublished" true-label="true" false-label="false">公开
                     </el-checkbox>
-                    <el-checkbox border v-model="form.isCommentEnabled" true-label="true" false-label="false">评论
+                    <el-checkbox v-model="form.isCommentEnabled" true-label="true" false-label="false">评论
                     </el-checkbox>
-                    <el-checkbox border v-model="form.isTop" true-label="true" false-label="false">置顶</el-checkbox>
-                    <el-checkbox border v-model="form.isRecommend" true-label="true" false-label="false">推荐
+                    <el-checkbox v-model="form.isTop" true-label="true" false-label="false">置顶</el-checkbox>
+                    <el-checkbox v-model="form.isRecommend" true-label="true" false-label="false">推荐
                     </el-checkbox>
-                    <el-checkbox border v-model="form.isAppreciation" true-label="true" false-label="false">赞赏
+                    <el-checkbox v-model="form.isAppreciation" true-label="true" false-label="false">赞赏
                     </el-checkbox>
                   </div>
                 </el-form-item>
@@ -230,14 +230,14 @@ export default {
         } else {
           this.$message.error(res.msg);
         }
-      }),
-          getTags().then(res => {
-            if (res.success) {
-              this.tags = this.tags.concat(res.data);
-            } else {
-              this.$message.error(res.msg);
-            }
-          })
+      })
+      getTags().then(res => {
+        if (res.success) {
+          this.tags = this.tags.concat(res.data);
+        } else {
+          this.$message.error(res.msg);
+        }
+      })
     },
     //保存文章
     submit() {
@@ -345,6 +345,7 @@ export default {
   position: static !important;
   border: 1px solid rgb(220, 223, 230) !important;
 }
+
 ::v-deep .v-note-op {
   z-index: unset !important;
 }
