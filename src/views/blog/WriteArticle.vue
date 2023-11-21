@@ -95,7 +95,7 @@
           <el-main>
             <!-- 图片库 -->
             <el-form-item label="文章首图" prop="thumbnail">
-              <el-image :src="form.thumbnail" class="lit-pic">
+              <el-image :src="url + form.thumbnail" class="lit-pic">
                 <div slot="error" class="el-upload--picture-card">
                   <i class="el-icon-plus"></i>
                 </div>
@@ -129,6 +129,7 @@ export default {
 
   data() {
     return {
+      url: window.env.API_BASE_URL + '/admin/annex/download/',
       articleId: null,
       buttonText: null,
       categories: [],

@@ -22,7 +22,7 @@
 		padding-top: 65px;
 	}
 	.app-main {
-		background-color: #F2F3F4;
+		background-color: #E9F0F3;
 		min-height: calc(100vh - 50px);
 		width: 100%;
 		position: relative;

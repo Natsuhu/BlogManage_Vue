@@ -36,7 +36,7 @@
 
     <el-row>
       <el-container>
-        <el-header>
+        <el-header style="border-bottom: 2px solid rgb(241, 242, 243);">
           <div style="width: 50%; border-left: 3px solid #1882C4; padding-left: 1rem; color: #1882C4; font-size: 18px">
             文件管理
           </div>
@@ -53,7 +53,6 @@
         <el-main>
           <!-- 文件表格 -->
           <el-table :data="annexTable" class="base_margin_b_large">
-
             <!-- 固定列 -->
             <el-table-column label="序号" type="index" width="50" align="center"/>
             <el-table-column label="文件名" prop="name" align="center" show-overflow-tooltip/>
@@ -142,33 +141,33 @@ export default {
       }
     }
   },
-  // 自定义指令的方法
-  // directives: {
-  //   // 如果后端不设置跨域，下载下来的文件是损坏的，不能使用
-  //   download: {
-  //     // 指令的定义
-  //     bind: function (el, binding) {
-  //       el.addEventListener('click', () => {
-  //         const url = binding.value;  // 完整的url则直接使用
-  //         const a = document.createElement('a');
-  //         // 将url转成blob地址。如果url是一个完整的链接，需要后端开清跨域请求
-  //         let fileName = null;
-  //         fetch(url).then(res => {
-  //           const fileNameEncode = res.headers.get('content-disposition').split('filename=')[1]
-  //           fileName = decodeURIComponent(fileNameEncode)
-  //           return res.blob()
-  //         }).then(blob => { // 将链接地址字符内容转变成blob地址
-  //           a.href = URL.createObjectURL(blob)
-  //           a.download = fileName // 下载文件的名字
-  //           document.body.appendChild(a)
-  //           a.click()
-  //           a.parentNode.removeChild(a)
-  //           window.URL.revokeObjectURL(url)
-  //         })
-  //       })
-  //     }
-  //   },
-  // },
+/*  //自定义指令的方法
+  directives: {
+    // 如果后端不设置跨域，下载下来的文件是损坏的，不能使用
+    download: {
+      // 指令的定义
+      bind: function (el, binding) {
+        el.addEventListener('click', () => {
+          const url = binding.value;  // 完整的url则直接使用
+          const a = document.createElement('a');
+          // 将url转成blob地址。如果url是一个完整的链接，需要后端开清跨域请求
+          let fileName = null;
+          fetch(url).then(res => {
+            const fileNameEncode = res.headers.get('content-disposition').split('filename=')[1]
+            fileName = decodeURIComponent(fileNameEncode)
+            return res.blob()
+          }).then(blob => { // 将链接地址字符内容转变成blob地址
+            a.href = URL.createObjectURL(blob)
+            a.download = fileName // 下载文件的名字
+            document.body.appendChild(a)
+            a.click()
+            a.parentNode.removeChild(a)
+            window.URL.revokeObjectURL(url)
+          })
+        })
+      }
+    },
+  },*/
   created() {
     this.suffixSelector()
     this.getTableData()
@@ -226,7 +225,7 @@ export default {
         }
       })
     },
-    //使用fetch api下载文件
+/*    //使用fetch api下载文件
     downloadAnnex(row) {
       const url = row.downloadAddress;
       const a = document.createElement('a');
@@ -244,6 +243,14 @@ export default {
         a.parentNode.removeChild(a)
         window.URL.revokeObjectURL(url)
       })
+    },*/
+    downloadAnnex(row) {
+      const url = window.env.API_BASE_URL + "/admin/annex/download/" + row.id;
+      const a = document.createElement('a');
+      a.href = url;
+      document.body.appendChild(a)
+      a.click()
+      a.parentNode.removeChild(a)
     },
     //表格中的编辑按钮
     changeAnnex(row) {
@@ -339,12 +346,12 @@ export default {
 <style scoped>
 .el-container {
   background-color: #FFFFFF;
+  /*box-shadow: 0 1px 1px -2px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 1px 0 rgba(0,0,0,.12);*/
 }
 
 .el-header {
   display: flex;
   align-items: center;
-  border-bottom: 2px solid rgb(241, 242, 243);
 }
 
 
