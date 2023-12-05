@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-form :model="form" :rules="formRules" ref="formRef" label-position="top">
-      <el-row class="base_margin_b_large">
+      <el-row class="base_margin_b">
         <el-container>
           <el-header>
             <div style="border-left: 3px solid #1882C4; padding-left: 1rem; color: #1882C4; font-size: 18px">
@@ -45,9 +45,8 @@
               <!-- 权限 -->
               <el-col :span="6">
                 <el-form-item label="权限">
-                  <el-checkbox v-model="form.isPublished" true-label="true" false-label="false">公开</el-checkbox>
-                  <el-checkbox v-model="form.isCommentEnabled" true-label="true" false-label="false">评论
-                  </el-checkbox>
+                  <el-checkbox-button class="base_margin_r" v-model="form.isPublished" true-label="true" false-label="false">公开</el-checkbox-button>
+                  <el-checkbox-button v-model="form.isCommentEnabled" true-label="true" false-label="false">评论</el-checkbox-button>
                 </el-form-item>
               </el-col>
 
@@ -211,6 +210,21 @@ export default {
   align-items: center;
   justify-content: space-between;
   border-bottom: 2px solid rgb(241, 242, 243);
+}
+
+/*权限按钮组，设置圆角*/
+::v-deep .el-checkbox-button__inner {
+  border: 1px solid #DCDFE6;
+  border-radius: 4px;
+  transition: all .2s cubic-bezier(.645,.045,.355,1);
+}
+
+::v-deep .el-checkbox-button:first-child .el-checkbox-button__inner {
+  border-radius: 4px;
+}
+
+::v-deep .el-checkbox-button:last-child .el-checkbox-button__inner {
+  border-radius: 4px;
 }
 
 .v-note-wrapper {

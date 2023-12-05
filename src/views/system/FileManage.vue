@@ -248,6 +248,8 @@ export default {
       const url = window.env.API_BASE_URL + "/admin/annex/download/" + row.id;
       const a = document.createElement('a');
       a.href = url;
+      a.download = row.name;
+      a.style.display = 'none';
       document.body.appendChild(a)
       a.click()
       a.parentNode.removeChild(a)

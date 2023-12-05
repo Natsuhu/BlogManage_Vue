@@ -1,7 +1,7 @@
 <template>
   <el-col>
     <el-form :model="form" :rules="formRules" ref="formRef" label-position="top">
-      <el-row class="base_margin_b_large">
+      <el-row class="base_margin_b">
         <el-container>
           <el-header>
             <div style="border-left: 3px solid #1882C4; padding-left: 1rem; color: #1882C4; font-size: 18px">
@@ -68,15 +68,16 @@
               <el-col :span="7">
                 <el-form-item label="权限">
                   <div class="base_attr_box">
-                    <el-checkbox v-model="form.isPublished" true-label="true" false-label="false">公开
-                    </el-checkbox>
-                    <el-checkbox v-model="form.isCommentEnabled" true-label="true" false-label="false">评论
-                    </el-checkbox>
-                    <el-checkbox v-model="form.isTop" true-label="true" false-label="false">置顶</el-checkbox>
-                    <el-checkbox v-model="form.isRecommend" true-label="true" false-label="false">推荐
-                    </el-checkbox>
-                    <el-checkbox v-model="form.isAppreciation" true-label="true" false-label="false">赞赏
-                    </el-checkbox>
+                    <el-checkbox-button v-model="form.isPublished" true-label="true" false-label="false">公开
+                    </el-checkbox-button>
+                    <el-checkbox-button v-model="form.isCommentEnabled" true-label="true" false-label="false">评论
+                    </el-checkbox-button>
+                    <el-checkbox-button v-model="form.isTop" true-label="true" false-label="false">置顶
+                    </el-checkbox-button>
+                    <el-checkbox-button v-model="form.isRecommend" true-label="true" false-label="false">推荐
+                    </el-checkbox-button>
+                    <el-checkbox-button v-model="form.isAppreciation" true-label="true" false-label="false">赞赏
+                    </el-checkbox-button>
                   </div>
                 </el-form-item>
               </el-col>
@@ -325,6 +326,21 @@ export default {
   width: 100%;
   display: flex;
   justify-content: space-between;
+}
+
+/*权限按钮组，设置圆角*/
+::v-deep .el-checkbox-button__inner {
+  border: 1px solid #DCDFE6;
+  border-radius: 4px;
+  transition: all .2s cubic-bezier(.645,.045,.355,1);
+}
+
+::v-deep .el-checkbox-button:first-child .el-checkbox-button__inner {
+  border-radius: 4px;
+}
+
+::v-deep .el-checkbox-button:last-child .el-checkbox-button__inner {
+  border-radius: 4px;
 }
 
 .el-checkbox {
