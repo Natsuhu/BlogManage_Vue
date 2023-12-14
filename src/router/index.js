@@ -102,9 +102,9 @@ export const constantRoutes = [
         meta: { title: '站点设置', icon: 'el-icon-setting' }
       },
       {
-        path: 'friend',
-        name: 'FriendList',
-        component: () => import('@/views/dashboard/index'),
+        path: 'friend/manage',
+        name: 'FriendManage',
+        component: () => import('@/views/system/FriendManage'),
         meta: { title: '友链管理', icon: 'el-icon-link' }
       },
       {

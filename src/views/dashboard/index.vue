@@ -1,6 +1,7 @@
 <template>
   <div class="dashboard-container">
     <div class="dashboard-text">name:</div>
+    <span v-html="text"></span>
   </div>
 </template>
 
@@ -8,12 +9,18 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'Dashboard'
+  name: 'Dashboard',
   // computed: {
   //   ...mapGetters([
   //     'name'
   //   ])
   // }
+
+  data() {
+    return {
+      text: '<meting-js server="netease" type="song" id="1437285525"></meting-js>'
+    }
+  }
 }
 </script>
 
