@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'NatsuKaze - MS',
+  title: 'NatsuKaze\'Blog MS',
 
   /**
    * @type {boolean} true | false

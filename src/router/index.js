@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import getPageTitle from '@/utils/get-page-title'
 
 Vue.use(Router)
 
@@ -96,9 +97,9 @@ export const constantRoutes = [
         meta: { title: '文件管理', icon: 'el-icon-folder' }
       },
       {
-        path: 'site',
+        path: 'site/manage',
         name: 'SiteSetting',
-        component: () => import('@/views/dashboard/index'),
+        component: () => import('@/views/system/SiteSetting'),
         meta: { title: '站点设置', icon: 'el-icon-setting' }
       },
       {
@@ -108,9 +109,9 @@ export const constantRoutes = [
         meta: { title: '友链管理', icon: 'el-icon-link' }
       },
       {
-        path: 'about',
-        name: 'About',
-        component: () => import('@/views/dashboard/index'),
+        path: 'about/manage',
+        name: 'AboutMe',
+        component: () => import('@/views/system/AboutMe'),
         meta: { title: '关于我', icon: 'el-icon-tickets' }
       }
     ]
@@ -195,6 +196,12 @@ const createRouter = () => new Router({
 })
 
 const router = createRouter()
+
+//挂载路由守卫
+router.beforeEach((to, from, next) => {
+  document.title = getPageTitle(to.meta.title)
+  next()
+})
 
 export function resetRouter() {
   const newRouter = createRouter()

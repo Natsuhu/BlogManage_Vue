@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">name:</div>
+    <div class="dashboard-text">后台管理主页</div>
     <span v-html="text"></span>
   </div>
 </template>
@@ -18,7 +18,8 @@ export default {
 
   data() {
     return {
-      text: '<meting-js server="netease" type="song" id="1437285525"></meting-js>'
+      //text: '<meting-js server="netease" type="song" id="1437285525"></meting-js>'
+      text: '<span>span</span>'
     }
   }
 }
