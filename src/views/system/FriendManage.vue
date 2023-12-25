@@ -69,7 +69,7 @@
             <el-table-column label="操作" width="200" align="center">
               <template slot-scope="scope">
                 <el-tooltip effect="dark" content="访问" placement="top">
-                  <a :href="scope.row.website" target="_blank" class="el-icon-view base_text_point"></a>
+                  <a :href="scope.row.website" target="_blank" class="el-icon-link base_text_point"></a>
                 </el-tooltip>
                 <el-tooltip effect="dark" content="编辑" placement="top">
                   <i class="el-icon-edit-outline base_text_point base_margin_lr" @click="changeFriend(scope.row)"/>
@@ -274,7 +274,7 @@ export default {
             type: 'success',
             duration: 1500
           })
-          getFriendSetting();
+          this.getPageSetting();
         } else {
           this.$message.error(res.msg);
         }
@@ -393,14 +393,14 @@ export default {
   align-items: center;
 }
 
-.el-icon-edit-outline, .el-icon-view {
+.el-icon-edit-outline, .el-icon-link {
   font-size: 1.2rem;
   font-weight: 100;
   color: #606266;
   transition: color .15s linear;
 }
 
-.el-icon-edit-outline:hover, .el-icon-view:hover {
+.el-icon-edit-outline:hover, .el-icon-link:hover {
   color: #66ccff;
 }
 
