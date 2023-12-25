@@ -5,7 +5,7 @@
         <el-container>
           <el-header>
             <div style="border-left: 3px solid #1882C4; padding-left: 1rem; color: #1882C4; font-size: 18px">
-              页面设置
+              关于我
             </div>
             <div>
               <el-button type="primary" @click="updatePageSetting">更新</el-button>
