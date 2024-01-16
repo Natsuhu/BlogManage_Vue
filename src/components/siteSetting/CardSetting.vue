@@ -1,12 +1,12 @@
 <template>
   <div>
-    <span>站点设置：子组件1</span>
+    <span>资料卡设置</span>
   </div>
 </template>
 
 <script>
 export default {
-  name: "siteSettingTest1"
+  name: "CardSetting"
 }
 </script>
 

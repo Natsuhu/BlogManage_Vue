@@ -111,11 +111,11 @@
           </el-header>
           <el-main>
             <!-- 是否允许评论 -->
-            <el-form-item label="是否开启评论">
+            <el-form-item label="评论开关">
               <el-switch v-model="friendPageSetting.friendIsComment" />
             </el-form-item>
             <!-- markdown编辑区 -->
-            <el-form-item label="友链页面介绍">
+            <el-form-item label="页面正文">
               <mavon-editor :autofocus="false" :boxShadow="false" v-model="friendPageSetting.friendContent"/>
             </el-form-item>
           </el-main>
@@ -125,7 +125,6 @@
 
     <!-- 新增/修改对话框 -->
     <el-dialog :title="dialogTitle" :visible.sync="dialog" :lock-scroll="false">
-
       <!-- 名称输入表单 -->
       <el-form label-position="top" label-width="80px">
         <el-row :gutter="20">
@@ -153,7 +152,6 @@
           </el-col>
         </el-row>
       </el-form>
-
       <!-- 操作按钮 -->
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialog = false">取 消</el-button>

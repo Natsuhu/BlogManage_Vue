@@ -95,12 +95,8 @@
           </el-header>
           <el-main>
             <!-- 图片库 -->
-            <el-form-item label="文章首图" prop="thumbnail">
-              <el-image :src="url + form.thumbnail" class="lit-pic">
-                <div slot="error" class="el-upload--picture-card">
-                  <i class="el-icon-plus"></i>
-                </div>
-              </el-image>
+            <el-form-item label="首图URL" prop="thumbnail">
+              <el-input :value="url + form.thumbnail" style="width: 50%"/>
             </el-form-item>
 
             <!-- 文章描述 -->
@@ -130,7 +126,7 @@ export default {
 
   data() {
     return {
-      url: window.env.API_BASE_URL + '/admin/annex/download/',
+      url: window.env.API_BASE_URL + '/annex/resource/',
       articleId: null,
       buttonText: null,
       categories: [],

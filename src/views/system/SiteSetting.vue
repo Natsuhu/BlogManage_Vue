@@ -1,28 +1,20 @@
 <template>
   <div>
-    <el-form :label-position="left" label-width="80px">
+    <el-form label-position="left" label-width="80px">
       <el-row>
           <el-container>
+            <!-- 头部菜单 -->
             <el-header>
               <el-menu mode="horizontal" default-active="1">
-                <el-menu-item index="1">通用</el-menu-item>
-                <el-menu-item index="2">页脚</el-menu-item>
-                <el-menu-item index="3">资料卡</el-menu-item>
+                <el-menu-item index="1" @click="componentName='CommonSetting'">通用</el-menu-item>
+                <el-menu-item index="2" >页脚</el-menu-item>
+                <el-menu-item index="3" @click="componentName='CardSetting'">资料卡</el-menu-item>
               </el-menu>
             </el-header>
-
+            <!-- 主内容区：动态组件 -->
             <el-main>
-              <component></component>
-              <el-row>
-                  <el-form-item label="配置项1">
-                    <el-input style="width: 200px"></el-input>
-                  </el-form-item>
-                  <el-form-item label="配置项2">
-                    <el-input style="width: 200px"></el-input>
-                  </el-form-item>
-              </el-row>
+              <component :is="componentName"></component>
             </el-main>
-
           </el-container>
       </el-row>
     </el-form>
@@ -30,8 +22,22 @@
 </template>
 
 <script>
+import CardSetting from "@/components/siteSetting/CardSetting";
+import CommonSetting from "@/components/siteSetting/CommonSetting";
+
 export default {
-  name: "SiteSetting"
+  name: "SiteSetting",
+
+  data() {
+    return {
+      componentName: CommonSetting
+    }
+  },
+
+  components: {
+    CardSetting,
+    CommonSetting
+  }
 }
 </script>
 
