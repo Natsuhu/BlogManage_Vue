@@ -96,7 +96,7 @@
           <el-main>
             <!-- 图片库 -->
             <el-form-item label="首图URL" prop="thumbnail">
-              <el-input :value="url + form.thumbnail" style="width: 50%"/>
+              <el-input :value="form.thumbnail" style="width: 50%"/>
             </el-form-item>
 
             <!-- 文章描述 -->
@@ -126,7 +126,6 @@ export default {
 
   data() {
     return {
-      url: window.env.API_BASE_URL + '/annex/resource/',
       articleId: null,
       buttonText: null,
       categories: [],
