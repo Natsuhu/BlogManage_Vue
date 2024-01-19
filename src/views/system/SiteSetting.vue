@@ -16,7 +16,9 @@
             </el-header>
             <!-- 主内容区：动态组件 -->
             <el-main>
-              <component ref="item" :is="componentName"></component>
+              <transition name="fade-transform" mode="out-in">
+                <component ref="item" :is="componentName"></component>
+              </transition>
             </el-main>
           </el-container>
       </el-row>

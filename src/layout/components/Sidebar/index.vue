@@ -10,6 +10,7 @@
         :unique-opened="false"
         :active-text-color="variables.menuActiveText"
         :collapse-transition="false"
+        :default-openeds="menuOpeneds"
         mode="vertical"
       >
         <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path" />
@@ -28,7 +29,7 @@ export default {
   components: { SidebarItem, Logo },
   computed: {
     ...mapGetters([
-      'sidebar'
+      'sidebar', 'menuOpeneds'
     ]),
     routes() {
       return this.$router.options.routes
