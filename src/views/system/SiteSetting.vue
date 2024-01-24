@@ -1,27 +1,25 @@
 <template>
-  <div>
-    <el-form label-position="left" label-width="80px">
-      <el-row>
-          <el-container>
-            <!-- 头部菜单 -->
-            <el-header>
-              <el-menu mode="horizontal" default-active="1">
-                <el-menu-item index="1" @click="componentName='CommonSetting'">通用</el-menu-item>
-                <el-menu-item index="2" >页脚</el-menu-item>
-                <el-menu-item index="3" @click="componentName='CardSetting'">资料卡</el-menu-item>
-              </el-menu>
-              <div>
-                <el-button @click="save" type="primary">保存</el-button>
-              </div>
-            </el-header>
-            <!-- 主内容区：动态组件 -->
-            <el-main>
-              <transition name="fade-transform" mode="out-in">
-                <component ref="item" :is="componentName"></component>
-              </transition>
-            </el-main>
-          </el-container>
-      </el-row>
+  <div style="height: 85vh">
+    <el-form label-position="left" label-width="80px" style="height: 100%">
+      <el-container>
+        <!-- 头部菜单 -->
+        <el-header>
+          <el-menu mode="horizontal" default-active="1">
+            <el-menu-item index="1" @click="componentName='CommonSetting'">通用</el-menu-item>
+            <el-menu-item index="2" >页脚</el-menu-item>
+            <el-menu-item index="3" @click="componentName='CardSetting'">资料卡</el-menu-item>
+          </el-menu>
+          <div>
+            <el-button @click="save" type="primary">保存</el-button>
+          </div>
+        </el-header>
+        <!-- 主内容区：动态组件 -->
+        <el-main>
+          <transition name="fade-transform" mode="out-in">
+            <component ref="item" :is="componentName"></component>
+          </transition>
+        </el-main>
+      </el-container>
     </el-form>
   </div>
 </template>
@@ -54,6 +52,7 @@ export default {
 
 <style scoped>
 .el-container {
+  height: 100%;
   background-color: #FFFFFF;
 }
 

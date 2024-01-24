@@ -37,7 +37,7 @@
             <el-table-column label="文章数量" prop="articleCount" width="200" align="center"/>
             <el-table-column label="标签颜色" width="220" align="center">
               <template slot-scope="scope">
-                <el-button circle :style="'background-color:' + scope.row.color" size="mini"></el-button>
+                <el-color-picker v-model="scope.row.color" @change="changeColor(scope.row)" size="mini"></el-color-picker>
               </template>
             </el-table-column>
             <el-table-column label="创建时间" prop="createTime" width="220" align="center"/>
@@ -115,7 +115,8 @@ export default {
       //更新&新增提交表单
       form: {
         id: null,
-        name: null
+        name: null,
+        color: null
       }
     }
   },
@@ -191,25 +192,37 @@ export default {
         })
       }
       if (this.saveFlag === 2) {
-        updateTag(this.form).then(res => {
-          if (res.success) {
-            Notification({
-              title: '更新成功',
-              type: 'success',
-              duration: 1500
-            })
-            //刷新表单,关闭对话框
-            this.getTableData();
-            this.dialog = false;
-          } else {
-            Notification({
-              title: '更新失败',
-              message: res.msg,
-              type: 'error'
-            })
-          }
-        })
+        this.update()
       }
+    },
+    //更新
+    update() {
+      updateTag(this.form).then(res => {
+        if (res.success) {
+          Notification({
+            title: '更新成功',
+            type: 'success',
+            duration: 1500
+          })
+          //刷新表单,关闭对话框
+          this.getTableData();
+          this.dialog = false;
+        } else {
+          Notification({
+            title: '更新失败',
+            message: res.msg,
+            type: 'error'
+          })
+        }
+      })
+    },
+    //改变标签颜色
+    changeColor(row) {
+      this.form.id = row.id
+      this.form.color = row.color;
+      this.update();
+      this.form.id = null;
+      this.form.color = null;
     },
     //表格删除按钮
     removeTag(row) {
@@ -273,5 +286,21 @@ export default {
   font-size: 1.2rem;
   font-weight: 100;
   color: #F56C6C;
+}
+
+::v-deep .el-color-picker__trigger {
+  border-radius: 50%;
+}
+
+::v-deep .el-color-picker__color {
+  border-radius: 50%;
+}
+
+::v-deep .el-color-picker__color-inner {
+  border-radius: 50%;
+}
+
+::v-deep .el-color-picker__icon {
+  display: none;
 }
 </style>
