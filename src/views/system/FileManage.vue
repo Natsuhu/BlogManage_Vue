@@ -66,10 +66,13 @@
             <el-table-column label="上传时间" width="200" prop="createTime" align="center"/>
 
             <!-- 操作按钮 -->
-            <el-table-column label="操作" width="200" align="center">
+            <el-table-column label="操作" width="260" align="center">
               <template slot-scope="scope">
+                <el-tooltip effect="dark" content="复制文件ID" placement="top">
+                  <i class="el-icon-document-copy base_text_point" @click="copyFileID(scope.row.id)"/>
+                </el-tooltip>
                 <el-tooltip effect="dark" content="下载文件" placement="top">
-                  <i @click="downloadAnnex(scope.row)" class="el-icon-download base_text_point" />
+                  <i @click="downloadAnnex(scope.row)" class="el-icon-download base_text_point base_margin_l" />
                 </el-tooltip>
                 <el-tooltip effect="dark" content="编辑文件" placement="top">
                   <i class="el-icon-edit-outline base_text_point base_margin_lr" @click="changeAnnex(scope.row)"/>
@@ -245,7 +248,7 @@ export default {
       })
     },*/
     downloadAnnex(row) {
-      const url = window.env.API_BASE_URL + "/admin/annex/download/" + row.id;
+      const url = row.downloadAddress + "?token=" + window.localStorage.getItem("token");
       const a = document.createElement('a');
       a.href = url;
       a.download = row.name;
@@ -267,6 +270,7 @@ export default {
       if (isRow) {
         data.id = isRow.id;
         data.isPublished = isRow.isPublished;
+        data.name = isRow.name;
       } else {
         data = this.updateForm
       }
@@ -331,6 +335,11 @@ export default {
       //上传完成后清除文件列表，否则会导致下次点上传无反应
       this.$refs.upload.clearFiles();
     },
+    //复制文件ID
+    copyFileID(id) {
+      navigator.clipboard.writeText(id);
+      this.$message.success("复制成功！")
+    },
     //分页监听，新pageNo
     handleSizeChange(newSize) {
       this.queryParam.pageSize = newSize
@@ -357,14 +366,14 @@ export default {
 }
 
 
-.el-icon-edit-outline, .el-icon-download {
+.el-icon-edit-outline, .el-icon-download, .el-icon-document-copy {
   font-size: 1.2rem;
   font-weight: 100;
   color: #606266;
   transition: color .15s linear;
 }
 
-.el-icon-edit-outline:hover, .el-icon-download:hover {
+.el-icon-edit-outline:hover, .el-icon-download:hover, el-icon-document-copy:hover {
   color: #66ccff;
 }
 

@@ -23,7 +23,7 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/blog/manage',
     children: [{
       path: 'dashboard',
       name: 'Dashboard',
@@ -100,7 +100,7 @@ export const constantRoutes = [
         path: 'site/manage',
         name: 'SiteSetting',
         component: () => import('@/views/system/SiteSetting'),
-        meta: { title: '站点设置', icon: 'el-icon-setting' }
+        meta: { title: '网站设置', icon: 'el-icon-setting' }
       },
       {
         path: 'friend/manage',

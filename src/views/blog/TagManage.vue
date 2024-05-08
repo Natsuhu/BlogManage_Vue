@@ -37,7 +37,8 @@
             <el-table-column label="文章数量" prop="articleCount" width="200" align="center"/>
             <el-table-column label="标签颜色" width="220" align="center">
               <template slot-scope="scope">
-                <el-color-picker v-model="scope.row.color" @change="changeColor(scope.row)" size="mini"></el-color-picker>
+                <el-color-picker v-model="scope.row.color" :predefine="predefineColors" @change="changeColor(scope.row)"
+                                 size="mini"></el-color-picker>
               </template>
             </el-table-column>
             <el-table-column label="创建时间" prop="createTime" width="220" align="center"/>
@@ -47,7 +48,7 @@
             <el-table-column label="操作" width="200" align="center">
               <template slot-scope="scope">
                 <el-tooltip effect="dark" content="编辑标签" placement="top">
-                  <i class="el-icon-edit-outline base_text_point base_margin_r" @click="changeTag(scope.row)" />
+                  <i class="el-icon-edit-outline base_text_point base_margin_r" @click="changeTag(scope.row)"/>
                 </el-tooltip>
                 <el-popconfirm confirm-button-text='好' cancel-button-text='手滑了' icon="el-icon-info" icon-color="red"
                                title="这可是物理删除！" @onConfirm="removeTag(scope.row)">
@@ -117,7 +118,9 @@ export default {
         id: null,
         name: null,
         color: null
-      }
+      },
+      //标签预定义颜色
+      predefineColors: ['#F56C6C', '#E6A23C', '#67C23A', '#00ced1', '#409EFF', '#c71585', '#909399']
     }
   },
 

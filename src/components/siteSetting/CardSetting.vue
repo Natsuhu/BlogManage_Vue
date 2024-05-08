@@ -1,18 +1,35 @@
 <template>
   <div>
     <el-form :model="form" label-position="right" label-width="auto">
-      <el-form-item label="头像URL" prop="cardAvatar">
-        <el-input v-model="form.cardAvatar" style="width: 30%" size="small"></el-input>
+      <el-form-item label="头像" prop="cardAvatar">
+        <el-input v-model="form.cardAvatar" style="width: 30%" size="small" placeholder="可填写文件ID或外部链接"></el-input>
       </el-form-item>
       <el-form-item label="资料卡昵称" prop="cardName">
         <el-input v-model="form.cardName" style="width: 30%" size="small"></el-input>
       </el-form-item>
-      <el-form-item label="资料卡个签">
+      <el-form-item label="资料卡个签" prop="cardSignature">
         <el-input v-model="form.cardSignature" style="width: 30%" size="small"></el-input>
       </el-form-item>
-<!--      <el-form-item>
-        <el-button @click="updateSetting" type="primary">保存</el-button>
-      </el-form-item>-->
+      <el-form-item label="Github" prop="github">
+        <el-input v-model="form.github" style="width: 30%" size="small"></el-input>
+      </el-form-item>
+      <el-form-item label="QQ" prop="qq">
+        <el-input v-model="form.qq" style="width: 30%" size="small"></el-input>
+      </el-form-item>
+      <el-form-item label="Bilibili" prop="bilibili">
+        <el-input v-model="form.bilibili" style="width: 30%" size="small"></el-input>
+      </el-form-item>
+      <el-form-item label="网易云" prop="netease">
+        <el-input v-model="form.netease" style="width: 30%" size="small"></el-input>
+      </el-form-item>
+      <el-form-item label="邮箱" prop="email">
+        <el-input v-model="form.email" style="width: 30%" size="small"></el-input>
+      </el-form-item>
+
+      <!--      <el-form-item>
+              <el-button @click="updateSetting" type="primary">保存</el-button>
+            </el-form-item>-->
+
     </el-form>
   </div>
 </template>
@@ -29,19 +46,21 @@ export default {
       form: {
         cardAvatar: null,
         cardName: null,
-        cardSignature: null
+        cardSignature: null,
+        github: null,
+        qq: null,
+        bilibili: null,
+        netease: null,
+        email: null
       }
     }
   },
-
   created() {
     this.getSetting();
   },
-
   destroyed() {
     this.form = null;
   },
-
   methods: {
     getSetting() {
       getCardSetting().then(res => {
@@ -49,6 +68,11 @@ export default {
           this.form.cardAvatar = res.data.cardAvatar;
           this.form.cardName = res.data.cardName;
           this.form.cardSignature = res.data.cardSignature
+          this.form.github = res.data.github;
+          this.form.qq = res.data.qq;
+          this.form.bilibili = res.data.bilibili;
+          this.form.netease = res.data.netease;
+          this.form.email = res.data.email;
         } else {
           this.$message.error(res.msg);
         }

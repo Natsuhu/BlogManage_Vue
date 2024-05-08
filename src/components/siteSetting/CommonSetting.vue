@@ -7,6 +7,15 @@
       <el-form-item label="网页标题后缀" prop="webTitleSuffix">
         <el-input v-model="form.webTitleSuffix" style="width: 30%" size="small"></el-input>
       </el-form-item>
+      <el-form-item label="首图标题" prop="headerTitle">
+        <el-input v-model="form.headerTitle" style="width: 30%" size="small"></el-input>
+      </el-form-item>
+      <el-form-item label="首图" prop="headerImage">
+        <el-input v-model="form.headerImage" style="width: 30%" size="small" placeholder="可填写文件ID或外部链接，不填写则不展示首图"></el-input>
+      </el-form-item>
+      <el-form-item label="博客背景图" prop="bodyImage">
+        <el-input v-model="form.bodyImage" style="width: 30%" size="small" placeholder="可填写文件ID或外部链接，不填写则背景为白色"></el-input>
+      </el-form-item>
 <!--      <el-form-item>
         <el-button @click="updateSetting" type="primary">保存</el-button>
       </el-form-item>-->
@@ -25,7 +34,10 @@ export default {
     return {
       form: {
         blogName: null,
-        webTitleSuffix: null
+        webTitleSuffix: null,
+        headerTitle: null,
+        headerImage: null,
+        bodyImage: null
       }
     }
   },
@@ -45,6 +57,9 @@ export default {
         if (res.success) {
           this.form.blogName = res.data.blogName;
           this.form.webTitleSuffix = res.data.webTitleSuffix;
+          this.form.headerTitle = res.data.headerTitle;
+          this.form.headerImage = res.data.headerImage;
+          this.form.bodyImage = res.data.bodyImage;
         } else {
           this.$message.error(res.msg);
         }

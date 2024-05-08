@@ -37,7 +37,12 @@
 
             <!-- 固定列 -->
             <el-table-column label="序号" type="index" width="50" align="center"/>
-            <el-table-column label="头像" prop="avatar" align="center"/>
+            <el-table-column label="头像" prop="avatar" align="center">
+              <template slot-scope="scope">
+                <!--  给此组件绑定一个key，以解决src更新后，图片没及时更新的问题  -->
+                <el-avatar shape="square" size="medium" :src="scope.row.avatar" :key="scope.row.avatar"></el-avatar>
+              </template>
+            </el-table-column>
             <el-table-column label="作者" prop="author" align="center"/>
             <el-table-column label="内容" width="300" prop="content" align="center" show-overflow-tooltip/>
             <el-table-column label="点赞数" prop="likes" align="center"/>

@@ -10,13 +10,11 @@
 
         <div class="right-menu">
             <el-dropdown class="avatar-container" trigger="click">
-                <div class="avatar-wrapper">
-                    <img :src="avatar" class="user-avatar"/>
-                </div>
+              <div class="avatar-wrapper">
+                <img src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80" class="user-avatar">
+                <i class="el-icon-caret-bottom"/>
+              </div>
                 <el-dropdown-menu slot="dropdown" class="user-dropdown">
-                    <router-link to="/">
-                        <el-dropdown-item> 主页 </el-dropdown-item>
-                    </router-link>
                     <el-dropdown-item divided @click.native="logout">
                         <span style="display: block"> 注销 </span>
                     </el-dropdown-item>
@@ -44,9 +42,9 @@ export default {
         toggleSideBar() {
             this.$store.dispatch("app/toggleSideBar");
         },
-        async logout() {
-            await this.$store.dispatch("user/logout");
-            this.$router.push(`/login?redirect=${this.$route.fullPath}`);
+        logout() {
+          window.localStorage.removeItem('token')
+          this.$router.push('/login')
         },
     },
 };

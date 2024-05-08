@@ -1,7 +1,6 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">后台管理主页</div>
-    <span v-html="text"></span>
+    <div class="dashboard-text">此页面开发中...</div>
   </div>
 </template>
 
@@ -19,7 +18,7 @@ export default {
   data() {
     return {
       //text: '<meting-js server="netease" type="song" id="1437285525"></meting-js>'
-      text: '<span>span</span>'
+      text: '<span>开发中...</span>'
     }
   }
 }

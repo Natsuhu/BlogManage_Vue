@@ -16,6 +16,10 @@ service.defaults.timeout =  window.env.AXIOS_TIMEOUT
 // 请求拦截
 service.interceptors.request.use(
 	config => {
+		const token = window.localStorage.getItem('token')
+		if (token) {
+			config.headers.Authorization = token
+		}
 		NProgress.start()
 		return config
 	},

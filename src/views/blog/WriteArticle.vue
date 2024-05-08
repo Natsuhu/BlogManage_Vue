@@ -96,7 +96,7 @@
           <el-main>
             <!-- 图片库 -->
             <el-form-item label="首图URL" prop="thumbnail">
-              <el-input :value="form.thumbnail" style="width: 50%"/>
+              <el-input v-model="form.thumbnail" placeholder="输入文件ID或一个Http链接" style="width: 50%"/>
             </el-form-item>
 
             <!-- 文章描述 -->
