@@ -54,7 +54,7 @@ export default {
     return {
       loginForm: {
         username: 'Visitor',
-        password: 'Visitor'
+        password: 'visitor'
       },
       loginRules: {
         username: [{ required: true, message:'请输入用户名', trigger: 'blur'}],
@@ -82,7 +82,7 @@ export default {
           login(this.loginForm).then(res => {
             if (res.success) {
               this.msgSuccess("登录成功");
-              window.localStorage.setItem('token', res.data)
+              window.localStorage.setItem('token', res.data.token)
               this.$router.push('/')
             } else {
               this.msgError(res.msg)

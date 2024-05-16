@@ -274,7 +274,11 @@ export default {
           })
           this.getPageSetting();
         } else {
-          this.$message.error(res.msg);
+          Notification({
+            title: '更新失败',
+            message: res.msg,
+            type: 'error'
+          })
         }
       })
     },

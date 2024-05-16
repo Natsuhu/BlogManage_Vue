@@ -254,7 +254,7 @@ export default {
           })
         } else {
           Notification({
-            title: '更新失败',
+            title: '删除失败',
             message: res.msg,
             type: 'error'
           })
