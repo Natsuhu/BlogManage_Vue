@@ -337,6 +337,7 @@ export default {
     },
     //复制文件ID
     copyFileID(id) {
+      //这种方式只能在https或127.0.0.1下使用
       navigator.clipboard.writeText(id);
       this.$message.success("复制成功！")
     },
