@@ -10,7 +10,7 @@ import Layout from '@/layout'
 export const constantRoutes = [
   {
     path: '/login',
-    component: () => import('@/views/login/index'),
+    component: () => import('@/views/login/Login'),
     hidden: true
   },
 
@@ -86,22 +86,10 @@ export const constantRoutes = [
   {
     path: '/system',
     name: 'System',
-    redirect: '/file/manage',
+    redirect: '/friend/manage',
     component: Layout,
     meta: { title: '系统管理', icon: 'el-icon-s-platform' },
     children: [
-      {
-        path: 'file/manage',
-        name: 'FileManage',
-        component: () => import('@/views/system/FileManage'),
-        meta: { title: '文件管理', icon: 'el-icon-folder' }
-      },
-      {
-        path: 'site/manage',
-        name: 'SiteSetting',
-        component: () => import('@/views/system/SiteSetting'),
-        meta: { title: '网站设置', icon: 'el-icon-setting' }
-      },
       {
         path: 'friend/manage',
         name: 'FriendManage',
@@ -112,32 +100,47 @@ export const constantRoutes = [
         path: 'about/manage',
         name: 'AboutMe',
         component: () => import('@/views/system/AboutMe'),
-        meta: { title: '关于我', icon: 'el-icon-tickets' }
-      }
-    ]
-  },
-  {
-    path: '/aa',
-    name: 'Aa',
-    redirect: '/system/job',
-    component: Layout,
-    meta: { title: '系统管理', icon: 'el-icon-s-platform' },
-    children: [
+        meta: { title: '关于本站', icon: 'el-icon-tickets' }
+      },
       {
-        path: 'job',
-        name: 'JobList',
+        path: 'site/manage',
+        name: 'SiteSetting',
+        component: () => import('@/views/system/SiteSetting'),
+        meta: { title: '网站设置', icon: 'el-icon-setting' }
+      },
+      {
+        path: 'file/manage',
+        name: 'FileManage',
+        component: () => import('@/views/system/FileManage'),
+        meta: { title: '文件管理', icon: 'el-icon-folder' }
+      },
+      {
+        path: 'job/manage',
+        name: 'JobManage',
         component: () => import('@/views/dashboard/index'),
         meta: { title: '定时任务', icon: 'el-icon-alarm-clock' }
+      },
+      {
+        path: 'user/manage',
+        name: 'UserManage',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '用户管理', icon: 'el-icon-user' }
       }
     ]
   },
   {
     path: '/log',
     name: 'Log',
-    redirect: '/log/job',
+    redirect: '/visit',
     component: Layout,
     meta: { title: '日志管理', icon: 'el-icon-document' },
     children: [
+      {
+        path: 'visit',
+        name: 'VisitLog',
+        component: () => import('@/views/log/VisitLog'),
+        meta: { title: '访问日志', icon: 'el-icon-data-line' }
+      },
       {
         path: 'job',
         name: 'JobLog',
@@ -161,16 +164,9 @@ export const constantRoutes = [
         name: 'ExceptionLog',
         component: () => import('@/views/dashboard/index'),
         meta: { title: '异常日志', icon: 'el-icon-document-delete' }
-      },
-      {
-        path: 'visit',
-        name: 'VisitLog',
-        component: () => import('@/views/dashboard/index'),
-        meta: { title: '访问日志', icon: 'el-icon-data-line' }
       }
     ]
   },
-
   {
     path: '/statistics',
     name: 'Statistics',

@@ -132,7 +132,7 @@ export default {
       total: 0,
       queryParam: {
         suffix: null,
-        isPublished: false,
+        isPublished: null,
         time: null,
         keyword: null,
         pageNo: 1,
