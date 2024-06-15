@@ -23,5 +23,5 @@ module.exports = {
   /**
    * 默认展开菜单，填写路由路径。
    */
-  menuOpeneds: ['/blog', '/system', 'log']
+  menuOpeneds: ['/blog', '/system', '/log']
 }
