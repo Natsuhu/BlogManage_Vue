@@ -142,26 +142,21 @@ export const constantRoutes = [
         meta: { title: '访问日志', icon: 'el-icon-data-line' }
       },
       {
+        path: 'operation',
+        name: 'OperationLog',
+        component: () => import('@/views/log/OperationLog'),
+        meta: { title: '操作日志', icon: 'el-icon-thumb' }
+      },
+      {
         path: 'job',
         name: 'JobLog',
         component: () => import('@/views/dashboard/index'),
         meta: { title: '任务日志', icon: 'el-icon-alarm-clock' }
       },
       {
-        path: 'login',
-        name: 'LoginLog',
-        component: () => import('@/views/dashboard/index'),
-        meta: { title: '登录日志', icon: 'el-icon-finished' }
-      },
-      {
-        path: 'operation',
-        name: 'OperationLog',
-        component: () => import('@/views/dashboard/index'),
-        meta: { title: '操作日志', icon: 'el-icon-document-checked' }
-      },
-      {
         path: 'exception',
         name: 'ExceptionLog',
+        hidden: true,
         component: () => import('@/views/dashboard/index'),
         meta: { title: '异常日志', icon: 'el-icon-document-delete' }
       }

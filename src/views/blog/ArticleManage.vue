@@ -80,7 +80,7 @@
                     </el-col>
                   </el-row>
                   <el-link slot="reference" icon="el-icon-edit" :underline="false">
-                    {{ scope.row.isPublished ? "公开" : "私人" }}
+                    {{ scope.row.isPublished ? "公开" : "隐藏" }}
                   </el-link>
                 </el-popover>
               </template>
