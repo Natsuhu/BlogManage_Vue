@@ -101,12 +101,12 @@
 
             <!-- 文章描述 -->
             <el-form-item label="文章描述" prop="description">
-              <mavon-editor :autofocus="false" :boxShadow="false" v-model="form.description"/>
+              <mavon-editor ref="description" :autofocus="false" :boxShadow="false" @imgAdd="imgAddA" v-model="form.description"/>
             </el-form-item>
 
             <!-- 正文 -->
             <el-form-item label="文章正文" prop="content">
-              <mavon-editor :autofocus="false" :boxShadow="false" v-model="form.content"/>
+              <mavon-editor ref="content" :autofocus="false" :boxShadow="false" @imgAdd="imgAddB" v-model="form.content"/>
             </el-form-item>
           </el-main>
         </el-container>
@@ -120,6 +120,7 @@ import {Notification} from "element-ui";
 import {saveArticle, getArticleById, updateArticle} from '@/api/Article';
 import {getCategories} from '@/api/Category';
 import {getTags} from '@/api/Tag';
+import {upload, deleteAnnex} from "@/api/Annex";
 
 export default {
   name: "WriteArticle",
@@ -298,6 +299,34 @@ export default {
           }
         } else {
           return this.msgError('请填写必要的表单项')
+        }
+      })
+    },
+    //不同编辑框的文件上传
+    imgAddA(pos, file) {
+      this.imgAdd(pos, file, 'a')
+    },
+    imgAddB(pos, file) {
+      this.imgAdd(pos, file, 'b')
+    },
+    //文件上传
+    imgAdd(pos, file, type) {
+      let form = new FormData();
+      form.append('file', file);
+      form.append('isPublished', true);
+      upload(form).then(res => {
+        if (res.success) {
+          if (type === 'a') {
+            this.$refs.description.$img2Url(pos, res.data)
+          } else {
+            this.$refs.content.$img2Url(pos, res.data)
+          }
+        } else {
+          Notification({
+            title: '上传失败',
+            message: res.msg,
+            type: 'error'
+          })
         }
       })
     }
