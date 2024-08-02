@@ -65,7 +65,7 @@
           <el-main>
             <!-- 动态内容 -->
             <el-form-item label="动态内容" prop="content">
-              <mavon-editor ref="content" :autofocus="false" :boxShadow="false" @imgAdd="imgAdd" v-model="form.content"/>
+              <mavon-editor ref="content" :autofocus="false" :boxShadow="false" @imgAdd="imgAdd" @imgDel="imgDel" v-model="form.content"/>
             </el-form-item>
           </el-main>
         </el-container>
@@ -211,6 +211,20 @@ export default {
             title: '上传失败',
             message: res.msg,
             type: 'error'
+          })
+        }
+      })
+    },
+    //图片删除
+    imgDel(pos) {
+      let imgUrl = pos[0];
+      let param = {}
+      param.id = imgUrl.split('/').pop()
+      deleteAnnex(param).then(res => {
+        if (res.success) {
+          Notification({
+            title: '删除成功',
+            type: 'success'
           })
         }
       })

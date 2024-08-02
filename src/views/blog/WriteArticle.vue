@@ -101,12 +101,12 @@
 
             <!-- 文章描述 -->
             <el-form-item label="文章描述" prop="description">
-              <mavon-editor ref="description" :autofocus="false" :boxShadow="false" @imgAdd="imgAddA" v-model="form.description"/>
+              <mavon-editor ref="description" :autofocus="false" :boxShadow="false" @imgAdd="imgAddA" @imgDel="imgDel" v-model="form.description"/>
             </el-form-item>
 
             <!-- 正文 -->
             <el-form-item label="文章正文" prop="content">
-              <mavon-editor ref="content" :autofocus="false" :boxShadow="false" @imgAdd="imgAddB" v-model="form.content"/>
+              <mavon-editor ref="content" :autofocus="false" :boxShadow="false" @imgAdd="imgAddB" @imgDel="imgDel" v-model="form.content"/>
             </el-form-item>
           </el-main>
         </el-container>
@@ -326,6 +326,21 @@ export default {
             title: '上传失败',
             message: res.msg,
             type: 'error'
+          })
+        }
+      })
+    },
+    //文件删除
+    //图片删除
+    imgDel(pos) {
+      let imgUrl = pos[0];
+      let param = {}
+      param.id = imgUrl.split('/').pop()
+      deleteAnnex(param).then(res => {
+        if (res.success) {
+          Notification({
+            title: '删除成功',
+            type: 'success'
           })
         }
       })

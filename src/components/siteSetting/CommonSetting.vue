@@ -16,6 +16,9 @@
       <el-form-item label="博客背景图" prop="bodyImage">
         <el-input v-model="form.bodyImage" style="width: 30%" size="small" placeholder="可填写文件ID或外部链接，不填写则背景为白色"></el-input>
       </el-form-item>
+      <el-form-item label="博主评论标识" prop="bodyImage">
+        <el-input v-model="form.adminCommentLabel" style="width: 30%" size="small" placeholder="填写后会在评论时带上博主标记"></el-input>
+      </el-form-item>
 <!--      <el-form-item>
         <el-button @click="updateSetting" type="primary">保存</el-button>
       </el-form-item>-->
@@ -37,7 +40,8 @@ export default {
         webTitleSuffix: null,
         headerTitle: null,
         headerImage: null,
-        bodyImage: null
+        bodyImage: null,
+        adminCommentLabel: null
       }
     }
   },
@@ -60,6 +64,7 @@ export default {
           this.form.headerTitle = res.data.headerTitle;
           this.form.headerImage = res.data.headerImage;
           this.form.bodyImage = res.data.bodyImage;
+          this.form.adminCommentLabel = res.data.adminCommentLabel;
         } else {
           this.$message.error(res.msg);
         }
