@@ -9,3 +9,10 @@ export function login(loginForm) {
         }
     })
 }
+
+export function getBackLoginSetting() {
+    return request({
+        method: 'get',
+        url: '/login/getBackLoginSetting'
+    })
+}

@@ -16,8 +16,14 @@
       <el-form-item label="博客背景图" prop="bodyImage">
         <el-input v-model="form.bodyImage" style="width: 30%" size="small" placeholder="可填写文件ID或外部链接，不填写则背景为白色"></el-input>
       </el-form-item>
-      <el-form-item label="博主评论标识" prop="bodyImage">
+      <el-form-item label="博主评论标识" prop="adminCommentLabel">
         <el-input v-model="form.adminCommentLabel" style="width: 30%" size="small" placeholder="填写后会在评论时带上博主标记"></el-input>
+      </el-form-item>
+      <el-form-item label="博客前台登录页背景" prop="frontLoginImage">
+        <el-input v-model="form.frontLoginImage" style="width: 30%" size="small" placeholder="可填写文件ID或外部链接，不填写则不展示"></el-input>
+      </el-form-item>
+      <el-form-item label="博客后台登录页背景" prop="backLoginImage">
+        <el-input v-model="form.backLoginImage" style="width: 30%" size="small" placeholder="可填写文件ID或外部链接，不填写则不展示"></el-input>
       </el-form-item>
 <!--      <el-form-item>
         <el-button @click="updateSetting" type="primary">保存</el-button>
@@ -41,7 +47,9 @@ export default {
         headerTitle: null,
         headerImage: null,
         bodyImage: null,
-        adminCommentLabel: null
+        adminCommentLabel: null,
+        frontLoginImage: null,
+        backLoginImage: null
       }
     }
   },
@@ -65,6 +73,8 @@ export default {
           this.form.headerImage = res.data.headerImage;
           this.form.bodyImage = res.data.bodyImage;
           this.form.adminCommentLabel = res.data.adminCommentLabel;
+          this.form.frontLoginImage = res.data.frontLoginImage;
+          this.form.backLoginImage = res.data.backLoginImage;
         } else {
           this.$message.error(res.msg);
         }
