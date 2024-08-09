@@ -33,3 +33,20 @@ export function updateCardSetting(form) {
         }
     })
 }
+
+export function getFooterSetting() {
+    return request({
+        method: 'post',
+        url: '/admin/setting/getFooterSetting',
+    })
+}
+
+export function updateFooterSetting(form) {
+    return request({
+        method: 'post',
+        url: '/admin/setting/updateFooterSetting',
+        data: {
+            ...form
+        }
+    })
+}

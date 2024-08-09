@@ -6,7 +6,7 @@
         <el-header>
           <el-menu mode="horizontal" default-active="1">
             <el-menu-item index="1" @click="componentName='CommonSetting'">通用</el-menu-item>
-            <el-menu-item index="2" >页脚</el-menu-item>
+            <el-menu-item index="2" @click="componentName='FooterSetting'">页脚</el-menu-item>
             <el-menu-item index="3" @click="componentName='CardSetting'">资料卡</el-menu-item>
           </el-menu>
           <div>
@@ -27,6 +27,7 @@
 <script>
 import CardSetting from "@/components/siteSetting/CardSetting";
 import CommonSetting from "@/components/siteSetting/CommonSetting";
+import FooterSetting from "@/components/siteSetting/FooterSetting";
 
 export default {
   name: "SiteSetting",
@@ -45,6 +46,7 @@ export default {
 
   components: {
     CardSetting,
+    FooterSetting,
     CommonSetting
   }
 }

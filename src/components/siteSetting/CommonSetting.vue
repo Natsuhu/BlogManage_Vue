@@ -1,33 +1,44 @@
 <template>
   <div>
     <el-form :model="form" label-position="right" label-width="auto">
-      <el-form-item label="博客名称" prop="blogName">
-        <el-input v-model="form.blogName" style="width: 30%" size="small"></el-input>
-      </el-form-item>
-      <el-form-item label="网页标题后缀" prop="webTitleSuffix">
-        <el-input v-model="form.webTitleSuffix" style="width: 30%" size="small"></el-input>
-      </el-form-item>
-      <el-form-item label="首图标题" prop="headerTitle">
-        <el-input v-model="form.headerTitle" style="width: 30%" size="small"></el-input>
-      </el-form-item>
-      <el-form-item label="首图" prop="headerImage">
-        <el-input v-model="form.headerImage" style="width: 30%" size="small" placeholder="可填写文件ID或外部链接，不填写则不展示首图"></el-input>
-      </el-form-item>
-      <el-form-item label="博客背景图" prop="bodyImage">
-        <el-input v-model="form.bodyImage" style="width: 30%" size="small" placeholder="可填写文件ID或外部链接，不填写则背景为白色"></el-input>
-      </el-form-item>
-      <el-form-item label="博主评论标识" prop="adminCommentLabel">
-        <el-input v-model="form.adminCommentLabel" style="width: 30%" size="small" placeholder="填写后会在评论时带上博主标记"></el-input>
-      </el-form-item>
-      <el-form-item label="博客前台登录页背景" prop="frontLoginImage">
-        <el-input v-model="form.frontLoginImage" style="width: 30%" size="small" placeholder="可填写文件ID或外部链接，不填写则不展示"></el-input>
-      </el-form-item>
-      <el-form-item label="博客后台登录页背景" prop="backLoginImage">
-        <el-input v-model="form.backLoginImage" style="width: 30%" size="small" placeholder="可填写文件ID或外部链接，不填写则不展示"></el-input>
-      </el-form-item>
-<!--      <el-form-item>
-        <el-button @click="updateSetting" type="primary">保存</el-button>
-      </el-form-item>-->
+      <el-row :gutter="30">
+        <el-col :span="12">
+          <el-form-item label="博客名称" prop="blogName">
+            <el-input v-model="form.blogName" size="small"></el-input>
+          </el-form-item>
+          <el-form-item label="首图标题" prop="headerTitle">
+            <el-input v-model="form.headerTitle" size="small"></el-input>
+          </el-form-item>
+          <el-form-item label="博主评论标识" prop="adminCommentLabel">
+            <el-input v-model="form.adminCommentLabel" size="small"
+                      placeholder="填写后会在评论时带上博主标记"></el-input>
+          </el-form-item>
+          <el-form-item label="网页标题后缀" prop="webTitleSuffix">
+            <el-input v-model="form.webTitleSuffix" size="small"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="首图" prop="headerImage">
+            <el-input v-model="form.headerImage" size="small"
+                      placeholder="可填写文件ID或外部链接，不填写则不展示首图"></el-input>
+          </el-form-item>
+          <el-form-item label="背景图" prop="bodyImage">
+            <el-input v-model="form.bodyImage" size="small"
+                      placeholder="可填写文件ID或外部链接，不填写则背景为白色"></el-input>
+          </el-form-item>
+          <el-form-item label="前台登录页背景" prop="frontLoginImage">
+            <el-input v-model="form.frontLoginImage" size="small"
+                      placeholder="可填写文件ID或外部链接，不填写则不展示"></el-input>
+          </el-form-item>
+          <el-form-item label="后台登录页背景" prop="backLoginImage">
+            <el-input v-model="form.backLoginImage" size="small"
+                      placeholder="可填写文件ID或外部链接，不填写则不展示"></el-input>
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <!--      <el-form-item>
+              <el-button @click="updateSetting" type="primary">保存</el-button>
+            </el-form-item>-->
     </el-form>
   </div>
 </template>
