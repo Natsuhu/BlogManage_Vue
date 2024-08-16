@@ -12,6 +12,25 @@
           <el-form-item label="个签" prop="cardSignature">
             <el-input v-model="form.cardSignature" size="small"></el-input>
           </el-form-item>
+          <el-row :gutter="15" v-for="(item, index) in form.cardCustom" :key="index">
+            <el-col :span="6">
+              <el-form-item label="标题" prop="cardCustom">
+                <el-input v-model="item.title" size="small" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="14">
+              <el-form-item label="内容" prop="cardCustom">
+                <el-input v-model="item.content" size="small" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="4">
+              <el-popconfirm confirm-button-text='好' cancel-button-text='手滑了' icon="el-icon-info" icon-color="red"
+                             title="确定删除吗？" @onConfirm="removeCustom(index)">
+                <i slot="reference" class="el-icon-delete base_text_point"/>
+              </el-popconfirm>
+            </el-col>
+          </el-row>
+          <el-button icon="el-icon-plus" type="primary" size="small" @click="addCustom">添加自定义</el-button>
         </el-col>
         <el-col :span="12">
           <el-form-item label="Github" prop="github">
@@ -57,7 +76,8 @@ export default {
         qq: null,
         bilibili: null,
         netease: null,
-        email: null
+        email: null,
+        cardCustom: null
       }
     }
   },
@@ -79,6 +99,7 @@ export default {
           this.form.bilibili = res.data.bilibili;
           this.form.netease = res.data.netease;
           this.form.email = res.data.email;
+          this.form.cardCustom = res.data.cardCustom;
         } else {
           this.$message.error(res.msg);
         }
@@ -100,11 +121,26 @@ export default {
           })
         }
       })
+    },
+    addCustom() {
+      let custom = {}
+      custom.title = ''
+      custom.content = ''
+      this.form.cardCustom.push(custom)
+    },
+    removeCustom(row) {
+      this.form.cardCustom.splice(row, 1)
     }
   }
 }
 </script>
 
 <style scoped>
-
+.el-icon-delete {
+  position: relative;
+  top: 8px;
+  font-size: 1.2rem;
+  font-weight: 100;
+  color: #F56C6C;
+}
 </style>
