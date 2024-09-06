@@ -9,19 +9,20 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "aplayer": "^1.10.1",
     "axios": "0.24.0",
     "core-js": "3.6.5",
     "echarts": "4.9.0",
     "element-ui": "2.13.2",
     "js-cookie": "^3.0.1",
     "lodash": "4.17.19",
-    "aplayer": "^1.10.1",
     "mavon-editor": "2.10.4",
     "moment": "2.27.0",
     "normalize.css": "7.0.0",
     "nprogress": "0.2.0",
     "v-viewer": "1.5.1",
-    "vue": "2.6.11",
+    "vue": "2.7.11",
+    "vue-icons-plus": "^0.1.0",
     "vue-router": "3.3.4",
     "vuex": "3.5.1"
   },

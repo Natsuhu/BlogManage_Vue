@@ -374,7 +374,7 @@ export default {
   transition: color .15s linear;
 }
 
-.el-icon-edit-outline:hover, .el-icon-download:hover, el-icon-document-copy:hover {
+.el-icon-edit-outline:hover, .el-icon-download:hover, .el-icon-document-copy:hover {
   color: #66ccff;
 }
 

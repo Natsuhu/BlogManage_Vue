@@ -117,7 +117,7 @@ export const constantRoutes = [
       {
         path: 'job/manage',
         name: 'JobManage',
-        component: () => import('@/views/dashboard/index'),
+        component: () => import('@/views/system/JobManage'),
         meta: { title: '定时任务', icon: 'el-icon-alarm-clock' }
       },
       {

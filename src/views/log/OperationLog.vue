@@ -19,6 +19,7 @@
               <el-option label="查询" value="5"/>
               <el-option label="上传" value="6"/>
               <el-option label="下载" value="7"/>
+              <el-option label="执行" value="8"/>
             </el-select>
           </div>
           <!-- 选择状态 -->
