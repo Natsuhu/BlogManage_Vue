@@ -132,8 +132,8 @@ export default {
       time = this.queryParam.time;
       if (time != null) {
         let arr = time.toString().split(",");
-        this.queryParam.startTime = arr[0];
-        this.queryParam.endTime = arr[1];
+        this.queryParam.startTime = arr[0] + " 00:00:00";
+        this.queryParam.endTime = arr[1] + " 23:59:59";
       } else {
         this.queryParam.startTime = null;
         this.queryParam.endTime = null;

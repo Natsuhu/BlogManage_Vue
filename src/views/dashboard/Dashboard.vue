@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--  顶部4块数据  -->
-    <el-row class="base_margin_b_large" :gutter="30">
+    <el-row class="base_margin_b" :gutter="30">
       <el-col :span="6">
         <el-card shadow="never">
           <div class="base_dashboard_top_left_icon" style="color: #03a9f4">
@@ -48,7 +48,7 @@
       </el-col>
     </el-row>
     <!--  中部3个图表  -->
-    <el-row class="base_margin_b_large" :gutter="20">
+    <el-row class="base_margin_b" :gutter="20">
       <el-col :span="8">
         <el-card shadow="never">
           <div ref="categoryEcharts" style="height:500px;"/>

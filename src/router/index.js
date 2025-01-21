@@ -150,6 +150,7 @@ export const constantRoutes = [
       {
         path: 'job',
         name: 'JobLog',
+        hidden: true,
         component: () => import('@/views/dashboard/index'),
         meta: { title: '任务日志', icon: 'el-icon-alarm-clock' }
       },
@@ -172,7 +173,7 @@ export const constantRoutes = [
       {
         path: 'visitor',
         name: 'Visitor',
-        component: () => import('@/views/dashboard/index'),
+        component: () => import('@/views/log/VisitorStatistics'),
         meta: { title: '访客统计', icon: 'el-icon-s-marketing' }
       }
     ]
