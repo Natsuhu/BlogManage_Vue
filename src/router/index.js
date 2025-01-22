@@ -160,16 +160,7 @@ export const constantRoutes = [
         hidden: true,
         component: () => import('@/views/dashboard/index'),
         meta: { title: '异常日志', icon: 'el-icon-document-delete' }
-      }
-    ]
-  },
-  {
-    path: '/statistics',
-    name: 'Statistics',
-    redirect: '/statistics/visitor',
-    component: Layout,
-    meta: { title: '数据统计', icon: 'el-icon-s-data' },
-    children: [
+      },
       {
         path: 'visitor',
         name: 'Visitor',
@@ -178,6 +169,21 @@ export const constantRoutes = [
       }
     ]
   },
+  // {
+  //   path: '/statistics',
+  //   name: 'Statistics',
+  //   redirect: '/statistics/visitor',
+  //   component: Layout,
+  //   meta: { title: '数据统计', icon: 'el-icon-s-data' },
+  //   children: [
+  //     {
+  //       path: 'visitor',
+  //       name: 'Visitor',
+  //       component: () => import('@/views/log/VisitorStatistics'),
+  //       meta: { title: '访客统计', icon: 'el-icon-s-marketing' }
+  //     }
+  //   ]
+  // },
 
   { path: '*', redirect: '/404', hidden: true }
 ]

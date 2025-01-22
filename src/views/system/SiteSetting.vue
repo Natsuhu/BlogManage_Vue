@@ -10,7 +10,7 @@
             <el-menu-item index="3" @click="componentName='CardSetting'">资料卡</el-menu-item>
           </el-menu>
           <div>
-            <el-button @click="save" type="primary">保存</el-button>
+            <el-button @click="save" icon="el-icon-circle-check" size="medium" type="primary">保存</el-button>
           </div>
         </el-header>
         <!-- 主内容区：动态组件 -->

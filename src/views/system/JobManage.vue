@@ -33,7 +33,7 @@
             定时任务
           </div>
           <div style="width: 50%; display: flex; justify-content: flex-end">
-            <el-button @click="addTask" icon="el-icon-plus" size="medium" type="primary">新增任务</el-button>
+            <el-button @click="addTask" icon="el-icon-circle-plus-outline" size="medium" type="primary">新增任务</el-button>
             <el-button @click="getTableData(false)" size="medium" plain type="info"
                        class="base_refresh_btn base_margin_l_small"
                        icon="el-icon-refresh-right"/>

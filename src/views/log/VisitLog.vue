@@ -22,7 +22,7 @@
           </div>
           <div style="width: 50%; display: flex; justify-content: flex-end">
             <!-- 新增按钮 -->
-            <el-button @click="add()" size="medium" type="primary">新增</el-button>
+            <el-button @click="add()" icon="el-icon-circle-plus-outline" size="medium" type="primary">新增</el-button>
             <el-button @click="getTableData(false)" size="medium" plain type="info" class="base_refresh_btn"
                        icon="el-icon-refresh-right"/>
           </div>

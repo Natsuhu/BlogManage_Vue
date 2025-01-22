@@ -30,7 +30,7 @@
           <!-- 访问记录 -->
           <el-table :data="visitorTable" class="base_margin_b_large">
             <el-table-column label="序号" type="index" width="50" align="center"/>
-            <el-table-column label="访客标识" prop="id" align="center" show-overflow-tooltip/>
+<!--            <el-table-column label="访客标识" prop="id" align="center" show-overflow-tooltip/>-->
             <el-table-column label="IP地址" prop="ip" align="center" show-overflow-tooltip/>
             <el-table-column label="IP归属" prop="ipSource" align="center" show-overflow-tooltip/>
             <el-table-column label="操作系统" prop="os" align="center" show-overflow-tooltip/>

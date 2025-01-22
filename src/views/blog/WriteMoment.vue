@@ -9,7 +9,7 @@
             </div>
             <div>
               <!-- 提交表单 -->
-              <el-button type="primary" @click="submit">{{ buttonText }}</el-button>
+              <el-button type="primary" size="medium" icon="el-icon-circle-check" @click="submit">保存</el-button>
             </div>
           </el-header>
 
@@ -86,7 +86,7 @@ export default {
   data() {
     return {
       momentId: null,
-      buttonText: null,
+      // buttonText: null,
       form: {
         author: 'NatsuKaze',
         likes: 0,
@@ -107,23 +107,23 @@ export default {
     }
     //更新按钮文本
     if (this.momentId != null) {
-      this.buttonText = '更新';
+      // this.buttonText = '更新';
       this.getMoment(this.momentId);
-    } else {
-      this.buttonText = '保存';
-    }
+    } // else {
+      // this.buttonText = '保存';
+    // }
   },
 
-  watch: {
-    //监听momentId变化改变按钮的文本
-    'momentId'(newValue) {
-      if (newValue != null) {
-        this.buttonText = '更新';
-      } else {
-        this.buttonText = "保存";
-      }
-    }
-  },
+  // watch: {
+  //   //监听momentId变化改变按钮的文本
+  //   'momentId'(newValue) {
+  //     if (newValue != null) {
+  //       this.buttonText = '更新';
+  //     } else {
+  //       this.buttonText = "保存";
+  //     }
+  //   }
+  // },
 
   methods: {
     //通过ID获取动态
@@ -149,21 +149,21 @@ export default {
             this.form.id = this.momentId
             updateMoment(this.form).then(res => {
               if (res.success) {
-                this.$refs.formRef.resetFields();
-                this.form.author = 'NatsuKaze';
-                this.form.likes = 0;
-                this.form.isPublished = true;
-                this.form.isCommentEnabled = false;
+                // this.$refs.formRef.resetFields();
+                // this.form.author = 'NatsuKaze';
+                // this.form.likes = 0;
+                // this.form.isPublished = true;
+                // this.form.isCommentEnabled = false;
                 //弹窗提示
                 Notification({
-                  title: '更新成功',
+                  title: '保存成功',
                   type: 'success',
                   duration: 1500
                 })
               } else {
                 //弹窗提示
                 Notification({
-                  title: '更新失败',
+                  title: '保存失败',
                   message: res.msg,
                   type: 'error'
                 })
@@ -172,11 +172,12 @@ export default {
           } else {
             saveMoment(this.form).then(res => {
               if (res.success) {
-                this.$refs.formRef.resetFields();
-                this.form.author = 'NatsuKaze';
-                this.form.likes = 0;
-                this.form.isPublished = true;
-                this.form.isCommentEnabled = false;
+                this.momentId = res.data;
+                // this.$refs.formRef.resetFields();
+                // this.form.author = 'NatsuKaze';
+                // this.form.likes = 0;
+                // this.form.isPublished = true;
+                // this.form.isCommentEnabled = false;
                 //弹窗提示
                 Notification({
                   title: '保存成功',

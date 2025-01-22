@@ -9,7 +9,7 @@
             </div>
             <div>
               <!-- 提交表单 -->
-              <el-button type="primary" @click="submit">{{ buttonText }}</el-button>
+              <el-button type="primary" size="medium" icon="el-icon-circle-check" @click="submit">保存</el-button>
             </div>
           </el-header>
 
@@ -128,7 +128,7 @@ export default {
   data() {
     return {
       articleId: null,
-      buttonText: null,
+      // buttonText: null,
       categories: [],
       tags: [],
       form: {
@@ -165,11 +165,11 @@ export default {
     this.getCateAndTag();
     //更新按钮文本
     if (this.articleId != null) {
-      this.buttonText = '更新';
+      // this.buttonText = '更新';
       this.getArticle(this.articleId);
-    } else {
-      this.buttonText = '保存';
-    }
+    } //else {
+      // this.buttonText = '保存';
+    //}
   },
 
   watch: {
@@ -188,13 +188,13 @@ export default {
     // }
 
     //监听articleId变化改变按钮的文本
-    'articleId'(newValue) {
-      if (newValue != null) {
-        this.buttonText = '更新';
-      } else {
-        this.buttonText = "保存";
-      }
-    }
+    // 'articleId'(newValue) {
+    //   if (newValue != null) {
+    //     this.buttonText = '更新';
+    //   } else {
+    //     this.buttonText = "保存";
+    //   }
+    // }
   },
 
   methods: {
@@ -247,24 +247,24 @@ export default {
             updateArticle(this.form).then(res => {
               if (res.success) {
                 //更新成功清空表单并回到新增状态
-                this.$refs.formRef.resetFields();
-                this.articleId = null;
+                // this.$refs.formRef.resetFields();
+                // this.articleId = null;
                 //重置属性值和标签选择框
-                this.form.tagIds = [];
-                this.form.isPublished = true;
-                this.form.isCommentEnabled = true;
-                this.form.isTop = false;
-                this.form.isRecommend = false;
-                this.form.isAppreciation = false
+                // this.form.tagIds = [];
+                // this.form.isPublished = true;
+                // this.form.isCommentEnabled = true;
+                // this.form.isTop = false;
+                // this.form.isRecommend = false;
+                // this.form.isAppreciation = false
                 //弹窗提示
                 Notification({
-                  title: '更新成功',
+                  title: '保存成功',
                   type: 'success',
                   duration: 1500
                 })
               } else {
                 Notification({
-                  title: '更新失败',
+                  title: '保存失败',
                   message: res.msg,
                   type: 'error'
                 })
@@ -274,15 +274,16 @@ export default {
             //文章ID不存在，新增文章
             saveArticle(this.form).then(res => {
               if (res.success) {
+                this.articleId = res.data;
                 //保存成功清空表单
-                this.$refs.formRef.resetFields();
+                // this.$refs.formRef.resetFields();
                 //重置属性和标签选择框
-                this.form.tagIds = [];
-                this.form.isPublished = true;
-                this.form.isCommentEnabled = true;
-                this.form.isTop = false;
-                this.form.isRecommend = false;
-                this.form.isAppreciation = false
+                // this.form.tagIds = [];
+                // this.form.isPublished = true;
+                // this.form.isCommentEnabled = true;
+                // this.form.isTop = false;
+                // this.form.isRecommend = false;
+                // this.form.isAppreciation = false
                 //弹窗提示
                 Notification({
                   title: '保存成功',

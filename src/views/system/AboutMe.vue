@@ -8,7 +8,7 @@
               关于我
             </div>
             <div>
-              <el-button type="primary" @click="updatePageSetting">更新</el-button>
+              <el-button type="primary" size="medium" icon="el-icon-circle-check" @click="updatePageSetting">更新</el-button>
             </div>
           </el-header>
           <el-main>
