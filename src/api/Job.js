@@ -30,6 +30,16 @@ export function exec(form) {
     })
 }
 
+export function updateTask(form) {
+    return request({
+        method: 'post',
+        url: '/admin/task/updateTask',
+        data: {
+            ...form
+        }
+    })
+}
+
 export function updateTaskStatus(form) {
     return request({
         method: 'post',

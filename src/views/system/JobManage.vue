@@ -153,7 +153,7 @@
 
 <script>
 import {BsCaretRightFill, BsFillStopFill, BsLightning, BsNut} from "vue-icons-plus/icons/bs"
-import {getTaskTable, createTask, exec, updateTaskStatus, deleteTask} from "@/api/Job";
+import {getTaskTable, createTask, exec, updateTaskStatus, updateTask, deleteTask} from "@/api/Job";
 import {Notification} from "element-ui";
 
 export default {
@@ -276,7 +276,24 @@ export default {
         })
       }
       if (this.saveFlag === 2) {
-
+        updateTask(this.form).then(res => {
+          if (res.success) {
+            Notification({
+              title: '更新任务成功',
+              type: 'success',
+              duration: 1500
+            })
+            //刷新表单,关闭对话框
+            this.getTableData();
+            this.dialog = false;
+          } else {
+            Notification({
+              title: '更新任务失败',
+              message: res.msg,
+              type: 'error'
+            })
+          }
+        })
       }
     },
     //立即执行
