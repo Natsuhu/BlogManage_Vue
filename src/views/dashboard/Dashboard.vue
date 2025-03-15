@@ -307,13 +307,13 @@ export default {
       //访问量折线图
       visitRecordOption: {
         title: {
-          text: '访问量折线图（接口开发中...）'
+          text: '访问量折线图'
         },
         tooltip: {
           trigger: 'axis'
         },
         legend: {
-          data: ['Email', 'Union Ads']
+          data: ['uv', 'pv']
         },
         grid: {
           left: '10',
@@ -324,24 +324,24 @@ export default {
         xAxis: {
           type: 'category',
           boundaryGap: false,
-          data: ['1', '2', '3', '4', '5', '6', '7']
+          data: null
         },
         yAxis: {
           type: 'value'
         },
         series: [
           {
-            name: 'Email',
+            name: 'uv',
             type: 'line',
             stack: 'Total',
-            data: [120, 132, 101, 134, 90, 230, 210],
+            data: null,
             smooth: true
           },
           {
-            name: 'Union Ads',
+            name: 'pv',
             type: 'line',
             stack: 'Total',
-            data: [220, 182, 191, 234, 290, 330, 310],
+            data: null,
             smooth: true
           }
         ]
@@ -385,8 +385,12 @@ export default {
       })
     },
     getLineData() {
-      //Mock
-      this.initVisitRecordEcharts()
+      getVisitRecordEcharts().then(res => {
+        this.visitRecordOption.xAxis.data = res.data.dateList;
+        this.visitRecordOption.series[0].data = res.data.uvList;
+        this.visitRecordOption.series[1].data = res.data.pvList;
+        this.initVisitRecordEcharts()
+      })
     },
     initCategoryEcharts() {
       this.categoryEcharts = echarts.init(this.$refs.categoryEcharts, 'light')

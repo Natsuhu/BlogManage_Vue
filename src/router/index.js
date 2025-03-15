@@ -123,7 +123,7 @@ export const constantRoutes = [
       {
         path: 'user/manage',
         name: 'UserManage',
-        component: () => import('@/views/dashboard/index'),
+        component: () => import('@/views/system/UserManage'),
         meta: { title: '用户管理', icon: 'el-icon-user' }
       }
     ]

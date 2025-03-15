@@ -39,3 +39,13 @@ export function updateArticle(updateParam) {
 		}
 	})
 }
+
+export function deleteArticle(deleteParam) {
+	return request({
+		method: 'post',
+		url: '/admin/article/deleteArticle',
+		data: {
+			...deleteParam
+		}
+	})
+}

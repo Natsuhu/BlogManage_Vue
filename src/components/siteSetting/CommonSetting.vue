@@ -34,6 +34,12 @@
             <el-input v-model="form.backLoginImage" size="small"
                       placeholder="可填写文件ID或外部链接，不填写则不展示"></el-input>
           </el-form-item>
+          <el-form-item label="删除文章和评论" prop="isDeleteCommentInDeleteArticle">
+            <el-select size="small" v-model="form.isDeleteCommentInDeleteArticle">
+              <el-option label="是" value="true"/>
+              <el-option label="否" value="false"/>
+            </el-select>
+          </el-form-item>
         </el-col>
       </el-row>
       <!--      <el-form-item>
@@ -60,7 +66,8 @@ export default {
         bodyImage: null,
         adminCommentLabel: null,
         frontLoginImage: null,
-        backLoginImage: null
+        backLoginImage: null,
+        isDeleteCommentInDeleteArticle: null
       }
     }
   },
@@ -86,6 +93,7 @@ export default {
           this.form.adminCommentLabel = res.data.adminCommentLabel;
           this.form.frontLoginImage = res.data.frontLoginImage;
           this.form.backLoginImage = res.data.backLoginImage;
+          this.form.isDeleteCommentInDeleteArticle = res.data.isDeleteCommentInDeleteArticle;
         } else {
           this.$message.error(res.msg);
         }

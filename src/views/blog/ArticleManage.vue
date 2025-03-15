@@ -9,14 +9,12 @@
             <el-input v-model="queryParam.keyword" @input="getTableData(true)" clearable placeholder="搜索标题"
                       prefix-icon="el-icon-search"/>
           </div>
-
           <!-- 选择分类 -->
           <div class="base_margin_r">
             <el-select v-model="queryParam.categoryId" @input="getTableData(true)" clearable placeholder="筛选分类">
               <el-option v-for="item in categories" :key="item.index" :label="item.name" :value="item.id"/>
             </el-select>
           </div>
-
           <!-- 时间范围 -->
           <div class="base_margin_r">
             <el-date-picker type="daterange" v-model="queryParam.time" @input="getTableData(true)" range-separator="至"
@@ -26,7 +24,6 @@
         </el-header>
       </el-container>
     </el-row>
-
     <el-row>
       <el-container>
         <el-header>
@@ -41,14 +38,12 @@
         <el-main>
           <!-- 文章表格 -->
           <el-table :data="articleTable" class="base_margin_b_large">
-
             <!-- 固定列 -->
             <el-table-column label="序号" type="index" width="50" align="center"/>
             <el-table-column label="标题" prop="title" align="center" show-overflow-tooltip/>
             <el-table-column label="分类" prop="categoryName" width="150" align="center"/>
             <el-table-column label="浏览数" prop="views" width="100" align="center"/>
             <el-table-column label="字数" prop="words" width="100" align="center"/>
-
             <!-- 可快捷更新列 -->
             <el-table-column label="权限" width="150" align="center">
               <template slot-scope="scope">
@@ -85,21 +80,22 @@
                 </el-popover>
               </template>
             </el-table-column>
-
             <!-- 固定列 -->
             <el-table-column label="创建时间" prop="createTime" width="170" align="center"/>
             <el-table-column label="更新时间" prop="updateTime" width="170" align="center"/>
-
             <!-- 操作按钮 -->
             <el-table-column label="操作" width="150" align="center">
               <template slot-scope="scope">
                 <el-tooltip effect="dark" content="编辑文章" placement="top">
-                  <i class="el-icon-edit-outline base_text_point" @click="editArticle(scope.row.id)"/>
+                  <i class="el-icon-edit-outline base_text_point base_margin_r" @click="editArticle(scope.row.id)"/>
                 </el-tooltip>
+                <el-popconfirm confirm-button-text='好' cancel-button-text='手滑了' icon="el-icon-info" icon-color="red"
+                               title="这可是物理删除！" @onConfirm="removeArticle(scope.row.id)">
+                  <i slot="reference" class="el-icon-delete base_text_point" />
+                </el-popconfirm>
               </template>
             </el-table-column>
           </el-table>
-
           <!--分页-->
           <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
                          :current-page.sync="queryParam.pageNo"
@@ -117,11 +113,10 @@
 <script>
 import {Notification} from "element-ui";
 import {getCategories} from '@/api/Category';
-import {getArticleTable, updateArticle} from "@/api/Article";
+import {getArticleTable, updateArticle, deleteArticle} from "@/api/Article";
 
 export default {
   name: "ArticleManage",
-
   data() {
     return {
       categories: [],
@@ -222,6 +217,28 @@ export default {
         }
       })
     },
+    //表格删除按钮
+    removeArticle(id) {
+      let deleteParam = {}
+      deleteParam.id = id
+      deleteArticle(deleteParam).then(res => {
+        if (res.success) {
+          Notification({
+            title: '删除成功',
+            type: 'success',
+            duration: 1500
+          })
+          //删除成功刷新表格
+          this.getTableData();
+        } else {
+          Notification({
+            title: '删除失败',
+            message: res.msg,
+            type: 'error'
+          })
+        }
+      })
+    },
     //分页监听，新pageNo
     handleSizeChange(newSize) {
       this.queryParam.pageSize = newSize
@@ -240,13 +257,11 @@ export default {
 .el-container {
   background-color: #FFFFFF;
 }
-
 .el-header {
   display: flex;
   align-items: center;
   border-bottom: 2px solid rgb(241, 242, 243);
 }
-
 .el-icon-edit-outline {
   font-size: 1.2rem;
   font-weight: 100;
@@ -255,5 +270,10 @@ export default {
 }
 .el-icon-edit-outline:hover {
   color: #66ccff;
+}
+.el-icon-delete {
+  font-size: 1.2rem;
+  font-weight: 100;
+  color: #F56C6C;
 }
 </style>
