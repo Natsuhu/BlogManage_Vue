@@ -149,7 +149,7 @@ export default {
       },
       formRules: {
         title: [{required: true, message: '请输入标题', trigger: 'change'}],
-        thumbnail: [{required: true, message: '请输入首图链接', trigger: 'change'}],
+        // thumbnail: [{required: true, message: '请输入首图链接', trigger: 'change'}],
         categoryId: [{required: true, message: '请选择分类', trigger: 'change'}],
         words: [{required: true, message: '请输入文章字数', trigger: 'change'}]
       }
