@@ -12,15 +12,17 @@
 
           <!-- 选择页面 -->
           <div class="base_margin_r">
-            <el-select v-model="queryParam.page" @input="getTableData(true)" clearable placeholder="页面">
+            <el-select v-model="queryParam.objectType" @input="getTableData(true)" clearable placeholder="页面">
+              <el-option :label="'文章'" :value="1"/>
               <el-option :label="'友链'" :value="2"/>
               <el-option :label="'关于我'" :value="3"/>
+              <el-option :label="'动态'" :value="6"/>
             </el-select>
           </div>
 
           <!-- 选择文章 -->
           <div class="base_margin_r">
-            <el-select v-model="queryParam.articleId" @input="getTableData(true)" clearable placeholder="文章">
+            <el-select v-model="queryParam.objectId" @input="getTableData(true)" clearable placeholder="文章">
               <el-option v-for="item in articles" :key="item.index" :label="item.title" :value="item.id"/>
             </el-select>
           </div>
@@ -146,8 +148,8 @@ export default {
         pageNo: 1,
         pageSize: 10,
         time: null,
-        page: null,
-        articleId: null
+        objectType: null,
+        objectId: null
       },
       updateForm: {
         id: null,
